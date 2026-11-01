@@ -4,22 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Koloritbeton — тротуарная плитка и брусчатка</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg-dark: #0F172A;
-      --surface: rgba(30, 41, 59, 0.7);
+      --surface: rgba(30, 41, 59, 0.4);
+      --surface-hover: rgba(30, 41, 59, 0.6);
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --accent-red: #E11D48;
       --accent-yellow: #F59E0B;
-      --border: rgba(255,255,255,0.1);
+      --border: rgba(255,255,255,0.08);
       --radius: 20px;
-      --font-head: 'Montserrat', sans-serif;
-      --font-body: 'Inter', sans-serif;
+      --font-main: 'Roboto', sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font-body); color: var(--text-main); background: var(--bg-dark); line-height: 1.6; overflow-x: hidden; }
+    body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-dark); line-height: 1.6; overflow-x: hidden; font-weight: 400; }
     
     .bg-glow { position: fixed; inset: 0; z-index: -1; background: var(--bg-dark); overflow: hidden; }
     .glow-1 { position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, transparent 60%); filter: blur(60px); }
@@ -29,64 +29,63 @@
     a { color: inherit; text-decoration: none; transition: 0.3s; }
     .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
     
-    .header { position: sticky; top: 0; z-index: 50; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .header { position: sticky; top: 0; z-index: 50; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     .header__inner { display: flex; align-items: center; gap: 32px; padding: 16px 0; }
     
     .logo { display: flex; align-items: center; gap: 14px; }
     .logo img { height: 52px; width: auto; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
-    .logo-text strong { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; }
-    .logo-text span { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .logo-text strong { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.5px; }
+    .logo-text span { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
     
-    .nav { display: flex; gap: 24px; margin-left: auto; font-size: 0.95rem; font-weight: 500; }
+    .nav { display: flex; gap: 24px; margin-left: auto; font-size: 0.95rem; font-weight: 400; }
     .nav a { color: var(--text-muted); } .nav a:hover { color: var(--text-main); }
     
     .header__contacts { display: flex; align-items: center; gap: 20px; }
-    .phone { font-weight: 600; font-size: 1rem; white-space: nowrap; } .phone:hover { color: var(--accent-yellow); }
+    .phone { font-weight: 500; font-size: 1rem; white-space: nowrap; } .phone:hover { color: var(--accent-yellow); }
     
-    .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--accent-red); color: #fff; padding: 14px 28px; border-radius: 50px; border: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px rgba(225, 29, 72, 0.3); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--accent-red); color: #fff; padding: 14px 28px; border-radius: 50px; border: none; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px rgba(225, 29, 72, 0.3); font-family: var(--font-main); }
     .btn:hover { background: #BE123C; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(225, 29, 72, 0.5); }
     .btn--outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); box-shadow: none; }
-    .btn--outline:hover { background: rgba(255,255,255,0.05); }
+    .btn--outline:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
     
     .hero { padding: 120px 0 100px; text-align: center; }
-    .hero h1 { font-family: var(--font-head); font-size: 3.5rem; font-weight: 800; margin-bottom: 24px; line-height: 1.15; background: linear-gradient(to right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin: 0 auto 40px; }
+    .hero h1 { font-size: 3rem; font-weight: 500; margin-bottom: 24px; line-height: 1.2; background: linear-gradient(to right, #fff, #94A3B8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin: 0 auto 40px; font-weight: 300; }
     .hero__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
     .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
-    /* КАРУСЕЛЬ ЦВЕТОВ */
-    .palette { padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); text-align: center; overflow: hidden; }
-    .palette h2 { font-family: var(--font-head); font-size: 1.4rem; margin-bottom: 30px; text-transform: uppercase; color: var(--text-main); letter-spacing: 1px; }
+    /* LIQUID GLASS CAROUSEL */
+    .palette { padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.1); text-align: center; overflow: hidden; }
+    .palette h2 { font-size: 1.4rem; font-weight: 500; margin-bottom: 30px; text-transform: uppercase; color: var(--text-main); letter-spacing: 2px; }
     
-    .color-slider-wrapper { position: relative; max-width: 900px; margin: 0 auto; padding: 0 40px; }
-    .color-slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 20px; scroll-behavior: smooth; }
+    .color-slider-wrapper { position: relative; max-width: 1000px; margin: 0 auto; }
+    .color-slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 20px; cursor: grab; }
+    .color-slider:active { cursor: grabbing; }
     .color-slider::-webkit-scrollbar { display: none; }
     
     .color-card { 
-      flex: 0 0 calc(33.333% - 14px); scroll-snap-align: start; 
-      background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; 
-      display: flex; flex-direction: column; align-items: center; gap: 16px; transition: 0.3s;
+      flex: 0 0 calc(25% - 15px); scroll-snap-align: center; 
+      background: var(--surface); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px; padding: 30px 20px; 
+      display: flex; flex-direction: column; align-items: center; gap: 16px; 
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.03);
     }
-    .color-card:hover { background: rgba(30, 41, 59, 0.9); transform: translateY(-5px); }
-    .color-circle { width: 80px; height: 80px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-    .color-name { font-weight: 600; font-size: 1.05rem; text-align: center; }
-    
-    .slider-btn {
-      position: absolute; top: 40%; transform: translateY(-50%);
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--accent-yellow); color: var(--bg-dark); border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 2; transition: 0.2s;
+    .color-card:hover { 
+      background: var(--surface-hover); 
+      transform: translateY(-8px) scale(1.02); 
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .slider-btn:hover { transform: translateY(-50%) scale(1.1); }
-    .slider-btn--prev { left: -10px; }
-    .slider-btn--next { right: -10px; }
+    .color-circle { width: 80px; height: 80px; border-radius: 50%; border: none; box-shadow: inset 0 4px 10px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.3); }
+    .color-name { font-weight: 400; font-size: 1rem; text-align: center; letter-spacing: 0.5px; }
 
     .section { padding: 80px 0; }
-    .section h2 { font-family: var(--font-head); font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; display: flex; align-items: center; gap: 16px; }
-    .section h2::before { content: ''; display: block; width: 12px; height: 32px; background: var(--accent-yellow); border-radius: 4px; }
+    .section h2 { font-size: 2rem; font-weight: 500; margin-bottom: 40px; display: flex; align-items: center; gap: 16px; letter-spacing: -0.5px; }
+    .section h2::before { content: ''; display: block; width: 10px; height: 30px; background: var(--accent-yellow); border-radius: 4px; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.4s; backdrop-filter: blur(20px); }
@@ -98,26 +97,26 @@
     .card:hover .carousel__slide { transform: scale(1.05); }
     
     .card__body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
-    .card__body h3 { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-    .card__specs { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; }
+    .card__body h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 8px; }
+    .card__specs { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; font-weight: 300; }
     .card__prices { display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 12px; border: 1px solid var(--border); }
     .price-row { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); }
-    .price-row b { font-weight: 600; color: var(--text-main); }
+    .price-row b { font-weight: 500; color: var(--text-main); }
 
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
     .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--accent-yellow); backdrop-filter: blur(20px); }
-    .service-card h3 { font-family: var(--font-head); font-size: 1.1rem; }
-    .service-card .price { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--accent-yellow); }
+    .service-card h3 { font-size: 1.1rem; font-weight: 400; }
+    .service-card .price { font-size: 1.5rem; font-weight: 700; color: var(--accent-yellow); }
 
     .about { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; align-items: start; }
-    .about p { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 16px; }
+    .about p { font-size: 1rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 300; }
     .checks { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-    .checks li { padding-left: 32px; position: relative; }
+    .checks li { padding-left: 32px; position: relative; font-weight: 400; }
     .checks li::before { content: "✓"; position: absolute; left: 0; top: 2px; width: 22px; height: 22px; background: rgba(225, 29, 72, 0.2); color: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
     .worktime { background: var(--surface); padding: 32px; border-radius: var(--radius); border: 1px solid var(--border); backdrop-filter: blur(20px); }
-    .worktime h3 { font-family: var(--font-head); font-size: 1.2rem; margin-bottom: 24px; }
-    .worktime p { display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 12px; color: var(--text-muted); }
-    .worktime p b { color: var(--text-main); } .worktime p:last-child { border: none; }
+    .worktime h3 { font-size: 1.2rem; margin-bottom: 24px; font-weight: 500; }
+    .worktime p { display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 12px; color: var(--text-muted); font-weight: 300; }
+    .worktime p b { color: var(--text-main); font-weight: 400; } .worktime p:last-child { border: none; }
 
     .map-section { padding: 80px 0; background: rgba(0,0,0,0.1); }
     .map-wrapper { width: 100%; height: 450px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; z-index: 1; }
@@ -125,19 +124,19 @@
 
     .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .form { display: flex; flex-direction: column; gap: 16px; background: var(--surface); padding: 40px; border-radius: var(--radius); border: 1px solid var(--border); backdrop-filter: blur(20px); }
-    .form input, .form textarea { width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 1rem; background: rgba(0,0,0,0.2); color: var(--text-main); }
+    .form input, .form textarea { width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 1rem; background: rgba(0,0,0,0.2); color: var(--text-main); font-weight: 300; }
     .form input:focus, .form textarea:focus { outline: none; border-color: var(--accent-red); background: rgba(0,0,0,0.4); }
-    .footer { border-top: 1px solid var(--border); color: var(--text-muted); padding: 40px 0; text-align: center; font-size: 0.9rem; }
+    .footer { border-top: 1px solid var(--border); color: var(--text-muted); padding: 40px 0; text-align: center; font-size: 0.9rem; font-weight: 300; }
     
     @media(max-width: 900px){
       .nav { display: none; } .header__contacts .phone { display: none; }
-      .hero h1 { font-size: 2.4rem; } .about, .contact { grid-template-columns: 1fr; gap: 40px; }
-      .logo img { height: 40px; } .section h2 { font-size: 1.8rem; }
+      .hero h1 { font-size: 2.2rem; } .about, .contact { grid-template-columns: 1fr; gap: 40px; }
+      .logo img { height: 40px; } .section h2 { font-size: 1.6rem; }
       .map-wrapper { height: 350px; }
+      .color-card { flex: 0 0 calc(50% - 10px); }
+    }
+    @media(max-width: 500px){
       .color-card { flex: 0 0 calc(80% - 10px); }
-      .slider-btn { width: 36px; height: 36px; font-size: 16px; }
-      .slider-btn--prev { left: 0px; } .slider-btn--next { right: 0px; }
-      .color-slider-wrapper { padding: 0 20px; }
     }
   </style>
 </head>
@@ -175,7 +174,6 @@
   <div class="container">
     <h2>Цветовая гамма</h2>
     <div class="color-slider-wrapper">
-      <button class="slider-btn slider-btn--prev" id="colorPrev">❮</button>
       <div class="color-slider" id="colorSlider">
         <div class="color-card"><div class="color-circle" style="background:#9CA3AF"></div><div class="color-name">Серый</div></div>
         <div class="color-card"><div class="color-circle" style="background:#E11D48"></div><div class="color-name">Цветной (Красный)</div></div>
@@ -185,7 +183,6 @@
         <div class="color-card"><div class="color-circle" style="background:#F3F4F6;"></div><div class="color-name">Мрамор из бетона</div></div>
         <div class="color-card"><div class="color-circle" style="background:#78350F"></div><div class="color-name">Темно-коричневый</div></div>
       </div>
-      <button class="slider-btn slider-btn--next" id="colorNext">❯</button>
     </div>
   </div>
 </section>
@@ -231,7 +228,7 @@
     <div class="map-wrapper reveal">
       <iframe src="https://yandex.by/map-widget/v1/?ll=23.826239%2C53.754207&mode=whatshere&whatshere%5Bpoint%5D=23.826202%2C53.753868&whatshere%5Bzoom%5D=17&z=18.41" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
     </div>
-    <p class="reveal" style="margin-top: 20px; color: var(--text-muted); text-align: center;"><b>Адрес производства:</b> г. Гродно, Гожская улица, 2А</p>
+    <p class="reveal" style="margin-top: 20px; color: var(--text-muted); text-align: center; font-weight: 300;"><b>Адрес производства:</b> г. Гродно, Гожская улица, 2А</p>
   </div>
 </section>
 
@@ -239,9 +236,9 @@
   <div class="container contact">
     <div class="reveal">
       <h2>Свяжитесь с нами</h2>
-      <p style="color: var(--text-muted); margin-bottom: 20px;">Оставьте заявку, и мы поможем подобрать плитку, рассчитаем стоимость и ответим на вопросы.</p>
-      <p style="margin-bottom: 8px; font-weight: 600;">Телефон: <a href="tel:+375297575265" style="color: var(--accent-yellow); font-size: 1.1rem;">+375 (29) 757-52-65</a></p>
-      <p style="font-weight: 600;">Соцсети: 
+      <p style="color: var(--text-muted); margin-bottom: 20px; font-weight: 300;">Оставьте заявку, и мы поможем подобрать плитку, рассчитаем стоимость и ответим на вопросы.</p>
+      <p style="margin-bottom: 8px; font-weight: 400;">Телефон: <a href="tel:+375297575265" style="color: var(--accent-yellow); font-size: 1.1rem;">+375 (29) 757-52-65</a></p>
+      <p style="font-weight: 400;">Соцсети: 
         <a href="#" target="_blank" style="color: var(--accent-yellow); margin-right: 10px;">Instagram</a>
         <a href="#" target="_blank" style="color: var(--accent-yellow); margin-right: 10px;">Telegram</a>
         <a href="#" target="_blank" style="color: var(--accent-yellow);">Viber</a>
@@ -332,22 +329,32 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-// КАРУСЕЛЬ ЦВЕТОВ
+// LIQUID GLASS CAROUSEL (Drag to scroll)
 const slider = document.getElementById('colorSlider');
-const btnPrev = document.getElementById('colorPrev');
-const btnNext = document.getElementById('colorNext');
+let isDown = false;
+let startX;
+let scrollLeft;
 
-function getScrollAmount() {
-  const card = slider.querySelector('.color-card');
-  return card ? card.offsetWidth + 20 : 300;
-}
-
-btnNext.addEventListener('click', () => {
-  slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.style.cursor = 'grabbing';
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
 });
-
-btnPrev.addEventListener('click', () => {
-  slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  slider.style.cursor = 'grab';
+});
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  slider.style.cursor = 'grab';
+});
+slider.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2; 
+  slider.scrollLeft = scrollLeft - walk;
 });
 </script>
 </body>
