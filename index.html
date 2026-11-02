@@ -3,8 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Koloritbeton — тротуарная плитка и брусчатка</title>
+  <!-- SEO МЕТА-ТЕГИ -->
+  <title>Тротуарная плитка и брусчатка в Гродно | Производство Koloritbeton</title>
+  <meta name="description" content="Производство тротуарной плитки, брусчатки и элементов благоустройства в Гродно. Высокопрочный бетон, кевларобетон. Более 50 видов продукции. Доступные цены, собственное производство.">
+  <meta name="keywords" content="тротуарная плитка Гродно, брусчатка, кевларобетон, бордюры, проступи, фасадные панели, Koloritbeton">
+  <meta property="og:title" content="Koloritbeton — тротуарная плитка в Гродно">
+  <meta property="og:description" content="Собственное производство из высокопрочного бетона. Более 50 видов продукции.">
+  <meta property="og:type" content="website">
+  
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- МИКРОРАЗМЕТКА ДЛЯ ПОИСКОВИКОВ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Koloritbeton",
+    "image": "https://djtimoxa94-arch.github.io/koloritbeton-site/img/logo.png",
+    "telephone": "+375297575265",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Гожская улица, 2А",
+      "addressLocality": "Гродно",
+      "addressCountry": "BY"
+    },
+    "openingHours": "Mo-Fr 08:00-19:00, Sa 09:00-17:00"
+  }
+  </script>
+
   <style>
     :root{
       --bg-dark: #0F172A;
@@ -96,14 +122,23 @@
     .card__body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
     .card__body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
     .card__specs { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; flex-grow: 1; }
-    .card__prices { display: flex; flex-direction: column; gap: 6px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid var(--border); }
+    .card__prices { display: flex; flex-direction: column; gap: 6px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 12px; }
     .price-row { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); }
     .price-row b { font-weight: 600; color: var(--text-main); }
 
+    /* КНОПКА ЗАКАЗАТЬ В КАРТОЧКЕ */
+    .card-order-btn {
+      width: 100%; padding: 10px; border-radius: 8px; border: none; cursor: pointer;
+      background: var(--accent-red); color: #fff; font-weight: 600; font-size: 0.85rem;
+      transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .card-order-btn:hover { background: #BE123C; }
+
     /* НАШИ РАБОТЫ */
     .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-    .work-card { border-radius: var(--radius); overflow: hidden; position: relative; aspect-ratio: 4/3; background: #1E293B; border: 1px solid var(--border); }
+    .work-card { border-radius: var(--radius); overflow: hidden; position: relative; aspect-ratio: 4/3; background: #1E293B; border: 1px solid var(--border); cursor: pointer; }
     .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+    .work-card:hover img { transform: scale(1.05); }
 
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
     .service-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--accent-yellow); backdrop-filter: blur(20px); }
@@ -153,11 +188,38 @@
     /* СОЦСЕТИ */
     .social-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
     .social-links a {
-      display: inline-flex; align-items: center; justify-content: center;
+      display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 16px; border-radius: 8px; font-weight: 500; font-size: 0.9rem;
       background: var(--surface); border: 1px solid var(--border); transition: 0.3s;
     }
+    .social-links a svg { width: 18px; height: 18px; fill: currentColor; }
     .social-links a:hover { background: var(--accent-yellow); color: var(--bg-dark); border-color: var(--accent-yellow); }
+
+    /* ЛАЙТБОКС */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.9);
+      display: none; align-items: center; justify-content: center;
+      backdrop-filter: blur(5px); opacity: 0; transition: 0.3s;
+    }
+    .lightbox.show { display: flex; opacity: 1; }
+    .lightbox img { max-width: 90%; max-height: 90%; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+    .lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; line-height: 1; }
+
+    /* МОДАЛЬНОЕ ОКНО ПОЛИТИКИ */
+    .modal-policy {
+      position: fixed; inset: 0; z-index: 1001; background: rgba(0,0,0,0.8);
+      display: none; align-items: center; justify-content: center; padding: 20px;
+      backdrop-filter: blur(5px);
+    }
+    .modal-policy.show { display: flex; }
+    .modal-content {
+      background: var(--bg-dark); border: 1px solid var(--border); border-radius: var(--radius);
+      max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .modal-content h2 { margin-bottom: 16px; color: var(--text-main); }
+    .modal-content p { color: var(--text-muted); margin-bottom: 12px; font-size: 0.95rem; }
+    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 30px; color: var(--text-muted); cursor: pointer; }
 
     /* =========================================
        МОБИЛЬНАЯ ВЕРСИЯ
@@ -200,6 +262,7 @@
       .floating-up { bottom: 15px; left: 15px; width: 36px; height: 36px; }
 
       .works-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .modal-content { padding: 24px; }
     }
   </style>
 </head>
@@ -264,13 +327,13 @@
   <div class="container">
     <h2 class="reveal">Примеры наших работ</h2>
     <div class="works-grid">
-      <div class="work-card reveal"><img src="img/work1.jpg" alt="Работа 1" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+1'"></div>
-      <div class="work-card reveal"><img src="img/work2.jpg" alt="Работа 2" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+2'"></div>
-      <div class="work-card reveal"><img src="img/work3.jpg" alt="Работа 3" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+3'"></div>
-      <div class="work-card reveal"><img src="img/work4.jpg" alt="Работа 4" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+4'"></div>
-      <div class="work-card reveal"><img src="img/work5.jpg" alt="Работа 5" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+5'"></div>
-      <div class="work-card reveal"><img src="img/work6.jpg" alt="Работа 6" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+6'"></div>
-    </div>
+      <!-- ЛАЙТБОКС -->
+      <div class="work-card reveal" onclick="openLightbox('img/work1.jpg')"><img src="img/work1.jpg" alt="Работа 1" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+1'"></div>
+      <div class="work-card reveal" onclick="openLightbox('img/work2.jpg')"><img src="img/work2.jpg" alt="Работа 2" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+2'"></div>
+      <div class="work-card reveal" onclick="openLightbox('img/work3.jpg')"><img src="img/work3.jpg" alt="Работа 3" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+3'"></div>
+      <div class="work-card reveal" onclick="openLightbox('img/work4.jpg')"><img src="img/work4.jpg" alt="Работа 4" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+4'"></div>
+      <div class="work-card reveal" onclick="openLightbox('img/work5.jpg')"><img src="img/work5.jpg" alt="Работа 5" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+5'"></div>
+      <div class="work-card reveal" onclick="openLightbox('img/work6.jpg')"><img src="img/work6.jpg" alt="Работа 6" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+6'"></div>    </div>
   </div>
 </section>
 
@@ -322,11 +385,20 @@
       <p style="font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Telegram: <a href="https://t.me/+375295894068" target="_blank" style="color: var(--accent-yellow);">Написать в Telegram</a></p>
       <p style="font-weight: 500; margin-bottom: 4px; font-size: 0.9rem;">Соцсети:</p>
       
-      <!-- КНОПКИ СОЦСЕТЕЙ -->
+      <!-- КНОПКИ СОЦСЕТЕЙ С ИКОНКАМИ -->
       <div class="social-links">
-        <a href="https://www.instagram.com/koloritbeton/" target="_blank">Instagram</a>
-        <a href="https://vk.ru/koloritbeton" target="_blank">VK</a>
-        <a href="viber://chat?number=%2B375297575265">Viber</a>
+        <a href="https://www.instagram.com/koloritbeton/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          Instagram
+        </a>
+        <a href="https://vk.ru/koloritbeton" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M19.4 15.1c.1-.2.1-.5-.1-.8l-3-3.6c-.4-.5-.7-.8-.7-1 0-.2.1-.4.2-.5l3.2-3.7c.3-.4.5-.8.5-1 0-.2-.1-.3-.3-.3h-3.5c-.2 0-.4.1-.5.3l-2.6 3.1c-.4.5-.7.7-.9.7-.1 0-.2 0-.2-.1V4.1c0-.2-.1-.3-.3-.3h-5c-.2 0-.3.1-.3.3 0 .3.4.4.4.9v3.6c0 .2-.1.4-.2.4-.2 0-.4-.2-.7-.6l-1.6-2.1c-.1-.2-.2-.3-.4-.3H3.3c-.2 0-.3.1-.3.3 0 .2.1.4.2.6l2.6 3.5c.1.2.2.3.2.4 0 .1-.1.2-.2.4L3.6 14c-.1.2-.2.4-.2.6 0 .2.1.3.3.3h2.7c.2 0 .4-.1.5-.3l1.7-2.3c.1-.1.2-.2.4-.2.1 0 .2 0 .2.1v3c0 .2.1.3.3.3h5c.2 0 .3-.1.3-.3V14c0-.2.1-.3.2-.3.2 0 .5.2.8.6l2.3 3c.1.1.2.2.4.2h3.5c.2 0 .3-.1.3-.3 0-.2-.1-.3-.1-.3z"/></svg>
+          VK
+        </a>
+        <a href="viber://chat?number=%2B375297575265">
+          <svg viewBox="0 0 24 24"><path d="M11.2 2C6.2 2 2.6 5.1 2.6 9.9c0 2.8 1.2 5.2 3.3 6.8v3.4l3.2-1.8c.7.1 1.4.2 2.1.2 5 0 8.6-3.1 8.6-7.9S16.2 2 11.2 2zm.3 14.2c-.6 0-1.3-.1-1.9-.2l-2.2 1.2v-2.2c-1.6-1.2-2.6-3.1-2.6-5.2 0-3.7 2.9-6.6 6.8-6.6 3.8 0 6.4 2.7 6.4 6.5 0 3.8-2.7 6.5-6.5 6.5zM9.2 7.8c-.2-.4-.4-.4-.7-.4-.2 0-.5 0-.8.1-.3.1-.8.3-1.2.7-.4.4-1 1.1-1 2.4s1 2.6 1.1 2.8c.2.2 1.9 3.2 4.8 4.2 2.4.8 2.9.7 3.4.6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3l-2.1-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.1-.4-2.1-1.3-.8-.7-1.3-1.5-1.5-1.8-.1-.2 0-.3.1-.5.1-.1.3-.3.5-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.7-.7-1.7z"/></svg>
+          Viber
+        </a>
       </div>
     </div>
     
@@ -341,22 +413,45 @@
   </div>
 </section>
 
-<footer class="footer"><div class="container"><p>© 2022 Koloritbeton. Все права защищены.</p></div></footer>
+<footer class="footer">
+  <div class="container">
+    <p>© 2022 Koloritbeton. Все права защищены.</p>
+    <p style="margin-top: 8px;"><a href="#" onclick="openPolicy(event)" style="color: var(--text-muted); text-decoration: underline;">Политика конфиденциальности</a></p>
+  </div>
+</footer>
 
 <!-- КНОПКИ ВНИЗУ -->
 <div class="floating-actions">
-  <!-- Кнопка "Позвонить" -->
   <a href="tel:+375297575265" class="floating-call" title="Позвонить">
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
   </a>
 </div>
 
-<!-- Кнопка "Наверх" (слева внизу) -->
 <div class="floating-up" id="scrollTop" title="Наверх">
   <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
 </div>
 
+<!-- ЛАЙТБОКС -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+  <img id="lightbox-img" src="" alt="Просмотр">
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ -->
+<div class="modal-policy" id="policyModal" onclick="closePolicy(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="closePolicy(event)">&times;</span>
+    <h2>Политика конфиденциальности</h2>
+    <p>Настоящая Политика конфиденциальности действует в отношении всей информации, которую сайт «Koloritbeton» может получить о Пользователе во время использования сайта.</p>
+    <p><b>1. Персональные данные</b><br>При отправке заявки через форму на сайте Пользователь предоставляет свое имя и номер телефона. Эти данные используются исключительно для связи с Пользователем с целью консультирования, подбора товара и оформления заказа.</p>
+    <p><b>2. Передача данных третьим лицам</b><br>Администрация сайта не передает персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством Республики Беларусь.</p>
+    <p><b>3. Согласие</b><br>Используя формы обратной связи на сайте, Пользователь автоматически соглашается с настоящей Политикой конфиденциальности.</p>
+    <p><b>4. Контакты</b><br>По всем вопросам вы можете связаться с нами по телефону +375 (29) 757-52-65.</p>
+  </div>
+</div>
+
 <script>
+// ДАННЫЕ КАТАЛОГА (к ним добавлено свойство orderLink для кнопки "Заказать")
 const data = {
   bruschatka: [
     {name:"Кремль", imgs:["kreml.jpg"], specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]]},
@@ -407,6 +502,11 @@ function renderGrid(id, items) {
           <div class="card__prices">
             ${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("")}
           </div>
+          <!-- Кнопка "Заказать в 1 клик" -->
+          <button class="card-order-btn" onclick="orderItem('${item.name}')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            Заказать
+          </button>
         </div>
       </article>
     `;
@@ -419,7 +519,7 @@ renderGrid("grid-bordyury", data.bordyury);
 renderGrid("grid-prostupi", data.prostupi);
 renderGrid("grid-paneli", data.paneli);
 
-// ПЛАВНАЯ АНИМАЦИЯ
+// АНИМАЦИЯ
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
@@ -428,7 +528,6 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
 // КАРУСЕЛЬ ЦВЕТОВ
@@ -463,7 +562,7 @@ scrollBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ОТПРАВКА В TELEGRAM
+// ОТПРАВКА В TELEGRAM (ОБЩАЯ ФОРМА)
 document.getElementById('tgForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const name = document.getElementById('userName').value;
@@ -475,10 +574,40 @@ document.getElementById('tgForm').addEventListener('submit', function(e) {
     text += `\nСообщение: ${msg}`;
   }
   
-  // Номер получателя: +375295894068
   const tgUrl = `https://t.me/+375295894068?text=${encodeURIComponent(text)}`;
   window.open(tgUrl, '_blank');
 });
+
+// КНОПКА "ЗАКАЗАТЬ" В КАРТОЧКЕ ТОВАРА
+function orderItem(productName) {
+  let text = `Здравствуйте, хочу заказать: ${productName}!`;
+  const tgUrl = `https://t.me/+375295894068?text=${encodeURIComponent(text)}`;
+  window.open(tgUrl, '_blank');
+}
+
+// ЛАЙТБОКС (ПРОСМОТР ФОТО)
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  lb.classList.add('show');
+}
+function closeLightbox(e) {
+  if (e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close')) {
+    document.getElementById('lightbox').classList.remove('show');
+  }
+}
+
+// МОДАЛЬНОЕ ОКНО ПОЛИТИКИ
+function openPolicy(e) {
+  e.preventDefault();
+  document.getElementById('policyModal').classList.add('show');
+}
+function closePolicy(e) {
+  if (e.target.id === 'policyModal' || e.target.classList.contains('modal-close')) {
+    document.getElementById('policyModal').classList.remove('show');
+  }
+}
 </script>
 </body>
 </html>
