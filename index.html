@@ -9,6 +9,7 @@
     :root{
       --bg-dark: #0F172A;
       --surface: rgba(30, 41, 59, 0.4);
+      --surface-hover: rgba(30, 41, 59, 0.6);
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --accent-red: #E11D48;
@@ -20,7 +21,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-dark); line-height: 1.5; overflow-x: hidden; font-weight: 400; }
     
-    /* ФОН */
     .bg-glow { position: fixed; inset: 0; z-index: -1; background: var(--bg-dark); overflow: hidden; }
     .glow-1 { position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, transparent 60%); filter: blur(60px); }
     .glow-2 { position: absolute; bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%); filter: blur(60px); }
@@ -58,8 +58,9 @@
     .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; margin: 0 auto 24px; }
     .hero__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    /* АНИМАЦИЯ */
+    .reveal { opacity: 0; transform: translateY(40px) scale(0.98); transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
     /* ЦВЕТА */
     .palette { padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.1); text-align: center; overflow: hidden; }
@@ -150,13 +151,21 @@
     .mobile-phone-btn { display: none; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--accent-red); border-radius: 50%; margin-left: auto; }
     .mobile-phone-btn svg { width: 18px; height: 18px; fill: #fff; }
 
+    /* СОЦСЕТИ */
+    .social-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .social-links a {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 16px; border-radius: 8px; font-weight: 500; font-size: 0.9rem;
+      background: var(--surface); border: 1px solid var(--border); transition: 0.3s;
+    }
+    .social-links a:hover { background: var(--accent-yellow); color: var(--bg-dark); border-color: var(--accent-yellow); }
+
     /* =========================================
-       МОБИЛЬНАЯ ВЕРСИЯ (Для смартфонов)
+       МОБИЛЬНАЯ ВЕРСИЯ
        ========================================= */
     @media(max-width: 900px){
       .container { padding: 0 16px; }
       
-      /* Шапка */
       .nav { display: none; } 
       .header__contacts { display: none; }
       .mobile-phone-btn { display: flex; }
@@ -165,14 +174,12 @@
       .logo-text span { font-size: 0.55rem; }
       .header__inner { justify-content: space-between; padding: 10px 0; }
 
-      /* Hero */
       .hero { padding: 40px 0 30px; }
       .hero h1 { font-size: 1.8rem; }
       .hero p { font-size: 0.9rem; margin-bottom: 20px; }
       .hero__actions { flex-direction: column; }
       .hero__actions .btn { width: 100%; }
 
-      /* Каталог (Свайп) */
       .grid { 
         display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; 
         padding-bottom: 15px; scrollbar-width: none; margin-right: -16px; padding-right: 16px; 
@@ -315,11 +322,13 @@
       <p style="margin-bottom: 6px; font-weight: 500; font-size: 0.9rem;">Телефон: <a href="tel:+375297575265" style="color: var(--accent-yellow);">+375 (29) 757-52-65</a></p>
       <p style="font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Telegram: <a href="https://t.me/+375295894068" target="_blank" style="color: var(--accent-yellow);">Написать в Telegram</a></p>
       <p style="font-weight: 500; margin-bottom: 4px; font-size: 0.9rem;">Соцсети:</p>
-      <p>
-        <a href="https://www.instagram.com/koloritbeton/" target="_blank" style="color: var(--accent-yellow); margin-right: 12px; font-weight: 500; font-size: 0.9rem;">Instagram</a>
-        <a href="https://vk.ru/koloritbeton" target="_blank" style="color: var(--accent-yellow); margin-right: 12px; font-weight: 500; font-size: 0.9rem;">VK</a>
-       <a href="viber://chat?number=%2B375297575265" style="color: var(--accent-yellow); font-weight: 500; font-size: 0.9rem;">Viber</a>
-      </p>
+      
+      <!-- УЛУЧШЕННЫЕ КНОПКИ СОЦСЕТЕЙ -->
+      <div class="social-links">
+        <a href="https://www.instagram.com/koloritbeton/" target="_blank">Instagram</a>
+        <a href="https://vk.ru/koloritbeton" target="_blank">VK</a>
+        <a href="viber://chat?number=%2B375297575265">Viber</a>
+      </div>
     </div>
     
     <!-- УМНАЯ ФОРМА С ОТПРАВКОЙ В TELEGRAM -->
@@ -411,7 +420,7 @@ renderGrid("grid-bordyury", data.bordyury);
 renderGrid("grid-prostupi", data.prostupi);
 renderGrid("grid-paneli", data.paneli);
 
-// АНИМАЦИЯ ПРИ СКРОЛЛЕ
+// ПЛАВНАЯ АНИМАЦИЯ
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if(entry.isIntersecting) {
@@ -419,7 +428,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
 document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
