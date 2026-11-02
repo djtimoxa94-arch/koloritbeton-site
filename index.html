@@ -87,10 +87,10 @@
       transform: scale(1.1);
       z-index: 1;
     }
-    /* ЛЕГКОЕ ЗАТЕМНЕНИЕ, ЧТОБЫ ФОТО БЫЛО ВИДНО */
+    /* ЛЕГКОЕ ЗАТЕМНЕНИЕ, ЧТОБЫ ФОТО БЫЛО ВИДНО (10% сверху, 60% снизу) */
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.85));
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.1), rgba(15, 23, 42, 0.6));
       z-index: 2;
     }
     .hero .container { position: relative; z-index: 3; }
@@ -361,7 +361,8 @@
         <div class="color-card"><div class="color-circle" style="background:#10B981"></div><div class="color-name">Зеленый</div></div>
         <div class="color-card"><div class="color-circle" style="background:#3B82F6"></div><div class="color-name">Синий</div></div>
         <div class="color-card"><div class="color-circle" style="background:#F3F4F6;"></div><div class="color-name">Мрамор</div></div>
-        <div class="color-card"><div class="color-circle" style="background:#78350F"></div><div class="color-name">Коричневый</div>      </div>
+        <div class="color-card"><div class="color-circle" style="background:#78350F"></div><div class="color-name">Коричневый</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -688,7 +689,7 @@ function orderItem(productName, btn) {
 // ЛАЙТБОКС
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
+  const img = document.getElementById('lightbox-img');
   img.src = src;
   lb.classList.add('show');
 }
