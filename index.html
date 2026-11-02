@@ -87,7 +87,6 @@
       transform: scale(1.1);
       z-index: 1;
     }
-    /* Качественный темный градиент для отличной читаемости текста */
     .hero::before {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(180deg, rgba(15, 23, 42, 0.5) 0%, rgba(15, 23, 42, 0.85) 100%);
@@ -120,14 +119,35 @@
     .color-circle { width: 60px; height: 60px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.3); }
     .color-name { font-weight: 500; font-size: 0.85rem; text-align: center; }
 
-    /* КАТАЛОГ */
+    /* КАТАЛОГ И БЕЙДЖИ ТОВАРОВ */
     .section { padding: 50px 0; }
     .section h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     .section h2::before { content: ''; display: block; width: 8px; height: 24px; background: var(--accent-yellow); border-radius: 4px; }
 
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.4s; backdrop-filter: blur(20px); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.4s; backdrop-filter: blur(20px); position: relative; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.2); background: rgba(30, 41, 59, 0.9); }
+    
+    /* Стиль бейджей на карточках */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      background: var(--accent-red);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .card-badge.badge-yellow {
+      background: var(--accent-yellow);
+      color: var(--bg-dark);
+    }
     
     .carousel { position: relative; width: 100%; aspect-ratio: 4/3; background: #1E293B; overflow: hidden; }
     .carousel__track { display: flex; height: 100%; transition: 0.5s; }
@@ -204,11 +224,6 @@
     .worktime p { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
     .worktime p b { color: var(--text-main); font-weight: 500; } .worktime p:last-child { border: none; }
     
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
-    .feature-item { background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); text-align: center; }
-    .feature-item h3 { font-size: 1rem; margin-bottom: 6px; color: var(--accent-yellow); font-weight: 600; }
-    .feature-item p { font-size: 0.85rem; color: var(--text-muted); }
-
     .map-section { padding: 50px 0; background: rgba(0,0,0,0.1); }
     .map-wrapper { width: 100%; height: 350px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); position: relative; z-index: 1; }
     .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.2) contrast(1.1); }
@@ -219,10 +234,22 @@
     .form input:focus, .form textarea:focus { outline: none; border-color: var(--accent-red); background: rgba(0,0,0,0.4); }
     .footer { border-top: 1px solid var(--border); color: var(--text-muted); padding: 24px 0; text-align: center; font-size: 0.85rem; }
     
-    /* КНОПКИ ВНИЗУ */
+    /* КНОПКИ ВНИЗУ И ПУЛЬСАЦИЯ (Пункт 4) */
     .floating-actions { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-    .floating-call { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: #4CAF50; border-radius: 50%; box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); transition: transform 0.3s; }
-    .floating-call:hover { transform: scale(1.1); }
+    
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 16px rgba(76, 175, 80, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+    }
+    
+    .floating-call { 
+      display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; 
+      background: #4CAF50; border-radius: 50%; box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); 
+      transition: transform 0.3s; 
+      animation: pulse-ring 2s infinite cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    .floating-call:hover { transform: scale(1.1); animation: none; }
     .floating-call svg { width: 24px; height: 24px; fill: #fff; }
     
     .floating-up { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: 50%; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; backdrop-filter: blur(10px); position: fixed; bottom: 20px; left: 20px; }
@@ -476,7 +503,7 @@
   </div>
 </footer>
 
-<!-- КНОПКИ ВНИЗУ -->
+<!-- КНОПКИ ВНИЗУ (С пульсацией) -->
 <div class="floating-actions">
   <a href="tel:+375297575265" class="floating-call" title="Позвонить">
     <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
@@ -518,15 +545,15 @@
 </div>
 
 <script>
-// ДАННЫЕ КАТАЛОГА
+// ДАННЫЕ КАТАЛОГА (С бейджами для популярных товаров)
 const data = {
   bruschatka: [
-    {name:"Кремль", imgs:["kreml.jpg"], specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]]},
+    {name:"Кремль", badge:"Хит продаж", imgs:["kreml.jpg"], specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]]},
     {name:"Греция", imgs:["grecia.jpg"], specs:"285×285 / 100×100 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","30 BYN"],["Мрамор","30 BYN"]]},
     {name:"Булыжная мостовая", imgs:["bulizhnaya.jpg"], specs:"150×300 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
     {name:"Каменная роза", imgs:["roza.jpg"], specs:"6 камней · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
     {name:"Домино", imgs:["domino.jpg"], specs:"295×145 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
-    {name:"Старый Арбат", imgs:["arbat.jpg"], specs:"135×195 / 135×150 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]}
+    {name:"Старый Арбат", badge:"Популярно", imgs:["arbat.jpg"], specs:"135×195 / 135×150 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]}
   ],
   plitka: [
     {name:"Флорида дерево", imgs:["florida.jpg"], specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
@@ -535,7 +562,7 @@ const data = {
     {name:"Калифорния Кубик", imgs:["california-kubik.jpg"], specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
     {name:"Паркет", imgs:["parket.jpg"], specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
     {name:"Калифорния дерево", imgs:["california-derevo.jpg"], specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-    {name:"12 кирпичей", imgs:["12-kirpichey.jpg"], specs:"500×500 мм · 50 мм", prices:[["Серый","28 руб."],["Цветной","33 руб."],["Мрамор","35 руб."]]},
+    {name:"12 кирпичей", badge:"Новинка", imgs:["12-kirpichey.jpg"], specs:"500×500 мм · 50 мм", prices:[["Серый","28 руб."],["Цветной","33 руб."],["Мрамор","35 руб."]]},
     {name:"Черепашка", imgs:["cherepashka.jpg"], specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
     {name:"Три доски", imgs:["tri-doski.jpg"], specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]}
   ],
@@ -549,7 +576,7 @@ const data = {
     {name:"Проступь", imgs:["prostup.jpg"], specs:"1250×320×40 мм", prices:[["Серый","24 руб."],["Цветной","27 руб."],["Мрамор","30 руб."]]}
   ],
   paneli: [
-    {name:"Ростовский камень", imgs:["rostov.jpg"], specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 руб."],["В цвете","29 руб."],["Мрамор","31 руб."]]}
+    {name:"Ростовский камень", badge:"Хит продаж", imgs:["rostov.jpg"], specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 руб."],["В цвете","29 руб."],["Мрамор","31 руб."]]}
   ]
 };
 
@@ -560,8 +587,14 @@ function renderGrid(id, items) {
     const slides = item.imgs.map(img => `<div class="carousel__slide" style="background-image:url('img/${img}')"></div>`).join("");
     const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
     
+    // Генерация HTML бейджа, если он указан в данных товара
+    const badgeHtml = item.badge 
+      ? `<div class="card-badge ${item.badge === 'Новинка' ? 'badge-yellow' : ''}">${item.badge}</div>` 
+      : '';
+    
     return `
       <article class="card reveal">
+        ${badgeHtml}
         <div class="carousel">
           <div class="carousel__track">${slides}</div>
         </div>
