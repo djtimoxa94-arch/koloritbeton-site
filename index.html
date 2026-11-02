@@ -9,7 +9,6 @@
     :root{
       --bg-dark: #0F172A;
       --surface: rgba(30, 41, 59, 0.4);
-      --surface-hover: rgba(30, 41, 59, 0.6);
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --accent-red: #E11D48;
@@ -21,6 +20,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body { font-family: var(--font-main); color: var(--text-main); background: var(--bg-dark); line-height: 1.5; overflow-x: hidden; font-weight: 400; }
     
+    /* ФОН */
     .bg-glow { position: fixed; inset: 0; z-index: -1; background: var(--bg-dark); overflow: hidden; }
     .glow-1 { position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, transparent 60%); filter: blur(60px); }
     .glow-2 { position: absolute; bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%); filter: blur(60px); }
@@ -58,9 +58,8 @@
     .hero p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; margin: 0 auto 24px; }
     .hero__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    /* АНИМАЦИЯ */
-    .reveal { opacity: 0; transform: translateY(40px) scale(0.98); transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
-    .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
     /* ЦВЕТА */
     .palette { padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.1); text-align: center; overflow: hidden; }
@@ -323,7 +322,7 @@
       <p style="font-weight: 500; margin-bottom: 6px; font-size: 0.9rem;">Telegram: <a href="https://t.me/+375295894068" target="_blank" style="color: var(--accent-yellow);">Написать в Telegram</a></p>
       <p style="font-weight: 500; margin-bottom: 4px; font-size: 0.9rem;">Соцсети:</p>
       
-      <!-- УЛУЧШЕННЫЕ КНОПКИ СОЦСЕТЕЙ -->
+      <!-- КНОПКИ СОЦСЕТЕЙ -->
       <div class="social-links">
         <a href="https://www.instagram.com/koloritbeton/" target="_blank">Instagram</a>
         <a href="https://vk.ru/koloritbeton" target="_blank">VK</a>
