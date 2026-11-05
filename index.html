@@ -5,41 +5,244 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#171615">
   <title>KOLORITBETON — бетонные изделия в Гродно</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    :root {
+      --ink: #171615;
+      --copper: #c77b4b;
+      --cream: #f4f0eb;
+      --muted: #b9b4ae;
+      --text-dark: #1A1A1A;
+      --border-light: rgba(0,0,0,0.1);
+      --border-dark: rgba(255,255,255,0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { background: var(--ink); color: #fff; font-family: 'Manrope', sans-serif; line-height: 1.5; overflow-x: hidden; padding-bottom: 70px; }
+    a { color: inherit; text-decoration: none; transition: 0.3s; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+
+    /* КНОПКИ */
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 50px; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease; font-family: 'Manrope', sans-serif; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: var(--copper); color: #fff; box-shadow: 0 4px 15px rgba(199, 123, 75, 0.3); }
+    .btn-primary:hover { background: #d58b5b; box-shadow: 0 8px 25px rgba(199, 123, 75, 0.5); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: #fff; background: transparent; }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+    /* ШАПКА */
+    .site-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(18,18,18,0.85); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-dark); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; padding: 0 5%; }
+    .brand { display: flex; align-items: center; gap: 15px; }
+    .brand-logo { height: 40px; }
+    .brand-copy b { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; display: block; }
+    .brand-copy small { font-size: 0.6rem; color: #aaa; letter-spacing: 1px; display: block; }
+    .desktop-nav { display: flex; gap: 30px; }
+    .desktop-nav a { font-weight: 600; font-size: 0.95rem; }
+    .desktop-nav a:hover { color: var(--copper); }
+    .header-actions { display: flex; align-items: center; gap: 20px; }
+    .lang-switch { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 30px; border: 1px solid var(--border-dark); }
+    .lang-btn { background: none; border: none; color: #888; font-family: inherit; font-weight: 700; cursor: pointer; font-size: 0.9rem; }
+    .lang-btn.active { color: var(--copper); }
+    .menu-toggle { display: none; background: none; border: none; width: 30px; height: 20px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 101; }
+    .menu-toggle i { display: block; height: 2px; background: #fff; width: 100%; transition: 0.3s; }
+    .menu-toggle.active i:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active i:nth-child(2) { opacity: 0; }
+    .menu-toggle.active i:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    
+    .mobile-menu { position: fixed; inset: 0; background: var(--ink); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px; transform: translateY(-100%); transition: 0.4s ease; }
+    .mobile-menu.active { transform: translateY(0); }
+    .mobile-menu a { font-size: 1.5rem; font-weight: 600; }
+
+    /* ГЛАВНЫЙ ЭКРАН */
+    .hero { position: relative; display: flex; flex-direction: column; padding: 130px 0 0; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('img/hero-bg.jpg') center/cover no-repeat; z-index: 1; }
+    .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,18,0.95) 0%, rgba(18,18,18,0.4) 100%), linear-gradient(0deg, rgba(18,18,18,0.8) 0%, transparent 50%); z-index: 2; }
+    .hero-content { position: relative; z-index: 3; max-width: 850px; padding: 0 20px; margin: 0 auto; width: 100%; margin-bottom: 50px; }
+    .eyebrow { display: flex; align-items: center; gap: 15px; color: var(--copper); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+    .eyebrow i { display: block; height: 1px; width: 80px; background: currentColor; }
+    .eyebrow.dark { color: var(--text-dark); }
+    .hero h1 { font-size: clamp(2.5rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -1.5px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    .hero-lead { font-size: 1.2rem; color: #ddd; margin-bottom: 40px; max-width: 500px; }
+    .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+    .button { height: 56px; padding: 0 32px; border-radius: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; font-weight: 600; font-size: 1rem; }
+    .button b { font-size: 1.4rem; }
+
+    .hero-bottom { position: relative; z-index: 3; background: rgba(18,18,18,0.9); border-top: 1px solid var(--border-dark); display: flex; justify-content: space-around; padding: 25px 5%; backdrop-filter: blur(5px); flex-wrap: wrap; }
+    .feature { display: flex; align-items: center; gap: 15px; font-size: 0.9rem; color: #ddd; margin: 10px 0; }
+    .feature svg { width: 32px; height: 32px; color: var(--copper); flex-shrink: 0; }
+
+    /* ЦВЕТОВАЯ ГАММА */
+    .palette { padding: 40px 0; border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); background: rgba(0,0,0,0.2); text-align: center; overflow: hidden; }
+    .palette h2 { font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; color: var(--text-main); letter-spacing: 2px; }
+    .color-slider-wrapper { position: relative; max-width: 1000px; margin: 0 auto; }
+    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 20px; cursor: grab; }
+    .color-slider::-webkit-scrollbar { display: none; }
+    .color-card { flex: 0 0 calc(25% - 12px); scroll-snap-align: center; background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid var(--border-dark); }
+    .color-circle { width: 60px; height: 60px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.3); }
+    .color-name { font-weight: 500; font-size: 0.85rem; text-align: center; }
+
+    /* КАТАЛОГ */
+    .section-light { background: var(--cream); color: var(--text-dark); padding: 80px 0; }
+    .section-intro { margin-bottom: 40px; }
+    .section-intro h2 { font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px; }
+    .section-intro p { font-size: 1.1rem; color: #666; }
+    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .tab-btn { padding: 12px 24px; border: 1px solid var(--border-light); background: transparent; border-radius: 50px; font-family: inherit; font-size: 0.95rem; font-weight: 600; color: var(--text-dark); cursor: pointer; transition: 0.3s; }
+    .tab-btn:hover { border-color: var(--copper); color: var(--copper); }
+    .tab-btn.active { background: var(--text-dark); color: #fff; border-color: var(--text-dark); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+    .card { background: #fff; border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+    .card-img { width: 100%; aspect-ratio: 4/3; background: #eee center/cover no-repeat; }
+    .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-body h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .card-specs { font-size: 0.85rem; color: #666; margin-bottom: 15px; flex-grow: 1; }
+    .card-prices { display: flex; flex-direction: column; gap: 6px; background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .price-row { display: flex; justify-content: space-between; font-size: 0.9rem; }
+    .card-controls { display: flex; gap: 10px; margin-bottom: 15px; }
+    .card-controls select, .card-controls input { padding: 8px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit; font-size: 0.9rem; }
+
+    /* НАШИ РАБОТЫ */
+    .works { padding: 80px 0; background: var(--ink); }
+    .works h2 { font-size: 2.5rem; margin-bottom: 30px; color: #fff; }
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .work-card { border-radius: 12px; overflow: hidden; aspect-ratio: 1/1; cursor: pointer; }
+    .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+    .work-card:hover img { transform: scale(1.05); }
+
+    /* О НАС */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+    .about-text p { font-size: 1.05rem; color: #666; margin-bottom: 20px; }
+    .checks { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .checks li { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(199, 123, 75, 0.1); color: var(--copper); border-radius: 50%; font-weight: 800; }
+    .worktime { background: #fff; padding: 40px; border-radius: 12px; border: 1px solid var(--border-light); }
+    .worktime h3 { margin-bottom: 20px; }
+    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 10px; margin-bottom: 10px; color: #666; }
+    .worktime p:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+    .worktime b { color: var(--text-dark); }
+
+    /* КОНТАКТЫ И КАРТА */
+    .contacts { padding: 80px 0; background: var(--ink); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    .contact-copy h2 { font-size: 2.5rem; margin-bottom: 20px; }
+    .contact-copy p { color: #ccc; margin-bottom: 30px; }
+    .contact-details { display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px; }
+    .contact-item small { display: block; font-size: 0.75rem; color: var(--copper); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+    .contact-item b { font-size: 1.1rem; }
+    .map-wrapper { width: 100%; height: 300px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-dark); }
+    .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.1); }
+
+    .form { background: rgba(255,255,255,0.05); padding: 40px; border-radius: 12px; border: 1px solid var(--border-dark); }
+    .form h3 { font-size: 1.5rem; margin-bottom: 10px; }
+    .form p { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
+    .form input, .form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-dark); border-radius: 8px; color: #fff; font-family: inherit; font-size: 1rem; }
+    .form input:focus, .form textarea:focus { outline: none; border-color: var(--copper); }
+    .form button { width: 100%; }
+
+    /* ФУТЕР */
+    footer { padding: 30px 0; background: #0a0a0a; border-top: 1px solid var(--border-dark); color: #888; font-size: 0.9rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+
+    /* МОБИЛЬНАЯ НАВИГАЦИЯ */
+    .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1b1a19; border-top: 1px solid var(--border-dark); z-index: 99; padding: 10px 0; }
+    .mobile-nav__inner { display: flex; justify-content: space-around; }
+    .mobile-nav a { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #888; font-size: 0.7rem; }
+    .mobile-nav a.selected { color: var(--copper); }
+    .mobile-nav a span { font-size: 1.4rem; }
+
+    /* ПЛАВАЮЩИЕ КНОПКИ */
+    .floating-call { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 98; box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); transition: 0.3s; }
+    .floating-call:hover { transform: scale(1.1); }
+    .floating-call svg { width: 28px; height: 28px; fill: #fff; }
+    
+    .floating-up { position: fixed; bottom: 20px; left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid var(--border-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 99; backdrop-filter: blur(10px); }
+    .floating-up.show { opacity: 1; pointer-events: auto; }
+    .floating-up:hover { background: var(--copper); border-color: var(--copper); }
+    .floating-up svg { width: 18px; height: 18px; fill: #fff; }
+
+    /* МОДАЛЬНЫЕ ОКНА */
+    .modal { position: fixed; inset: 0; z-index: 1002; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal.show { display: flex; }
+    .modal-content { background: #fff; color: var(--text-dark); border-radius: 12px; max-width: 500px; width: 100%; padding: 40px; position: relative; text-align: center; }
+    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
+    .modal-content input { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
+
+    /* АДАПТИВ */
+    @media(max-width: 1024px) {
+      .hero h1 { font-size: 3rem; }
+      .feature { font-size: 0.8rem; gap: 10px; }
+      .feature svg { width: 24px; height: 24px; }
+    }
+
+    @media(max-width: 900px) {
+      body { padding-bottom: 70px; }
+      .desktop-nav, .desktop-only { display: none; }
+      .menu-toggle { display: flex; }
+      
+      .hero { padding: 120px 0 0; justify-content: flex-start; }
+      .hero-content { margin-bottom: 30px; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-lead { font-size: 1rem; }
+      .hero-buttons { flex-direction: column; gap: 10px; }
+      .hero-buttons .button { width: 100%; }
+      
+      .hero-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px 5%; }
+      .feature { flex-direction: column; text-align: center; gap: 8px; margin: 0; }
+      .feature svg { width: 32px; height: 32px; }
+      
+      .palette { padding: 30px 0; }
+      .color-card { flex: 0 0 calc(45% - 8px); }
+
+      .section-intro h2 { font-size: 2rem; }
+      .product-grid { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; margin-right: -20px; padding-right: 20px; }
+      .card { flex: 0 0 85%; }
+      
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+      .map-wrapper { height: 250px; }
+      
+      .mobile-nav { display: block; }
+      footer { padding-bottom: 90px; }
+      
+      .floating-call { bottom: 85px; right: 15px; width: 50px; height: 50px; }
+      .floating-call svg { width: 24px; height: 24px; }
+      .floating-up { bottom: 85px; left: 15px; width: 36px; height: 36px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ШАПКА -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
     <a class="brand" href="#home">
       <img src="img/logo.png" alt="Koloritbeton" class="brand-logo" onerror="this.style.display='none'">
       <span class="brand-copy"><b>KOLORITBETON</b><small>ПРОИЗВОДСТВО БЕТОННЫХ ИЗДЕЛИЙ</small></span>
     </a>
-    
     <nav class="desktop-nav">
       <a href="#catalog">Каталог</a>
       <a href="#works">Наши работы</a>
       <a href="#about">О компании</a>
       <a href="#contacts">Контакты</a>
     </nav>
-    
     <div class="header-actions">
-      <div class="language-switch">
-        <button class="lang active" data-lang="ru">RU</button>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ru">RU</button>
         <span>/</span>
-        <button class="lang" data-lang="be">BE</button>
+        <button class="lang-btn" data-lang="be">BE</button>
       </div>
       <a href="tel:+375297575265" class="btn btn-primary desktop-only">Позвонить</a>
-      <button class="menu-toggle" aria-label="Меню"><i></i><i></i><i></i></button>
+      <button class="menu-toggle" id="menuToggle"><i></i><i></i><i></i></button>
     </div>
   </div>
 </header>
 
-<!-- МОБИЛЬНОЕ МЕНЮ -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#catalog">Каталог</a>
   <a href="#works">Наши работы</a>
@@ -47,51 +250,63 @@
   <a href="#contacts">Контакты</a>
 </div>
 
-<!-- ГЛАВНЫЙ ЭКРАН -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-shade"></div>
-  
-  <div class="hero-content container">
+  <div class="hero-content">
     <div class="eyebrow"><span>ПРЕМИАЛЬНОЕ КАЧЕСТВО</span><i></i></div>
     <h1>Тротуарная плитка<br>собственного производства<br>в Гродно</h1>
     <p class="hero-lead">Надёжное покрытие для вашего дома на долгие годы</p>
-    
     <div class="hero-buttons">
-      <a class="button button-primary" href="#catalog">Посмотреть каталог <b>→</b></a>
-      <a class="button button-outline" href="#contacts">Получить консультацию</a>
+      <a class="btn btn-primary" href="#catalog">Посмотреть каталог <b>→</b></a>
+      <a class="btn btn-outline" href="#contacts">Получить консультацию</a>
     </div>
   </div>
-  
   <div class="hero-bottom">
     <div class="feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-      <span>Собственное<br>производство</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      <span>Собственное производство</span>
     </div>
     <div class="feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/><path d="M11 3L8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
-      <span>Контроль<br>качества</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/><path d="M11 3L8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
+      <span>Контроль качества</span>
     </div>
     <div class="feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
-      <span>Доставка<br>по Гродно и области</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+      <span>Доставка по Гродно и области</span>
     </div>
     <div class="feature">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
-      <span>Профессиональная<br>консультация</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+      <span>Профессиональная консультация</span>
     </div>
   </div>
 </section>
 
-<!-- КАТАЛОГ -->
-<section class="catalog section-light" id="catalog">
+<!-- ЦВЕТОВАЯ ГАММА -->
+<section class="palette">
+  <div class="container">
+    <h2>Цветовая гамма</h2>
+    <div class="color-slider-wrapper">
+      <div class="color-slider" id="colorSlider">
+        <div class="color-card"><div class="color-circle" style="background:#9CA3AF"></div><div class="color-name">Серый</div></div>
+        <div class="color-card"><div class="color-circle" style="background:#E11D48"></div><div class="color-name">Красный</div></div>
+        <div class="color-card"><div class="color-circle" style="background:#F59E0B"></div><div class="color-name">Желтый</div></div>
+        <div class="color-card"><div class="color-circle" style="background:#10B981"></div><div class="color-name">Зеленый</div></div>
+        <div class="color-card"><div class="color-circle" style="background:#3B82F6"></div><div class="color-name">Синий</div></div>
+        <div class="color-card"><div class="color-circle" style="background:#F3F4F6;"></div><div class="color-name">Мрамор</div></div>
+        <div class="color-card"><div class="color-circle" style="background:#78350F"></div><div class="color-name">Коричневый</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-light" id="catalog">
   <div class="container">
     <div class="section-intro">
       <div class="eyebrow dark"><span>КАТАЛОГ ПРОДУКЦИИ</span><i></i></div>
       <h2>Широкий выбор<br>бетонных изделий</h2>
       <p>Разнообразие форм, цветов и фактур для любых задач</p>
     </div>
-    
     <div class="tabs">
       <button class="tab-btn active" data-tab="bruschatka">Брусчатка</button>
       <button class="tab-btn" data-tab="plitka">Тротуарная плитка</button>
@@ -99,7 +314,6 @@
       <button class="tab-btn" data-tab="prostupi">Проступи</button>
       <button class="tab-btn" data-tab="paneli">Фасадные панели</button>
     </div>
-    
     <div id="tab-bruschatka" class="tab-content active"><div class="product-grid" id="grid-bruschatka"></div></div>
     <div id="tab-plitka" class="tab-content"><div class="product-grid" id="grid-plitka"></div></div>
     <div id="tab-bordyury" class="tab-content"><div class="product-grid" id="grid-bordyury"></div></div>
@@ -108,19 +322,16 @@
   </div>
 </section>
 
-<!-- НАШИ РАБОТЫ -->
 <section class="works" id="works">
   <div class="container">
     <div class="section-heading">
       <div><div class="eyebrow"><span>ПОРТФОЛИО</span><i></i></div><h2>Красота в каждой детали</h2></div>
-      <p>Идеи благоустройства для дома, двора и территории.</p>
     </div>
     <div class="works-grid" id="works-grid"></div>
   </div>
 </section>
 
-<!-- О НАС -->
-<section class="about section-light" id="about">
+<section class="section-light" id="about">
   <div class="container about-grid">
     <div class="about-text">
       <div class="eyebrow dark"><span>О КОМПАНИИ</span><i></i></div>
@@ -143,7 +354,6 @@
   </div>
 </section>
 
-<!-- КОНТАКТЫ -->
 <section class="contacts" id="contacts">
   <div class="container contact-grid">
     <div class="contact-copy">
@@ -178,17 +388,22 @@
   </div>
 </footer>
 
-<!-- НИЖНЕЕ МЕНЮ (Моб) -->
 <nav class="mobile-nav">
-  <a class="selected" href="#home"><span>⌂</span><small>Главная</small></a>
-  <a href="#catalog"><span>▦</span><small>Каталог</small></a>
-  <a href="#contacts"><span>⌖</span><small>Контакты</small></a>
-  <a href="tel:+375297575265"><span>♧</span><small>Звонок</small></a>
+  <div class="mobile-nav__inner">
+    <a class="selected" href="#home"><span>⌂</span><small>Главная</small></a>
+    <a href="#catalog"><span>▦</span><small>Каталог</small></a>
+    <a href="#contacts"><span>⌖</span><small>Контакты</small></a>
+    <a href="tel:+375297575265"><span>♧</span><small>Звонок</small></a>
+  </div>
 </nav>
 
 <a href="tel:+375297575265" class="floating-call">
   <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
 </a>
+
+<div class="floating-up" id="scrollTop">
+  <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
+</div>
 
 <div class="modal" id="callbackModal" onclick="closeCallbackModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
@@ -209,6 +424,172 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+  // ДАННЫЕ КАТАЛОГА
+  const data = {
+    bruschatka: [
+      {name:"Кремль", badge:"Хит продаж", img:"kreml.jpg", specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]]},
+      {name:"Греция", img:"grecia.jpg", specs:"285×285 / 100×100 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","30 BYN"],["Мрамор","30 BYN"]]},
+      {name:"Булыжная мостовая", img:"bulizhnaya.jpg", specs:"150×300 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
+      {name:"Каменная роза", img:"roza.jpg", specs:"6 камней · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
+      {name:"Домино", img:"domino.jpg", specs:"295×145 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
+      {name:"Старый Арбат", badge:"Популярно", img:"arbat.jpg", specs:"135×195 / 135×150 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]}
+    ],
+    plitka: [
+      {name:"Флорида дерево", img:"florida.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"Ялта", img:"yalta.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"Фазенда", img:"fazenda.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"Калифорния Кубик", img:"california-kubik.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"Паркет", img:"parket.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"Калифорния дерево", img:"california-derevo.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"12 кирпичей", badge:"Новинка", img:"12-kirpichey.jpg", specs:"500×500 мм · 50 мм", prices:[["Серый","28 руб."],["Цветной","33 руб."],["Мрамор","35 руб."]]},
+      {name:"Черепашка", img:"cherepashka.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
+      {name:"Три доски", img:"tri-doski.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]}
+    ],
+    bordyury: [
+      {name:"Бордюр 100×22×7,5", img:"bordur-100.jpg", specs:"100×22×7,5", prices:[["Серый","10 руб."],["Цветной","12 руб."],["Мрамор","14 руб."]]},
+      {name:"Водосток", img:"vodostok.jpg", specs:"50×16×6", prices:[["Серый","6 руб."],["Цветной","8 руб."],["Мрамор","9 руб."]]},
+      {name:"Бордюр 50×20×3.5", img:"bordur-50.jpg", specs:"50×20×3,5", prices:[["Серый","3.5 руб."],["Цветной","5.5 руб."],["Мрамор","5.5 руб."]]}
+    ],
+    prostupi: [
+      {name:"Три прорези", img:"tri-prorezi.jpg", specs:"1350×340×40 мм", prices:[["Серый","25 руб."],["Цветной","28 руб."],["Мрамор","31 руб."]]},
+      {name:"Проступь", img:"prostup.jpg", specs:"1250×320×40 мм", prices:[["Серый","24 руб."],["Цветной","27 руб."],["Мрамор","30 руб."]]}
+    ],
+    paneli: [
+      {name:"Ростовский камень", badge:"Хит продаж", img:"rostov.jpg", specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 руб."],["В цвете","29 руб."],["Мрамор","31 руб."]]}
+    ]
+  };
+
+  const works = ["work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg", "work5.jpg", "work6.jpg"];
+
+  // РЕНДЕР КАТАЛОГА
+  function renderGrid(id, items) {
+    const grid = document.getElementById(id);
+    if(!grid) return;
+    grid.innerHTML = items.map(item => {
+      const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
+      const badge = item.badge ? `<div style="position:absolute; top:10px; left:10px; background:var(--copper); color:#fff; padding:4px 10px; border-radius:4px; font-size:0.7rem; font-weight:700; z-index:10;">${item.badge}</div>` : '';
+      return `
+        <article class="card" style="position:relative;">
+          ${badge}
+          <div class="card-img" style="background-image:url('img/${item.img}')"></div>
+          <div class="card-body">
+            <h3>${item.name}</h3>
+            <div class="card-specs">${item.specs}</div>
+            <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("")}</div>
+            <div class="card-controls">
+              <select class="color-select">${colorOptions}</select>
+              <input type="number" class="qty-input" value="1" min="1" style="width: 60px;">
+            </div>
+            <button class="btn btn-primary" onclick="orderItem('${item.name}', this)">Заказать</button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  function renderWorks() {
+    const grid = document.getElementById("works-grid");
+    if(!grid) return;
+    grid.innerHTML = works.map((img, index) => `
+      <div class="work-card" onclick="openLightbox('img/${img}')">
+        <img src="img/${img}" alt="Работа ${index+1}" onerror="this.src='https://placehold.co/400x400/1E1E1E/555?text=Фото+${index+1}'">
+      </div>
+    `).join("");
+  }
+
+  renderGrid("grid-bruschatka", data.bruschatka);
+  renderGrid("grid-plitka", data.plitka);
+  renderGrid("grid-bordyury", data.bordyury);
+  renderGrid("grid-prostupi", data.prostupi);
+  renderGrid("grid-paneli", data.paneli);
+  renderWorks();
+
+  // ВКЛАДКИ
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+    });
+  });
+
+  // БУРГЕР
+  const menuBtn = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    menuBtn.classList.toggle("active");
+    document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "";
+  });
+  mobileMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("active");
+      menuBtn.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+  });
+
+  // ЗАКАЗ
+  function orderItem(name, btn) {
+    const card = btn.closest(".card");
+    const color = card.querySelector(".color-select").value;
+    const qty = card.querySelector(".qty-input").value;
+    const text = `Здравствуйте, хочу заказать: ${name}.\nЦвет: ${color}.\nКоличество: ${qty}`;
+    window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
+  }
+
+  // ОБЩАЯ ФОРМА
+  document.getElementById("tgForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("userName").value;
+    const phone = document.getElementById("userPhone").value;
+    const msg = document.getElementById("userMsg").value;
+    let text = `Здравствуйте, хочу заказать!\nИмя: ${name}\nТелефон: ${phone}`;
+    if (msg.trim()) text += `\nСообщение: ${msg}`;
+    window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
+  });
+
+  // ЛАЙТБОКС
+  function openLightbox(src) {
+    const lb = document.createElement("div");
+    lb.className = "modal show";
+    lb.innerHTML = `<div class="modal-content" style="padding:0;background:transparent;border:none;max-width:95%;"><img src="${src}" style="width:100%;border-radius:12px;"></div>`;
+    lb.onclick = () => lb.remove();
+    document.body.appendChild(lb);
+  }
+
+  // МОДАЛЬНЫЕ ОКНА
+  function openCallbackModal(e) { e.preventDefault(); document.getElementById("callbackModal").classList.add("show"); }
+  function closeCallbackModal(e) { if(e.target.id === "callbackModal" || e.target.classList.contains("modal-close")) document.getElementById("callbackModal").classList.remove("show"); }
+  function submitCallback() {
+    const phone = document.getElementById("callbackPhone").value.trim();
+    if(!phone) { alert("Введите номер"); return; }
+    window.open(`https://t.me/+375295894068?text=${encodeURIComponent("Прошу перезвонить: " + phone)}`, "_blank");
+    document.getElementById("callbackPhone").value = "";
+    closeCallbackModal();
+  }
+  function openPolicy(e) { e.preventDefault(); document.getElementById("policyModal").classList.add("show"); }
+  function closePolicy(e) { if(e.target.id === "policyModal" || e.target.classList.contains("modal-close")) document.getElementById("policyModal").classList.remove("show"); }
+
+  // СТРЕЛКА НАВЕРХ
+  const scrollTopBtn = document.getElementById("scrollTop");
+  window.addEventListener("scroll", () => {
+    if(window.scrollY > 400) scrollTopBtn.classList.add("show");
+    else scrollTopBtn.classList.remove("show");
+  });
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ЯЗЫК
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+</script>
 </body>
 </html>
