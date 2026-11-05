@@ -4,7 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#171615">
+  
+  <!-- SEO-теги -->
   <title>KOLORITBETON — тротуарная плитка и бетонные изделия в Гродно</title>
+  <meta name="description" content="Производство и продажа тротуарной плитки, брусчатки и бетонных изделий в Гродно. Высокое качество, доступные цены, доставка по области.">
+  <meta name="keywords" content="тротуарная плитка Гродно, брусчатка, купить плитку, колоритбетон, бетонные изделия">
+  
+  <!-- Open Graph / соцсети -->
+  <meta property="og:title" content="KOLORITBETON — тротуарная плитка в Гродно">
+  <meta property="og:description" content="Надежное покрытие для вашего дома на долгие годы. Собственное производство.">
+  <meta property="og:type" content="website">
+  
+  <!-- Микроразметка Schema.org (LocalBusiness) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Koloritbeton",
+    "image": "img/logo.png",
+    "telephone": "+375297575265",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ул. Гожская, 2А",
+      "addressLocality": "Гродно",
+      "addressCountry": "BY"
+    },
+    "openingHours": "Mo-Fr 08:00-19:00, Sa 09:00-17:00"
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -25,6 +53,18 @@
     a { color: inherit; text-decoration: none; transition: 0.3s; }
     .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
 
+    /* АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      will-change: opacity, transform;
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* КНОПКИ */
     .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 50px; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease; font-family: 'Manrope', sans-serif; }
     .btn:hover { transform: translateY(-2px); }
@@ -32,6 +72,10 @@
     .btn-primary:hover { background: var(--copper-hover); box-shadow: 0 8px 25px rgba(199, 123, 75, 0.5); }
     .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: #fff; background: transparent; }
     .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+    /* УВЕДОМЛЕНИЕ ОБ ОТПРАВКЕ */
+    .toast { position: fixed; top: 100px; right: 20px; background: #4CAF50; color: #fff; padding: 15px 25px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 10000; transform: translateY(-100px); opacity: 0; transition: 0.4s; }
+    .toast.show { transform: translateY(0); opacity: 1; }
 
     /* ШАПКА */
     .site-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(18,18,18,0.88); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-dark); }
@@ -83,25 +127,6 @@
     .color-circle { width: 56px; height: 56px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.3); }
     .color-name { font-weight: 500; font-size: 0.85rem; text-align: center; }
 
-    /* БЛОК КАЛЬКУЛЯТОРА ПЛИТКИ */
-    .calc-section { padding: 60px 0; background: rgba(255,255,255,0.02); border-bottom: 1px solid var(--border-dark); }
-    .calc-card { background: rgba(255,255,255,0.05); border: 1px solid var(--border-dark); border-radius: 16px; padding: 35px; backdrop-filter: blur(10px); }
-    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-    .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .calc-group { display: flex; flex-direction: column; gap: 8px; }
-    .calc-group.full { grid-column: span 2; }
-    .calc-group label { font-size: 0.85rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
-    .calc-group input, .calc-group select { padding: 12px 16px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-dark); border-radius: 8px; color: #fff; font-family: inherit; font-size: 1rem; outline: none; transition: 0.3s; }
-    .calc-group input:focus, .calc-group select:focus { border-color: var(--copper); }
-    
-    .calc-result-box { background: var(--copper); border-radius: 12px; padding: 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; }
-    .calc-res-title { font-size: 0.9rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; opacity: 0.9; }
-    .calc-res-values { display: flex; flex-direction: column; gap: 10px; }
-    .calc-res-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; }
-    .calc-res-row span { font-size: 0.95rem; }
-    .calc-res-row b { font-size: 1.4rem; font-weight: 800; }
-    .calc-res-row.total b { font-size: 1.8rem; color: #fff; }
-
     /* КАТАЛОГ */
     .section-light { background: var(--cream); color: var(--text-dark); padding: 80px 0; }
     .section-intro { margin-bottom: 40px; }
@@ -116,7 +141,7 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-    .card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; position: relative; }
+    .card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; position: relative; cursor: pointer; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
     .card-img { width: 100%; aspect-ratio: 4/3; background: var(--cream-dark) center/cover no-repeat; }
     .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
@@ -129,29 +154,46 @@
     .card-controls select, .card-controls input { padding: 9px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit; font-size: 0.9rem; background: #fff; }
     .card-controls select { flex: 1; }
 
-    /* НАШИ РАБОТЫ */
+    /* БЛОК КАЛЬКУЛЯТОРА ПЛИТКИ */
+    .calc-section { padding: 80px 0; background: var(--ink); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+    .calc-card { background: rgba(255,255,255,0.04); border: 1px solid var(--border-dark); border-radius: 16px; padding: 40px; backdrop-filter: blur(10px); }
+    .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+    .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .calc-group { display: flex; flex-direction: column; gap: 8px; }
+    .calc-group.full { grid-column: span 2; }
+    .calc-group label { font-size: 0.85rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
+    .calc-group input, .calc-group select { width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-dark); border-radius: 8px; color: #fff; font-family: inherit; font-size: 1rem; outline: none; transition: 0.3s; }
+    .calc-group input:focus, .calc-group select:focus { border-color: var(--copper); }
+    
+    .calc-result-box { background: var(--copper); border-radius: 12px; padding: 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; box-shadow: 0 10px 30px rgba(199,123,75,0.3); }
+    .calc-res-title { font-size: 0.9rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; opacity: 0.9; }
+    .calc-res-values { display: flex; flex-direction: column; gap: 10px; }
+    .calc-res-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; }
+    .calc-res-row span { font-size: 0.95rem; }
+    .calc-res-row b { font-size: 1.3rem; font-weight: 800; }
+    .calc-res-row.total b { font-size: 1.7rem; color: #fff; }
+
+    /* ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ */
+    .services-section { background: var(--cream); color: var(--text-dark); padding: 80px 0; border-bottom: 1px solid var(--border-light); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .service-card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: 0.3s; position: relative; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+    .service-icon { width: 50px; height: 50px; background: rgba(199,123,75,0.1); color: var(--copper); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .service-icon svg { width: 26px; height: 26px; }
+    .service-text h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .service-text p { font-size: 0.95rem; color: #666; line-height: 1.5; }
+    .service-price { font-weight: 800; font-size: 1.1rem; color: var(--copper); margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border-light); }
+
+    /* НАШИ РАБОТЫ / ПОРТФОЛИО */
     .works { padding: 80px 0; background: var(--ink); }
     .works h2 { font-size: 2.5rem; margin-bottom: 30px; color: #fff; }
-    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
     .work-card { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; background: #222; border: 1px solid var(--border-dark); }
     .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
     .work-card:hover img { transform: scale(1.05); }
 
-    /* О НАС */
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-    .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
-    .about-text p { font-size: 1.05rem; color: #666; margin-bottom: 20px; }
-    .checks { list-style: none; display: flex; flex-direction: column; gap: 15px; }
-    .checks li { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); }
-    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(199, 123, 75, 0.15); color: var(--copper); border-radius: 50%; font-weight: 800; flex-shrink: 0; }
-    .worktime { background: #fff; padding: 40px; border-radius: var(--radius); border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-    .worktime h3 { margin-bottom: 20px; color: var(--text-dark); font-size: 1.3rem; }
-    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 12px; color: #666; }
-    .worktime p:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
-    .worktime b { color: var(--text-dark); }
-
-    /* КОНТАКТЫ И КАРТА */
-    .contacts { padding: 80px 0; background: var(--ink); }
+    /* КОНТАКТЫ / МЫ НА СВЯЗИ */
+    .contacts { padding: 80px 0; background: var(--ink); border-top: 1px solid var(--border-dark); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
     .contact-copy h2 { font-size: 2.5rem; margin-bottom: 20px; }
     .contact-copy p { color: #ccc; margin-bottom: 30px; }
@@ -171,16 +213,30 @@
     .form input:focus, .form textarea:focus { outline: none; border-color: var(--copper); }
     .form button { width: 100%; }
 
+    /* О НАС */
+    .about-section { background: var(--cream); color: var(--text-dark); padding: 80px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--text-dark); }
+    .about-text p { font-size: 1.05rem; color: #666; margin-bottom: 20px; }
+    .checks { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+    .checks li { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); }
+    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(199, 123, 75, 0.15); color: var(--copper); border-radius: 50%; font-weight: 800; flex-shrink: 0; }
+    .worktime { background: #fff; padding: 40px; border-radius: var(--radius); border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+    .worktime h3 { margin-bottom: 20px; color: var(--text-dark); font-size: 1.3rem; }
+    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 12px; color: #666; }
+    .worktime p:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+    .worktime b { color: var(--text-dark); }
+
     /* ФУТЕР */
     footer { padding: 30px 0; background: #0a0a0a; border-top: 1px solid var(--border-dark); color: #888; font-size: 0.9rem; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
 
-    /* МОБИЛЬНАЯ НАВИГАЦИЯ */
+    /* МОБИЛЬНАЯ НАВИГАЦИЯ С SVG ИКОНКАМИ */
     .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1b1a19; border-top: 1px solid var(--border-dark); z-index: 99; height: 70px; }
     .mobile-nav__inner { display: flex; justify-content: space-around; align-items: center; height: 100%; }
-    .mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #888; font-size: 0.7rem; width: 25%; height: 100%; }
-    .mobile-nav a.selected { color: var(--copper); }
-    .mobile-nav a span { font-size: 1.4rem; line-height: 1; }
+    .mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #888; font-size: 0.7rem; width: 25%; height: 100%; text-decoration: none; transition: 0.3s; }
+    .mobile-nav a.selected, .mobile-nav a:hover { color: var(--copper); }
+    .mobile-nav a svg { width: 22px; height: 22px; fill: currentColor; }
 
     /* ПЛАВАЮЩИЕ КНОПКИ */
     .floating-call { position: fixed; bottom: 90px; right: 20px; width: 56px; height: 56px; background: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 98; box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); transition: 0.3s; animation: pulse-ring 2s infinite cubic-bezier(0.45, 0, 0.55, 1); }
@@ -207,7 +263,7 @@
     .modal-content p { color: #555; margin-bottom: 12px; font-size: 0.92rem; line-height: 1.6; }
     .modal-content input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; font-family: inherit; }
 
-    /* АДАПТИВ */
+    /* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
     @media(max-width: 1024px) {
       .hero h1 { font-size: 3rem; }
       .feature { font-size: 0.8rem; gap: 10px; }
@@ -238,7 +294,7 @@
       .calc-group.full { grid-column: span 1; }
 
       .section-intro h2 { font-size: 1.8rem; }
-      .product-grid { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; margin-right: -20px; padding-right: 20px; scroll-snap-type: x mandatory; }
+      .product-grid { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; margin-right: -20px; padding-right: 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
       .card { flex: 0 0 85%; scroll-snap-align: start; }
       
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -256,6 +312,8 @@
 </head>
 <body>
 
+<div class="toast" id="toastMsg">Заявка успешно отправлена!</div>
+
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
     <a class="brand" href="#home">
@@ -265,9 +323,10 @@
     <nav class="desktop-nav">
       <a href="#catalog">Каталог</a>
       <a href="#calculator">Калькулятор</a>
+      <a href="#services">Услуги</a>
       <a href="#works">Наши работы</a>
-      <a href="#about">О компании</a>
       <a href="#contacts">Контакты</a>
+      <a href="#about">О компании</a>
     </nav>
     <div class="header-actions">
       <div class="lang-switch">
@@ -285,12 +344,13 @@
   <span class="close-btn" id="closeMenuBtn">&times;</span>
   <a href="#catalog" class="nav-link">Каталог</a>
   <a href="#calculator" class="nav-link">Калькулятор</a>
+  <a href="#services" class="nav-link">Услуги</a>
   <a href="#works" class="nav-link">Наши работы</a>
-  <a href="#about" class="nav-link">О компании</a>
   <a href="#contacts" class="nav-link">Контакты</a>
+  <a href="#about" class="nav-link">О компании</a>
 </div>
 
-<section class="hero" id="home">
+<section class="hero animate-on-scroll" id="home">
   <div class="hero-bg"></div>
   <div class="hero-shade"></div>
   <div class="hero-content">
@@ -322,7 +382,7 @@
   </div>
 </section>
 
-<section class="palette">
+<section class="palette animate-on-scroll">
   <div class="container">
     <h2 data-i18n="palette-title">Цветовая гамма</h2>
     <div class="color-slider-wrapper">
@@ -339,8 +399,31 @@
   </div>
 </section>
 
-<!-- ИНТЕРАКТИВНЫЙ КАЛЬКУЛЯТОР -->
-<section class="calc-section" id="calculator">
+<!-- КАТАЛОГ -->
+<section class="section-light animate-on-scroll" id="catalog">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow dark"><span data-i18n="catalog-subtitle">КАТАЛОГ ПРОДУКЦИИ</span><i></i></div>
+      <h2 data-i18n="catalog-title">Широкий выбор<br>бетонных изделий</h2>
+      <p data-i18n="catalog-lead">Разнообразие форм, цветов и фактур для любых задач</p>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="bruschatka" data-i18n="tab-bruschatka">Брусчатка</button>
+      <button class="tab-btn" data-tab="plitka" data-i18n="tab-plitka">Тротуарная плитка</button>
+      <button class="tab-btn" data-tab="bordyury" data-i18n="tab-bordyury">Бордюры</button>
+      <button class="tab-btn" data-tab="prostupi" data-i18n="tab-prostupi">Проступи</button>
+      <button class="tab-btn" data-tab="paneli" data-i18n="tab-paneli">Фасадные панели</button>
+    </div>
+    <div id="tab-bruschatka" class="tab-content active"><div class="product-grid" id="grid-bruschatka"></div></div>
+    <div id="tab-plitka" class="tab-content"><div class="product-grid" id="grid-plitka"></div></div>
+    <div id="tab-bordyury" class="tab-content"><div class="product-grid" id="grid-bordyury"></div></div>
+    <div id="tab-prostupi" class="tab-content"><div class="product-grid" id="grid-prostupi"></div></div>
+    <div id="tab-paneli" class="tab-content"><div class="product-grid" id="grid-paneli"></div></div>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР -->
+<section class="calc-section animate-on-scroll" id="calculator">
   <div class="container">
     <div class="calc-card">
       <div class="calc-grid">
@@ -397,61 +480,53 @@
   </div>
 </section>
 
-<section class="section-light" id="catalog">
+<!-- ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ -->
+<section class="services-section animate-on-scroll" id="services">
   <div class="container">
     <div class="section-intro">
-      <div class="eyebrow dark"><span data-i18n="catalog-subtitle">КАТАЛОГ ПРОДУКЦИИ</span><i></i></div>
-      <h2 data-i18n="catalog-title">Широкий выбор<br>бетонных изделий</h2>
-      <p data-i18n="catalog-lead">Разнообразие форм, цветов и фактур для любых задач</p>
+      <div class="eyebrow dark"><span data-i18n="services-subtitle">СЕРВИС</span><i></i></div>
+      <h2 data-i18n="services-title">Дополнительные услуги</h2>
+      <p data-i18n="services-lead">Поможем с выбором и организуем логистику на вашем объекте</p>
     </div>
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="bruschatka" data-i18n="tab-bruschatka">Брусчатка</button>
-      <button class="tab-btn" data-tab="plitka" data-i18n="tab-plitka">Тротуарная плитка</button>
-      <button class="tab-btn" data-tab="bordyury" data-i18n="tab-bordyury">Бордюры</button>
-      <button class="tab-btn" data-tab="prostupi" data-i18n="tab-prostupi">Проступи</button>
-      <button class="tab-btn" data-tab="paneli" data-i18n="tab-paneli">Фасадные панели</button>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="service-text">
+          <h3 data-i18n="service-1">Подбор плитки под ландшафт</h3>
+          <p data-i18n="service-1-desc">Поможем выбрать форму, цвет и фактуру, которые идеально впишутся в ваш дизайн участка.</p>
+        </div>
+        <div class="service-price">10.00 BYN</div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+        </div>
+        <div class="service-text">
+          <h3 data-i18n="service-2">Погрузка / разгрузка плитки</h3>
+          <p data-i18n="service-2-desc">Аккуратно и быстро разгрузим материал на объекте, чтобы вы могли сразу приступить к работе.</p>
+        </div>
+        <div class="service-price">30.00 BYN</div>
+      </div>
     </div>
-    <div id="tab-bruschatka" class="tab-content active"><div class="product-grid" id="grid-bruschatka"></div></div>
-    <div id="tab-plitka" class="tab-content"><div class="product-grid" id="grid-plitka"></div></div>
-    <div id="tab-bordyury" class="tab-content"><div class="product-grid" id="grid-bordyury"></div></div>
-    <div id="tab-prostupi" class="tab-content"><div class="product-grid" id="grid-prostupi"></div></div>
-    <div id="tab-paneli" class="tab-content"><div class="product-grid" id="grid-paneli"></div></div>
   </div>
 </section>
 
-<section class="works" id="works">
+<!-- НАШИ РАБОТЫ (ПОРТФОЛИО) -->
+<section class="works animate-on-scroll" id="works">
   <div class="container">
     <div class="section-heading">
-      <div><div class="eyebrow"><span data-i18n="works-subtitle">ПОРТФОЛИО</span><i></i></div><h2 data-i18n="works-title">Красота в каждой детали</h2></div>
+      <div><div class="eyebrow"><span data-i18n="works-subtitle">ПОРТФОЛИО</span><i></i></div><h2 data-i18n="works-title">Наши работы и реализованные проекты</h2></div>
     </div>
     <div class="works-grid" id="works-grid"></div>
   </div>
 </section>
 
-<section class="section-light" id="about">
-  <div class="container about-grid">
-    <div class="about-text">
-      <div class="eyebrow dark"><span data-i18n="about-subtitle">О КОМПАНИИ</span><i></i></div>
-      <h2 data-i18n="about-title">Бетонные изделия,<br>которым доверяют</h2>
-      <p data-i18n="about-text1">Производственная компания «Koloritbeton» на рынке с 2022 года — молодой, но стремительно развивающийся производитель строительных материалов.</p>
-      <p data-i18n="about-text2">Мы изготавливаем более 50 видов продукции из бетона (кевларобетон). На нашем производстве работают только высококвалифицированные специалисты.</p>
-      <ul class="checks">
-        <li data-i18n="about-check1">Высокое качество продукции</li>
-        <li data-i18n="about-check2">Доступные цены</li>
-        <li data-i18n="about-check3">Индивидуальный подход</li>
-        <li data-i18n="about-check4">Гибкая система скидок</li>
-      </ul>
-    </div>
-    <div class="worktime">
-      <h3 data-i18n="worktime-title">Время работы</h3>
-      <p><span data-i18n="worktime-mon">Пн–Пт</span> <b>8:00 – 19:00</b></p>
-      <p><span data-i18n="worktime-sat">Суббота</span> <b>9:00 – 17:00</b></p>
-      <p><span data-i18n="worktime-sun">Воскресенье</span> <b>Выходной</b></p>
-    </div>
-  </div>
-</section>
-
-<section class="contacts" id="contacts">
+<!-- КОНТАКТЫ / МЫ НА СВЯЗИ -->
+<section class="contacts animate-on-scroll" id="contacts">
   <div class="container contact-grid">
     <div class="contact-copy">
       <div class="eyebrow"><span data-i18n="contact-subtitle">МЫ НА СВЯЗИ</span><i></i></div>
@@ -479,8 +554,32 @@
         <input type="text" id="userName" placeholder="Ваше имя" data-i18n-placeholder="form-name" required>
         <input type="tel" id="userPhone" placeholder="Номер телефона" data-i18n-placeholder="form-phone" required>
         <textarea id="userMsg" rows="3" placeholder="Сообщение" data-i18n-placeholder="form-msg"></textarea>
-        <button type="submit" class="btn btn-primary" data-i18n="form-button">Отправить в Telegram</button>
+        <button type="submit" class="btn btn-primary" data-i18n="form-button">Отправить заявку</button>
       </form>
+    </div>
+  </div>
+</section>
+
+<!-- О КОМПАНИИ -->
+<section class="about-section animate-on-scroll" id="about">
+  <div class="container about-grid">
+    <div class="about-text">
+      <div class="eyebrow dark"><span data-i18n="about-subtitle">О КОМПАНИИ</span><i></i></div>
+      <h2 data-i18n="about-title">Бетонные изделия,<br>которым доверяют</h2>
+      <p data-i18n="about-text1">Производственная компания «Koloritbeton» на рынке с 2022 года — молодой, но стремительно развивающийся производитель строительных материалов.</p>
+      <p data-i18n="about-text2">Мы изготавливаем более 50 видов продукции из бетона (кевларобетон). На нашем производстве работают только высококвалифицированные специалисты.</p>
+      <ul class="checks">
+        <li data-i18n="about-check1">Высокое качество продукции</li>
+        <li data-i18n="about-check2">Доступные цены</li>
+        <li data-i18n="about-check3">Индивидуальный подход</li>
+        <li data-i18n="about-check4">Гибкая система скидок</li>
+      </ul>
+    </div>
+    <div class="worktime">
+      <h3 data-i18n="worktime-title">Время работы</h3>
+      <p><span data-i18n="worktime-mon">Пн–Пт</span> <b>8:00 – 19:00</b></p>
+      <p><span data-i18n="worktime-sat">Суббота</span> <b>9:00 – 17:00</b></p>
+      <p><span data-i18n="worktime-sun">Воскресенье</span> <b>Выходной</b></p>
     </div>
   </div>
 </section>
@@ -492,12 +591,25 @@
   </div>
 </footer>
 
+<!-- ТОЧНАЯ НИЖНЯЯ МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ С SVG ИКОНКАМИ -->
 <nav class="mobile-nav">
   <div class="mobile-nav__inner">
-    <a class="selected" href="#home"><span>⌂</span><small data-i18n="nav-home">Главная</small></a>
-    <a href="#catalog"><span>▦</span><small data-i18n="nav-catalog">Каталог</small></a>
-    <a href="#contacts"><span>⌖</span><small data-i18n="nav-contacts">Контакты</small></a>
-    <a href="tel:+375297575265"><span>📞</span><small data-i18n="nav-call">Звонок</small></a>
+    <a class="selected" href="#home">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <small data-i18n="nav-home">Главная</small>
+    </a>
+    <a href="#catalog">
+      <svg viewBox="0 0 24 24"><path d="M4 4h4v4H4V4m6 0h4v4h-4V4m6 0h4v4h-4V4M4 10h4v4H4v-4m6 0h4v4h-4v-4m6 0h4v4h-4v-4M4 16h4v4H4v-4m6 0h4v4h-4v-4m6 0h4v4h-4v-4z"/></svg>
+      <small data-i18n="nav-catalog">Каталог</small>
+    </a>
+    <a href="#contacts">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <small data-i18n="nav-contacts">Контакты</small>
+    </a>
+    <a href="tel:+375297575265">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <small data-i18n="nav-call">Звонок</small>
+    </a>
   </div>
 </nav>
 
@@ -519,26 +631,64 @@
   </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ (Закон РБ № 99-З) -->
+<!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ ТОВАРА -->
+<div class="modal" id="productModal" onclick="closeProductModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="closeProductModal(event)">&times;</span>
+    <div id="productModalBody"></div>
+  </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ -->
 <div class="modal" id="policyModal" onclick="closePolicy(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closePolicy(event)">&times;</span>
     <h2 data-i18n="modal-policy-title">Политика конфиденциальности</h2>
     <p style="font-size:0.8rem; color:#888; margin-bottom:15px;">В соответствии с Законом Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных»</p>
-    
-    <p><b>1. Общие положения</b><br>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта «Koloritbeton» (далее — Оператор).</p>
-    
-    <p><b>2. Цели обработки данных</b><br>Оператор обрабатывает персональные данные (имя, номер телефона) исключительно с целью обратной связи, консультирования, расчёта стоимости и оформления заказов на строительную продукцию.</p>
-    
-    <p><b>3. Порядок и условия обработки</b><br>Обработка персональных данных осуществляется с согласия пользователя, выраженного путем заполнением форм обратной связи на сайте. Передача данных третьим лицам не осуществляется, за исключением случаев, предусмотренных законодательством Республики Беларусь.</p>
-    
-    <p><b>4. Права субъекта персональных данных</b><br>Вы вправе в любой момент отозвать свое согласие на обработку данных, а также потребовать их удаления или изменения, направив обращение по телефону или в мессенджеры Оператора.</p>
-    
-    <p><b>5. Контакты Оператора:</b><br>Производственная компания «Koloritbeton»<br>Адрес: г. Гродно, Гожская ул., 2А<br>Телефон: +375 (29) 757-52-65</p>
+    <p><b>1. Общие положения</b><br>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта «Koloritbeton».</p>
+    <p><b>2. Цели обработки данных</b><br>Обработка персональных данных (имя, номер телефона) осуществляется исключительно с целью обратной связи и оформления заказов.</p>
+    <p><b>3. Контакты Оператора:</b><br>г. Гродно, Гожская ул., 2А<br>Телефон: +375 (29) 757-52-65</p>
   </div>
 </div>
 
 <script>
+  // НАСТРОЙКА TELEGRAM БОТА
+  const TELEGRAM_BOT_TOKEN = "9283707316:AAEZ8nBhc9k2OU4FIlxDVMK9elbPZNWOukE";
+  const TELEGRAM_CHAT_ID = "748132010";
+
+  function sendToTelegram(text) {
+    if (window.location.protocol === "file:") {
+      window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
+      showToast("Заявка сформирована!");
+      return;
+    }
+
+    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: text,
+        parse_mode: "HTML"
+      })
+    })
+    .then(res => {
+      if(res.ok) showToast("Заявка успешно отправлена в Telegram!");
+      else alert("Ошибка отправки. Попробуйте еще раз.");
+    })
+    .catch(() => {
+      window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
+      showToast("Заявка сформирована!");
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toastMsg");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 4000);
+  }
+
   // ПЕРЕВОДЫ
   const translations = {
     "ru": {
@@ -561,7 +711,10 @@
       "catalog-title": "Широкий выбор<br>бетонных изделий",
       "catalog-lead": "Разнообразие форм, цветов и фактур для любых задач",
       "tab-bruschatka": "Брусчатка", "tab-plitka": "Тротуарная плитка", "tab-bordyury": "Бордюры", "tab-prostupi": "Проступи", "tab-paneli": "Фасадные панели",
-      "works-subtitle": "ПОРТФОЛИО", "works-title": "Красота в каждой детали",
+      "works-subtitle": "ПОРТФОЛИО", "works-title": "Наши работы и реализованные проекты",
+      "services-subtitle": "СЕРВИС", "services-title": "Дополнительные услуги", "services-lead": "Поможем с выбором и организуем логистику на вашем объекте",
+      "service-1": "Подбор плитки под ландшафт", "service-1-desc": "Поможем выбрать форму, цвет и фактуру, которые идеально впишутся в ваш дизайн участка.",
+      "service-2": "Погрузка / разгрузка плитки", "service-2-desc": "Аккуратно и быстро разгрузим материал на объекте, чтобы вы могли сразу приступить к работе.",
       "about-subtitle": "О КОМПАНИИ",
       "about-title": "Бетонные изделия,<br>которым доверяют",
       "about-text1": "Производственная компания «Koloritbeton» на рынке с 2022 года — молодой, но стремительно развивающийся производитель строительных материалов.",
@@ -570,7 +723,7 @@
       "worktime-title": "Время работы", "worktime-mon": "Пн–Пт", "worktime-sat": "Суббота", "worktime-sun": "Воскресенье",
       "contact-subtitle": "МЫ НА СВЯЗИ", "contact-title": "Обсудим ваш проект?", "contact-text": "Свяжитесь с нами — поможем подобрать подходящие бетонные изделия.",
       "contact-phone-label": "ТЕЛЕФОН", "contact-address-label": "АДРЕС", "contact-address": "г. Гродно, Гожская ул., 2А",
-      "form-title": "Оставить заявку", "form-text": "Мы свяжемся с вами в ближайшее время", "form-name": "Ваше имя", "form-phone": "Номер телефона", "form-msg": "Сообщение", "form-button": "Отправить в Telegram",
+      "form-title": "Оставить заявку", "form-text": "Мы свяжемся с вами в ближайшее время", "form-name": "Ваше имя", "form-phone": "Номер телефона", "form-msg": "Сообщение", "form-button": "Отправить заявку",
       "footer-copy": "© 2022 Koloritbeton. Все права защищены.", "footer-policy": "Политика конфиденциальности",
       "nav-home": "Главная", "nav-catalog": "Каталог", "nav-contacts": "Контакты", "nav-call": "Звонок",
       "modal-callback-title": "Заказать звонок", "modal-callback-text": "Оставьте номер — мы перезвоним.", "modal-callback-btn": "Жду звонка",
@@ -596,7 +749,10 @@
       "catalog-title": "Шырокі выбар<br>бетонных вырабаў",
       "catalog-lead": "Разнастайнасць формаў, колераў і фактур для любых задач",
       "tab-bruschatka": "Брукаванка", "tab-plitka": "Тратуарная плітка", "tab-bordyury": "Бардзюры", "tab-prostupi": "Прыступкі", "tab-paneli": "Фасадныя панэлі",
-      "works-subtitle": "ПАРТФОЛІО", "works-title": "Прыгажосць у кожнай дэталі",
+      "works-subtitle": "ПАРТФОЛІО", "works-title": "Нашы работы і рэалізаваныя праекты",
+      "services-subtitle": "СЭРВІС", "services-title": "Дадатковыя паслугі", "services-lead": "Дапаможам з выбарам і арганізуем лагістыку на вашым аб'екце",
+      "service-1": "Падбор пліткі пад ландшафт", "service-1-desc": "Дапаможам выбраць форму, колер і фактуру, якія ідэальна ўпішуцца ў ваш дызайн участку.",
+      "service-2": "Пагрузка / разгрузка пліткі", "service-2-desc": "Акуратна і хутка разгрузім матэрыял на аб'екце, каб вы маглі адразу прыступіць да працы.",
       "about-subtitle": "ПРА КАМПАНІЮ",
       "about-title": "Бетонныя вырабы,<br>якім давяраюць",
       "about-text1": "Вытворчая кампанія «Koloritbeton» на рынку з 2022 года — малады, але імкліва развіваючы вытворца будаўнічых матэрыялаў.",
@@ -605,7 +761,7 @@
       "worktime-title": "Час працы", "worktime-mon": "Пн–Пт", "worktime-sat": "Субота", "worktime-sun": "Нядзеля",
       "contact-subtitle": "МЫ НА СУВЯЗІ", "contact-title": "Абмяркуем ваш праект?", "contact-text": "Звяжыцеся з намі — дапаможам падабраць адпаведныя бетонныя вырабы.",
       "contact-phone-label": "ТЭЛЕФОН", "contact-address-label": "АДРАС", "contact-address": "г. Гродна, Гожская вул., 2А",
-      "form-title": "Пакінуць заяўку", "form-text": "Мы звяжамся з вамі ў бліжэйшы час", "form-name": "Ваша імя", "form-phone": "Нумар тэлефона", "form-msg": "Паведамленне", "form-button": "Адправіць у Telegram",
+      "form-title": "Пакінуць заяўку", "form-text": "Мы звяжамся з вамі ў бліжэйшы час", "form-name": "Ваша імя", "form-phone": "Нумар тэлефона", "form-msg": "Паведамленне", "form-button": "Адправіць заяўку",
       "footer-copy": "© 2022 Koloritbeton. Усе правы абаронены.", "footer-policy": "Палітыка канфідэнцыйнасці",
       "nav-home": "Галоўная", "nav-catalog": "Каталог", "nav-contacts": "Кантакты", "nav-call": "Званок",
       "modal-callback-title": "Замовіць званок", "modal-callback-text": "Пакіньце нумар — мы перазвонім.", "modal-callback-btn": "Чакаю званка",
@@ -638,35 +794,35 @@
   // ПОЛНЫЙ МАССИВ ДАННЫХ
   const data = {
     bruschatka: [
-      {name:"Кремль", badge:"Хит продаж", img:"kreml.jpg", specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]]},
-      {name:"Греция", img:"grecia.jpg", specs:"285×285 / 100×100 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","30 BYN"],["Мрамор","30 BYN"]]},
-      {name:"Булыжная мостовая", img:"bulizhnaya.jpg", specs:"150×300 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
-      {name:"Каменная роза", img:"roza.jpg", specs:"6 камней · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
-      {name:"Домино", img:"domino.jpg", specs:"295×145 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]},
-      {name:"Старый Арбат", badge:"Популярно", img:"arbat.jpg", specs:"135×195 / 135×150 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]]}
+      {name:"Кремль", badge:"Хит продаж", img:"kreml.jpg", specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]], desc:"Идеальное решение для пешеходных зон, дворов и загородных участков. Отличается высокой прочностью и классической формой."},
+      {name:"Греция", img:"grecia.jpg", specs:"285×285 / 100×100 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","30 BYN"],["Мрамор","30 BYN"]], desc:"Элегантная брусчатка с аутентичным узором, создающая атмосферу античности на вашей территории."},
+      {name:"Булыжная мостовая", img:"bulizhnaya.jpg", specs:"150×300 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Имитация старинной европейской мостовой. Прекрасно подходит для ландшафтного дизайна в стиле ретро."},
+      {name:"Каменная роза", img:"roza.jpg", specs:"6 камней · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Набор из 6 уникальных камней для создания изящных художественных узоров и мозаики."},
+      {name:"Домино", img:"domino.jpg", specs:"295×145 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Строгая прямоугольная форма, удобная в укладке и долговечная в эксплуатации."},
+      {name:"Старый Арбат", badge:"Популярно", img:"arbat.jpg", specs:"135×195 / 135×150 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Комплект из нескольких элементов разного размера для создания неповторимого стиля."}
     ],
     plitka: [
-      {name:"Флорида дерево", img:"florida.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"Ялта", img:"yalta.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"Фазенда", img:"fazenda.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"Калифорния Кубик", img:"california-kubik.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"Паркет", img:"parket.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"Калифорния дерево", img:"california-derevo.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"12 кирпичей", badge:"Новинка", img:"12-kirpichey.jpg", specs:"500×500 мм · 50 мм", prices:[["Серый","28 руб."],["Цветной","33 руб."],["Мрамор","35 руб."]]},
-      {name:"Черепашка", img:"cherepashka.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]},
-      {name:"Три доски", img:"tri-doski.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]]}
+      {name:"Флорида дерево", img:"florida.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Тротуарная плитка с текстурой натурального дерева. Не боится влаги и морозов."},
+      {name:"Ялта", img:"yalta.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Классическая фактурная плитка для мощения дорожек и придомовой территории."},
+      {name:"Фазенда", img:"fazenda.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Практичное и долговечное покрытие для дачи и сада."},
+      {name:"Калифорния Кубик", img:"california-kubik.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Объемный геометрический рисунок «кубик» визуально расширяет пространство."},
+      {name:"Паркет", img:"parket.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Имитация паркетной доски для мощения террас и площадок возле дома."},
+      {name:"Калифорния дерево", img:"california-derevo.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Сочетание удобного формата и природной текстуры древесины."},
+      {name:"12 кирпичей", badge:"Новинка", img:"12-kirpichey.jpg", specs:"500×500 мм · 50 мм", prices:[["Серый","28 руб."],["Цветной","33 руб."],["Мрамор","35 руб."]], desc:"Крупноформатная плитка повышенной прочности для интенсивных нагрузок."},
+      {name:"Черепашка", img:"cherepashka.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Оригинальный узор поверхности, предотвращающий скольжение."},
+      {name:"Три доски", img:"tri-doski.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Эффектная имитация трех деревянных досок в одной плите."}
     ],
     bordyury: [
-      {name:"Бордюр 100×22×7,5", img:"bordur-100.jpg", specs:"100×22×7,5", prices:[["Серый","10 руб."],["Цветной","12 руб."],["Мрамор","14 руб."]]},
-      {name:"Водосток", img:"vodostok.jpg", specs:"50×16×6", prices:[["Серый","6 руб."],["Цветной","8 руб."],["Мрамор","9 руб."]]},
-      {name:"Бордюр 50×20×3.5", img:"bordur-50.jpg", specs:"50×20×3,5", prices:[["Серый","3.5 руб."],["Цветной","5.5 руб."],["Мрамор","5.5 руб."]]}
+      {name:"Бордюр 100×22×7,5", img:"bordur-100.jpg", specs:"100×22×7,5", prices:[["Серый","10 руб."],["Цветной","12 руб."],["Мрамор","14 руб."]], desc:"Дорожный бордюр для фиксации краев плиточного покрытия и разделения зон."},
+      {name:"Водосток", img:"vodostok.jpg", specs:"50×16×6", prices:[["Серый","6 руб."],["Цветной","8 руб."],["Мрамор","9 руб."]], desc:"Бетонный водосток для эффективного отвода дождевой воды."},
+      {name:"Бордюр 50×20×3.5", img:"bordur-50.jpg", specs:"50×20×3,5", prices:[["Серый","3.5 руб."],["Цветной","5.5 руб."],["Мрамор","5.5 руб."]], desc:"Садовый бордюр для оформления клумб и пешеходных дорожек."}
     ],
     prostupi: [
-      {name:"Три прорези", img:"tri-prorezi.jpg", specs:"1350×340×40 мм", prices:[["Серый","25 руб."],["Цветной","28 руб."],["Мрамор","31 руб."]]},
-      {name:"Проступь", img:"prostup.jpg", specs:"1250×320×40 мм", prices:[["Серый","24 руб."],["Цветной","27 руб."],["Мрамор","30 руб."]]}
+      {name:"Три прорези", img:"tri-prorezi.jpg", specs:"1350×340×40 мм", prices:[["Серый","25 руб."],["Цветной","28 руб."],["Мрамор","31 руб."]], desc:"Проступь для лестничных маршей с противоскользящими прорезями."},
+      {name:"Проступь", img:"prostup.jpg", specs:"1250×320×40 мм", prices:[["Серый","24 руб."],["Цветной","27 руб."],["Мрамор","30 руб."]], desc:"Прочная железобетонная ступень для крыльца и уличных лестниц."}
     ],
     paneli: [
-      {name:"Ростовский камень", badge:"Хит продаж", img:"rostov.jpg", specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 руб."],["В цвете","29 руб."],["Мрамор","31 руб."]]}
+      {name:"Ростовский камень", badge:"Хит продаж", img:"rostov.jpg", specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 руб."],["В цвете","29 руб."],["Мрамор","31 руб."]], desc:"Фасадная плитка под дикий камень для облицовки цоколей и стен зданий."}
     ]
   };
 
@@ -690,39 +846,79 @@
     const area = document.getElementById("resArea").textContent;
     const totalM = document.getElementById("resTotalM").textContent;
     const cost = document.getElementById("resCost").textContent;
-    const text = `Здравствуйте! Хочу сделать заказ по калькулятору:\nЧистая площадь: ${area}\nОбъем с запасом: ${totalM}\nПредварительная стоимость: ${cost}`;
-    window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
+    const text = `<b>Заказ с калькулятора:</b>\nЧистая площадь: ${area}\nОбъем с запасом: ${totalM}\nСтоимость: ${cost}`;
+    sendToTelegram(text);
   }
 
   function renderGrid(id, items) {
     const grid = document.getElementById(id);
     if(!grid) return;
-    grid.innerHTML = items.map(item => {
+    grid.innerHTML = items.map((item, index) => {
       const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
       const badge = item.badge ? `<div style="position:absolute; top:12px; left:12px; background:var(--copper); color:#fff; padding:5px 10px; border-radius:6px; font-size:0.7rem; font-weight:700; z-index:10; text-transform:uppercase;">${item.badge}</div>` : '';
       return `
-        <article class="card">
+        <article class="card" onclick="openProductDetail('${id}', ${index}, event)">
           ${badge}
           <div class="card-img" style="background-image:url('img/${item.img}')" onerror="this.style.background='#e0dad0'"></div>
           <div class="card-body">
             <h3>${item.name}</h3>
             <div class="card-specs">${item.specs}</div>
             <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("")}</div>
-            <div class="card-controls">
+            <div class="card-controls" onclick="event.stopPropagation()">
               <select class="color-select">${colorOptions}</select>
               <input type="number" class="qty-input" value="1" min="1" style="width: 55px; text-align:center;">
             </div>
-            <button class="btn btn-primary" style="width:100%; padding:10px;" onclick="orderItem('${item.name}', this)">Заказать</button>
+            <button class="btn btn-primary" style="width:100%; padding:10px;" onclick="event.stopPropagation(); orderItem('${item.name}', this)">Заказать</button>
           </div>
         </article>
       `;
     }).join("");
   }
 
+  function openProductDetail(category, index, e) {
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+    const item = data[category][index];
+    const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
+    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:6px;"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("");
+    
+    document.getElementById("productModalBody").innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:15px;">
+        <div style="width:100%; aspect-ratio:16/9; background:#e0dad0 center/cover no-repeat; border-radius:12px; background-image:url('img/${item.img}')"></div>
+        <h2>${item.name}</h2>
+        <p><b>Размеры / Характеристики:</b> ${item.specs}</p>
+        <p>${item.desc || 'Высококачественное бетонное изделие собственного производства.'}</p>
+        <div style="background:#f8f6f2; padding:15px; border-radius:8px;">
+          <b style="display:block; margin-bottom:8px; color:var(--text-dark);">Цены по исполнению:</b>
+          ${pricesHtml}
+        </div>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <select id="modalColor" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:8px; font-family:inherit;">${colorOptions}</select>
+          <input type="number" id="modalQty" value="1" min="1" style="width:70px; padding:12px; text-align:center; border:1px solid #ddd; border-radius:8px; font-family:inherit;">
+        </div>
+        <button class="btn btn-primary" style="width:100%; margin-top:5px;" onclick="orderModalItem('${item.name}')">Заказать этот товар</button>
+      </div>
+    `;
+    document.getElementById("productModal").classList.add("show");
+  }
+
+  function closeProductModal(e) {
+    if (e.target.id === 'productModal' || e.target.classList.contains('modal-close')) {
+      document.getElementById("productModal").classList.remove("show");
+    }
+  }
+
+  function orderModalItem(name) {
+    const color = document.getElementById("modalColor").value;
+    const qty = document.getElementById("modalQty").value;
+    const text = `<b>Заказ товара из модального окна:</b>\nТовар: ${name}\nЦвет: ${color}\nКоличество: ${qty}`;
+    sendToTelegram(text);
+    document.getElementById("productModal").classList.remove("show");
+  }
+
   function renderWorks() {
     const grid = document.getElementById("works-grid");
     if(!grid) return;
-    const works = ["work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg", "work5.jpg", "work6.jpg"];
+    const works = ["work1.jpg", "work2.jpg", "work3.jpg"];
     grid.innerHTML = works.map((img, index) => `
       <div class="work-card" onclick="openLightbox('img/${img}')">
         <img src="img/${img}" alt="Работа ${index+1}" onerror="this.src='https://placehold.co/400x300/1E293B/94A3B8?text=Фото+${index+1}'">
@@ -737,6 +933,20 @@
   renderGrid("grid-paneli", data.paneli);
   renderWorks();
   recalculate();
+
+  // НАБЛЮДАТЕЛЬ ДЛЯ АНИМАЦИИ ПРИ СКРОЛЛЕ
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(".animate-on-scroll").forEach(section => {
+    observer.observe(section);
+  });
 
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -758,7 +968,8 @@
     const card = btn.closest(".card");
     const color = card.querySelector(".color-select").value;
     const qty = card.querySelector(".qty-input").value;
-    window.open(`https://t.me/+375295894068?text=${encodeURIComponent(`Здравствуйте, хочу заказать: ${name}.\nЦвет: ${color}.\nКоличество: ${qty}`)}`, "_blank");
+    const text = `<b>Заказ товара:</b>\nТовар: ${name}\nЦвет: ${color}\nКоличество: ${qty}`;
+    sendToTelegram(text);
   }
 
   document.getElementById("tgForm").addEventListener("submit", function(e) {
@@ -766,9 +977,10 @@
     const name = document.getElementById("userName").value;
     const phone = document.getElementById("userPhone").value;
     const msg = document.getElementById("userMsg").value;
-    let text = `Здравствуйте, хочу заказать!\nИмя: ${name}\nТелефон: ${phone}`;
+    let text = `<b>Новая заявка с сайта:</b>\nИмя: ${name}\nТелефон: ${phone}`;
     if (msg.trim()) text += `\nСообщение: ${msg}`;
-    window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
+    sendToTelegram(text);
+    this.reset();
   });
 
   function openLightbox(src) {
@@ -801,7 +1013,7 @@
   function submitCallback() {
     const phone = document.getElementById("callbackPhone").value.trim();
     if (!phone) return alert("Введите номер!");
-    window.open(`https://t.me/+375295894068?text=${encodeURIComponent(`Здравствуйте! Прошу перезвонить мне.\nНомер: ${phone}`)}`, "_blank");
+    sendToTelegram(`<b>Заказ обратного звонка:</b>\nТелефон: ${phone}`);
     closeCallbackModal();
   }
 
