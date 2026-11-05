@@ -2,11 +2,9 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#171615">
-  <meta name="description" content="KOLORITBETON — производство бетонных изделий в Гродно. Тротуарная плитка, брусчатка, бордюры и ступени.">
   <title>KOLORITBETON — бетонные изделия в Гродно</title>
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,14 +12,12 @@
 </head>
 <body>
 
-  <!-- ШАПКА -->
-  <header class="site-header">
+<!-- ШАПКА -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
     <a class="brand" href="#home">
       <img src="img/logo.png" alt="Koloritbeton" class="brand-logo" onerror="this.style.display='none'">
-      <span class="brand-copy">
-        <b>KOLORITBETON</b>
-        <small>ПРОИЗВОДСТВО БЕТОННЫХ ИЗДЕЛИЙ</small>
-      </span>
+      <span class="brand-copy"><b>KOLORITBETON</b><small>ПРОИЗВОДСТВО БЕТОННЫХ ИЗДЕЛИЙ</small></span>
     </a>
     
     <nav class="desktop-nav">
@@ -38,185 +34,181 @@
         <button class="lang" data-lang="be">BE</button>
       </div>
       <a href="tel:+375297575265" class="btn btn-primary desktop-only">Позвонить</a>
-      <button class="menu-toggle" aria-label="Меню">
-        <i></i><i></i><i></i>
-      </button>
+      <button class="menu-toggle" aria-label="Меню"><i></i><i></i><i></i></button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ГЛАВНЫЙ ЭКРАН -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-shade"></div>
-    
-    <div class="hero-content container">
-      <div class="eyebrow"><span>ПРЕМИАЛЬНОЕ КАЧЕСТВО</span><i></i></div>
-      <h1>Тротуарная плитка собственного производства в Гродно</h1>
-      <p class="hero-lead">Надёжное покрытие для вашего дома на долгие годы</p>
-      
-      <div class="hero-buttons">
-        <a class="button button-primary" href="#catalog">Посмотреть каталог <b>→</b></a>
-        <a class="button button-outline" href="#contacts">
-          <span class="phone-icon">♧</span> Получить консультацию
-        </a>
-      </div>
-    </div>
-    
-    <div class="hero-bottom">
-      <div class="feature"><span class="feature-icon">▥</span><span>Собственное производство</span></div>
-      <div class="feature"><span class="feature-icon">◇</span><span>Контроль качества</span></div>
-      <div class="feature"><span class="feature-icon">♧</span><span>Доставка по Гродно</span></div>
-      <div class="feature"><span class="feature-icon">☏</span><span>Профессиональная консультация</span></div>
-    </div>
-  </section>
+<!-- МОБИЛЬНОЕ МЕНЮ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#catalog">Каталог</a>
+  <a href="#works">Наши работы</a>
+  <a href="#about">О компании</a>
+  <a href="#contacts">Контакты</a>
+</div>
 
-  <!-- КАТАЛОГ -->
-  <section class="catalog section-light" id="catalog">
-    <div class="container">
-      <div class="section-intro">
-        <div class="eyebrow dark"><span>КАТАЛОГ ПРОДУКЦИИ</span><i></i></div>
-        <h2>Широкий выбор бетонных изделий</h2>
-        <p>Разнообразие форм, цветов и фактур для любых задач</p>
-      </div>
-
-      <!-- ВКЛАДКИ -->
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="bruschatka">Брусчатка</button>
-        <button class="tab-btn" data-tab="plitka">Тротуарная плитка</button>
-        <button class="tab-btn" data-tab="bordyury">Бордюры</button>
-        <button class="tab-btn" data-tab="prostupi">Проступи</button>
-        <button class="tab-btn" data-tab="paneli">Фасадные панели</button>
-      </div>
-
-      <!-- СЕТКА ТОВАРОВ -->
-      <div id="tab-bruschatka" class="tab-content active"><div class="product-grid" id="grid-bruschatka"></div></div>
-      <div id="tab-plitka" class="tab-content"><div class="product-grid" id="grid-plitka"></div></div>
-      <div id="tab-bordyury" class="tab-content"><div class="product-grid" id="grid-bordyury"></div></div>
-      <div id="tab-prostupi" class="tab-content"><div class="product-grid" id="grid-prostupi"></div></div>
-      <div id="tab-paneli" class="tab-content"><div class="product-grid" id="grid-paneli"></div></div>
-    </div>
-  </section>
-
-  <!-- НАШИ РАБОТЫ -->
-  <section class="works" id="works">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <div class="eyebrow"><span>ПОРТФОЛИО</span><i></i></div>
-          <h2>Красота в каждой детали</h2>
-        </div>
-        <p>Идеи благоустройства для дома, двора и территории.</p>
-      </div>
-      <div class="works-grid" id="works-grid"></div>
-    </div>
-  </section>
-
-  <!-- О НАС -->
-  <section class="about section-light" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text">
-          <div class="eyebrow dark"><span>О КОМПАНИИ</span><i></i></div>
-          <h2>Бетонные изделия, которым доверяют</h2>
-          <p>Производственная компания «Koloritbeton» на рынке с 2022 года. Мы изготавливаем более 50 видов продукции из высокопрочного бетона (кевларобетон).</p>
-          <ul class="checks">
-            <li>Высокое качество продукции</li>
-            <li>Доступные цены</li>
-            <li>Индивидуальный подход</li>
-            <li>Гибкая система скидок</li>
-          </ul>
-        </div>
-        <div class="worktime">
-          <h3>Время работы</h3>
-          <p><span>Пн–Пт</span> <b>8:00 – 19:00</b></p>
-          <p><span>Суббота</span> <b>9:00 – 17:00</b></p>
-          <p><span>Воскресенье</span> <b>Выходной</b></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- КОНТАКТЫ -->
-  <section class="contacts" id="contacts">
-    <div class="container contact-grid">
-      <div class="contact-copy">
-        <div class="eyebrow"><span>МЫ НА СВЯЗИ</span><i></i></div>
-        <h2>Обсудим ваш проект?</h2>
-        <p>Свяжитесь с нами — поможем подобрать подходящие бетонные изделия.</p>
-        
-        <div class="contact-details">
-          <a href="tel:+375297575265" class="contact-item"><small>ТЕЛЕФОН</small><b>+375 (29) 757-52-65</b></a>
-          <div class="contact-item"><small>АДРЕС</small><b>г. Гродно, Гожская ул., 2А</b></div>
-        </div>
-
-        <div class="social-links">
-          <a href="https://www.instagram.com/koloritbeton/" target="_blank">Instagram</a>
-          <a href="https://vk.com/koloritbeton" target="_blank">VK</a>
-          <a href="viber://chat?number=%2B375297575265">Viber</a>
-        </div>
-      </div>
-      
-      <div class="contact-form-wrapper">
-        <form class="form" id="tgForm">
-          <h3>Оставить заявку</h3>
-          <p>Мы свяжемся с вами в ближайшее время</p>
-          <input type="text" id="userName" placeholder="Ваше имя" required>
-          <input type="tel" id="userPhone" placeholder="Номер телефона" required>
-          <textarea id="userMsg" rows="3" placeholder="Сообщение (необязательно)"></textarea>
-          <button type="submit" class="btn btn-primary">Отправить в Telegram</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container footer-inner">
-      <p>© 2022 Koloritbeton. Все права защищены.</p>
-      <a href="#" onclick="openPolicy(event)">Политика конфиденциальности</a>
-    </div>
-  </footer>
-
-  <!-- МОБИЛЬНОЕ МЕНЮ -->
-  <nav class="mobile-nav">
-    <a class="selected" href="#home"><span>⌂</span><small>Главная</small></a>
-    <a href="#catalog"><span>▦</span><small>Каталог</small></a>
-    <a href="#contacts"><span>⌖</span><small>Контакты</small></a>
-    <a href="tel:+375297575265"><span>♧</span><small>Звонок</small></a>
-  </nav>
+<!-- ГЛАВНЫЙ ЭКРАН -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-shade"></div>
   
-  <div class="mobile-menu">
-    <a href="#catalog">Каталог</a>
-    <a href="#works">Наши работы</a>
-    <a href="#about">О компании</a>
-    <a href="#contacts">Контакты</a>
-  </div>
-
-  <!-- ПЛАВАЮЩАЯ КНОПКА -->
-  <a href="tel:+375297575265" class="floating-call">
-    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-  </a>
-
-  <!-- МОДАЛЬНЫЕ ОКНА -->
-  <div class="modal" id="callbackModal" onclick="closeCallbackModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closeCallbackModal(event)">&times;</span>
-      <h2>Заказать звонок</h2>
-      <p>Оставьте номер — мы перезвоним.</p>
-      <input type="tel" id="callbackPhone" placeholder="Ваш номер телефона" required>
-      <button class="btn btn-primary" onclick="submitCallback()">Жду звонка</button>
+  <div class="hero-content container">
+    <div class="eyebrow"><span>ПРЕМИАЛЬНОЕ КАЧЕСТВО</span><i></i></div>
+    <h1>Тротуарная плитка<br>собственного производства<br>в Гродно</h1>
+    <p class="hero-lead">Надёжное покрытие для вашего дома на долгие годы</p>
+    
+    <div class="hero-buttons">
+      <a class="button button-primary" href="#catalog">Посмотреть каталог <b>→</b></a>
+      <a class="button button-outline" href="#contacts">Получить консультацию</a>
     </div>
   </div>
-
-  <div class="modal" id="policyModal" onclick="closePolicy(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <span class="modal-close" onclick="closePolicy(event)">&times;</span>
-      <h2>Политика конфиденциальности</h2>
-      <p style="text-align: left; margin-bottom: 10px;">Настоящая Политика конфиденциальности действует в отношении всей информации, которую сайт «Koloritbeton» может получить о Пользователе.</p>
-      <p style="text-align: left; margin-bottom: 10px;"><b>1. Персональные данные</b><br>При отправке заявки Пользователь предоставляет имя и номер телефона. Эти данные используются исключительно для связи с Пользователем.</p>
-      <p style="text-align: left;"><b>2. Контакты</b><br>По всем вопросам: +375 (29) 757-52-65.</p>
+  
+  <div class="hero-bottom">
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      <span>Собственное<br>производство</span>
+    </div>
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6z"/><path d="M11 3L8 9l4 12 4-12-3-6"/><path d="M2 9h20"/></svg>
+      <span>Контроль<br>качества</span>
+    </div>
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+      <span>Доставка<br>по Гродно и области</span>
+    </div>
+    <div class="feature">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+      <span>Профессиональная<br>консультация</span>
     </div>
   </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- КАТАЛОГ -->
+<section class="catalog section-light" id="catalog">
+  <div class="container">
+    <div class="section-intro">
+      <div class="eyebrow dark"><span>КАТАЛОГ ПРОДУКЦИИ</span><i></i></div>
+      <h2>Широкий выбор<br>бетонных изделий</h2>
+      <p>Разнообразие форм, цветов и фактур для любых задач</p>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="bruschatka">Брусчатка</button>
+      <button class="tab-btn" data-tab="plitka">Тротуарная плитка</button>
+      <button class="tab-btn" data-tab="bordyury">Бордюры</button>
+      <button class="tab-btn" data-tab="prostupi">Проступи</button>
+      <button class="tab-btn" data-tab="paneli">Фасадные панели</button>
+    </div>
+    
+    <div id="tab-bruschatka" class="tab-content active"><div class="product-grid" id="grid-bruschatka"></div></div>
+    <div id="tab-plitka" class="tab-content"><div class="product-grid" id="grid-plitka"></div></div>
+    <div id="tab-bordyury" class="tab-content"><div class="product-grid" id="grid-bordyury"></div></div>
+    <div id="tab-prostupi" class="tab-content"><div class="product-grid" id="grid-prostupi"></div></div>
+    <div id="tab-paneli" class="tab-content"><div class="product-grid" id="grid-paneli"></div></div>
+  </div>
+</section>
+
+<!-- НАШИ РАБОТЫ -->
+<section class="works" id="works">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="eyebrow"><span>ПОРТФОЛИО</span><i></i></div><h2>Красота в каждой детали</h2></div>
+      <p>Идеи благоустройства для дома, двора и территории.</p>
+    </div>
+    <div class="works-grid" id="works-grid"></div>
+  </div>
+</section>
+
+<!-- О НАС -->
+<section class="about section-light" id="about">
+  <div class="container about-grid">
+    <div class="about-text">
+      <div class="eyebrow dark"><span>О КОМПАНИИ</span><i></i></div>
+      <h2>Бетонные изделия,<br>которым доверяют</h2>
+      <p>Производственная компания «Koloritbeton» на рынке с 2022 года — молодой, но стремительно развивающийся производитель строительных материалов.</p>
+      <p>Мы изготавливаем более 50 видов продукции из бетона (кевларобетон). На нашем производстве работают только высококвалифицированные специалисты.</p>
+      <ul class="checks">
+        <li>Высокое качество продукции</li>
+        <li>Доступные цены</li>
+        <li>Индивидуальный подход</li>
+        <li>Гибкая система скидок</li>
+      </ul>
+    </div>
+    <div class="worktime">
+      <h3>Время работы</h3>
+      <p><span>Пн–Пт</span> <b>8:00 – 19:00</b></p>
+      <p><span>Суббота</span> <b>9:00 – 17:00</b></p>
+      <p><span>Воскресенье</span> <b>Выходной</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="contacts" id="contacts">
+  <div class="container contact-grid">
+    <div class="contact-copy">
+      <div class="eyebrow"><span>МЫ НА СВЯЗИ</span><i></i></div>
+      <h2>Обсудим ваш проект?</h2>
+      <p>Свяжитесь с нами — поможем подобрать подходящие бетонные изделия.</p>
+      <div class="contact-details">
+        <a href="tel:+375297575265" class="contact-item"><small>ТЕЛЕФОН</small><b>+375 (29) 757-52-65</b></a>
+        <div class="contact-item"><small>АДРЕС</small><b>г. Гродно, Гожская ул., 2А</b></div>
+      </div>
+      <div class="map-wrapper">
+        <iframe src="https://yandex.by/map-widget/v1/?ll=23.826239%2C53.754207&mode=whatshere&whatshere%5Bpoint%5D=23.826202%2C53.753868&whatshere%5Bzoom%5D=17&z=18.41" width="100%" height="100%" frameborder="0"></iframe>
+      </div>
+    </div>
+    <div class="contact-form-wrapper">
+      <form class="form" id="tgForm">
+        <h3>Оставить заявку</h3>
+        <p>Мы свяжемся с вами в ближайшее время</p>
+        <input type="text" id="userName" placeholder="Ваше имя" required>
+        <input type="tel" id="userPhone" placeholder="Номер телефона" required>
+        <textarea id="userMsg" rows="3" placeholder="Сообщение"></textarea>
+        <button type="submit" class="btn btn-primary">Отправить в Telegram</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© 2022 Koloritbeton. Все права защищены.</p>
+    <a href="#" onclick="openPolicy(event)">Политика конфиденциальности</a>
+  </div>
+</footer>
+
+<!-- НИЖНЕЕ МЕНЮ (Моб) -->
+<nav class="mobile-nav">
+  <a class="selected" href="#home"><span>⌂</span><small>Главная</small></a>
+  <a href="#catalog"><span>▦</span><small>Каталог</small></a>
+  <a href="#contacts"><span>⌖</span><small>Контакты</small></a>
+  <a href="tel:+375297575265"><span>♧</span><small>Звонок</small></a>
+</nav>
+
+<a href="tel:+375297575265" class="floating-call">
+  <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="modal" id="callbackModal" onclick="closeCallbackModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="closeCallbackModal(event)">&times;</span>
+    <h2>Заказать звонок</h2>
+    <p style="margin-bottom: 20px;">Оставьте номер — мы перезвоним.</p>
+    <input type="tel" id="callbackPhone" placeholder="Ваш номер телефона" required>
+    <button class="btn btn-primary" onclick="submitCallback()">Жду звонка</button>
+  </div>
+</div>
+
+<div class="modal" id="policyModal" onclick="closePolicy(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="modal-close" onclick="closePolicy(event)">&times;</span>
+    <h2>Политика конфиденциальности</h2>
+    <p style="text-align: left; margin-bottom: 10px;">Настоящая Политика конфиденциальности действует в отношении всей информации, которую сайт «Koloritbeton» может получить о Пользователе.</p>
+    <p style="text-align: left;"><b>Контакты:</b> +375 (29) 757-52-65.</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

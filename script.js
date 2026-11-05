@@ -1,4 +1,4 @@
-// ===== ДАННЫЕ КАТАЛОГА =====
+// ДАННЫЕ КАТАЛОГА
 const data = {
   bruschatka: [
     {name:"Кремль", badge:"Хит продаж", img:"kreml.jpg", specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]]},
@@ -33,25 +33,21 @@ const data = {
   ]
 };
 
-// ===== РЕНДЕР КАРТОЧЕК =====
+// РЕНДЕР КАТАЛОГА
 function renderGrid(id, items) {
   const grid = document.getElementById(id);
   if(!grid) return;
-  
   grid.innerHTML = items.map(item => {
     const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
-    const badge = item.badge ? `<div class="card-badge">${item.badge}</div>` : '';
-    
+    const badge = item.badge ? `<div style="position:absolute; top:10px; left:10px; background:var(--copper); color:#fff; padding:4px 10px; border-radius:4px; font-size:0.7rem; font-weight:700;">${item.badge}</div>` : '';
     return `
-      <article class="card">
+      <article class="card" style="position:relative;">
         ${badge}
         <div class="card-img" style="background-image:url('img/${item.img}')"></div>
         <div class="card-body">
           <h3>${item.name}</h3>
           <div class="card-specs">${item.specs}</div>
-          <div class="card-prices">
-            ${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("")}
-          </div>
+          <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("")}</div>
           <div class="card-controls">
             <select class="color-select">${colorOptions}</select>
             <input type="number" class="qty-input" value="1" min="1" style="width: 60px;">
@@ -63,19 +59,19 @@ function renderGrid(id, items) {
   }).join("");
 }
 
-// ===== РЕНДЕР ГАЛЕРЕИ =====
+// РЕНДЕР ГАЛЕРЕИ
 const works = ["work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg", "work5.jpg", "work6.jpg"];
 function renderWorks() {
   const grid = document.getElementById("works-grid");
   if(!grid) return;
   grid.innerHTML = works.map((img, index) => `
     <div class="work-card" onclick="openLightbox('img/${img}')">
-      <img src="img/${img}" alt="Работа ${index+1}" onerror="this.src='https://placehold.co/400x400/1E1E1E/555?text=Работа+${index+1}'">
+      <img src="img/${img}" alt="Работа ${index+1}" onerror="this.src='https://placehold.co/400x400/1E1E1E/555?text=Фото+${index+1}'">
     </div>
   `).join("");
 }
 
-// ===== ЗАПУСК =====
+// ЗАПУСК
 renderGrid("grid-bruschatka", data.bruschatka);
 renderGrid("grid-plitka", data.plitka);
 renderGrid("grid-bordyury", data.bordyury);
@@ -83,55 +79,53 @@ renderGrid("grid-prostupi", data.prostupi);
 renderGrid("grid-paneli", data.paneli);
 renderWorks();
 
-// ===== ВКЛАДКИ =====
+// ВКЛАДКИ
 document.querySelectorAll(".tab-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
     document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    
     btn.classList.add("active");
     document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
   });
 });
 
-// ===== БУРГЕР-МЕНЮ =====
+// БУРГЕР
 const menuBtn = document.querySelector(".menu-toggle");
-const mobileMenu = document.querySelector(".mobile-menu");
+const mobileMenu = document.getElementById("mobileMenu");
 menuBtn.addEventListener("click", () => {
   mobileMenu.classList.toggle("active");
-  document.body.classList.toggle("menu-open");
+  menuBtn.classList.toggle("active");
+  document.body.style.overflow = mobileMenu.classList.contains("active") ? "hidden" : "";
 });
 mobileMenu.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
     mobileMenu.classList.remove("active");
-    document.body.classList.remove("menu-open");
+    menuBtn.classList.remove("active");
+    document.body.style.overflow = "";
   });
 });
 
-// ===== ЗАКАЗ В TELEGRAM =====
+// ЗАКАЗ
 function orderItem(name, btn) {
   const card = btn.closest(".card");
   const color = card.querySelector(".color-select").value;
   const qty = card.querySelector(".qty-input").value;
-  
   const text = `Здравствуйте, хочу заказать: ${name}.\nЦвет: ${color}.\nКоличество: ${qty}`;
   window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
 }
 
-// ===== ОБЩАЯ ФОРМА =====
+// ОБЩАЯ ФОРМА
 document.getElementById("tgForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const name = document.getElementById("userName").value;
   const phone = document.getElementById("userPhone").value;
   const msg = document.getElementById("userMsg").value;
-  
   let text = `Здравствуйте, хочу заказать!\nИмя: ${name}\nТелефон: ${phone}`;
   if (msg.trim()) text += `\nСообщение: ${msg}`;
-  
   window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
 });
 
-// ===== ЛАЙТБОКС =====
+// ЛАЙТБОКС
 function openLightbox(src) {
   const lb = document.createElement("div");
   lb.className = "modal show";
@@ -140,7 +134,7 @@ function openLightbox(src) {
   document.body.appendChild(lb);
 }
 
-// ===== МОДАЛЬНЫЕ ОКНА =====
+// МОДАЛЬНЫЕ ОКНА
 function openCallbackModal(e) { e.preventDefault(); document.getElementById("callbackModal").classList.add("show"); }
 function closeCallbackModal(e) { if(e.target.id === "callbackModal" || e.target.classList.contains("modal-close")) document.getElementById("callbackModal").classList.remove("show"); }
 function submitCallback() {
@@ -150,6 +144,5 @@ function submitCallback() {
   document.getElementById("callbackPhone").value = "";
   closeCallbackModal();
 }
-
 function openPolicy(e) { e.preventDefault(); document.getElementById("policyModal").classList.add("show"); }
 function closePolicy(e) { if(e.target.id === "policyModal" || e.target.classList.contains("modal-close")) document.getElementById("policyModal").classList.remove("show"); }
