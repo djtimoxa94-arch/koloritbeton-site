@@ -321,7 +321,6 @@
       .section-light, .calc-section, .services-section, .works, .contacts, .about-section { padding: 70px 0; }
       .section-intro h2, .works h2, .contact-copy h2, .about-text h2 { font-size: 2rem; }
       
-      /* ИСПРАВЛЕННЫЙ СВАЙП КАРУСЕЛИ НА МОБИЛЬНЫХ */
       .product-grid { 
         display: flex; 
         overflow-x: auto; 
@@ -717,7 +716,7 @@
 </div>
 
 <script>
-  // АВТОМАТИЧЕСКАЯ СМЕНА ФОНА ХИРО В ЗАВИСИМОСТИ ОТ СЕЗОНА И ВРЕМЕНИ СУТОК
+  // ИСПРАВЛЕННОЕ АВТОМАТИЧЕСКОЕ ПЕРЕКЛЮЧЕНИЕ ДЕНЬ / НОЧЬ
   function initDynamicHeroBackground() {
     const now = new Date();
     const month = now.getMonth(); // 0 (Янв) - 11 (Дек)
@@ -738,11 +737,11 @@
     const heroBg = document.getElementById('heroBg');
     if (heroBg) {
       if (isDayTime) {
-        // Дневное изображение (можете заменить 'hero-day.jpg' на вашу дневную фото, если появится)
-        heroBg.style.backgroundImage = "url('img/hero-day.jpg')";
-      } else {
-        // Вечернее/ночное изображение (текущий вечерний фасад)
+        // Дневное изображение
         heroBg.style.backgroundImage = "url('img/hero-bg.jpg')";
+      } else {
+        // Ночное изображение
+        heroBg.style.backgroundImage = "url('img/hero-night.jpg')";
       }
     }
   }
