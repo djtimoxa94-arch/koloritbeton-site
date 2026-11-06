@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="theme-color" content="#171615">
   
-  <!-- SEO-теги -->
   <title>KOLORITBETON — тротуарная плитка и бетонные изделия в Гродно</title>
   <meta name="description" content="Производство и продажа тротуарной плитки, брусчатки и бетонных изделий в Гродно. Высокое качество, доступные цены, доставка по области.">
   <meta name="keywords" content="тротуарная плитка Гродно, брусчатка, купить плитку, колоритбетон, бетонные изделия">
   
-  <!-- Open Graph / соцсети -->
   <meta property="og:title" content="KOLORITBETON — тротуарная плитка в Гродно">
   <meta property="og:description" content="Надежное покрытие для вашего дома на долгие годы. Собственное производство.">
   <meta property="og:type" content="website">
   
-  <!-- Микроразметка Schema.org (LocalBusiness) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,21 +40,19 @@
       --cream: #f4f0eb;
       --cream-dark: #e8e2d9;
       --text-dark: #1A1A1A;
-      --border-light: rgba(0,0,0,0.1);
-      --border-dark: rgba(255,255,255,0.1);
-      --radius: 12px;
+      --border-light: rgba(0,0,0,0.08);
+      --radius: 14px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body { background: var(--ink); color: #fff; font-family: 'Manrope', sans-serif; line-height: 1.5; overflow-x: hidden; padding-bottom: calc(70px + env(safe-area-inset-bottom)); min-height: 100dvh; }
+    html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+    body { background: var(--ink); color: #fff; font-family: 'Manrope', sans-serif; line-height: 1.6; overflow-x: hidden; padding-bottom: calc(70px + env(safe-area-inset-bottom)); min-height: 100dvh; }
     a { color: inherit; text-decoration: none; transition: 0.3s; }
-    .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
 
-    /* АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ */
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
     .animate-on-scroll.visible {
@@ -65,80 +60,90 @@
       transform: translateY(0);
     }
 
-    /* КНОПКИ */
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 50px; border: none; font-weight: 600; font-size: 1rem; cursor: pointer; transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease; font-family: 'Manrope', sans-serif; touch-action: manipulation; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 30px; border-radius: 50px; border: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; font-family: 'Manrope', sans-serif; touch-action: manipulation; letter-spacing: 0.3px; }
     .btn:hover { transform: translateY(-2px); }
-    .btn-primary { background: var(--copper); color: #fff; box-shadow: 0 4px 15px rgba(199, 123, 75, 0.3); }
-    .btn-primary:hover { background: var(--copper-hover); box-shadow: 0 8px 25px rgba(199, 123, 75, 0.5); }
-    .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: #fff; background: transparent; }
+    .btn-primary { background: var(--copper); color: #fff; box-shadow: 0 6px 20px rgba(199, 123, 75, 0.35); }
+    .btn-primary:hover { background: var(--copper-hover); box-shadow: 0 10px 30px rgba(199, 123, 75, 0.5); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.35); color: #fff; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); }
     .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
-    /* КНОПКА КОРЗИНЫ В ШАПКЕ */
-    .cart-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--border-dark); padding: 8px 16px; border-radius: 30px; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; color: #fff; transition: 0.3s; }
-    .cart-btn:hover { background: var(--copper); border-color: var(--copper); }
-    .cart-badge { background: #fff; color: var(--text-dark); font-size: 0.75rem; padding: 2px 7px; border-radius: 50px; font-weight: 700; }
-
-    /* ОШИБКИ И ПОДСКАЗКИ */
-    .error-hint { color: #E11D48; font-size: 0.8rem; margin-top: -10px; margin-bottom: 12px; display: none; }
-    input.error { border-color: #E11D48 !important; }
-
-    /* ШАПКА */
-    .site-header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: rgba(18,18,18,0.88); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-dark); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; padding: 0 5%; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-logo { height: 42px; width: 42px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-dark); }
-    .brand-copy b { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; display: block; }
-    .brand-copy small { font-size: 0.6rem; color: #aaa; letter-spacing: 1px; display: block; }
-    .desktop-nav { display: flex; gap: 30px; }
-    .desktop-nav a { font-weight: 600; font-size: 0.95rem; }
+    /* ШАПКА ТОЧНО КАК НА ЭТАЛОНЕ */
+    .site-header { position: absolute; top: 0; left: 0; width: 100%; z-index: 100; background: transparent; border-bottom: none; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 95px; max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand-logo { height: 44px; width: 44px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); }
+    .brand-copy b { font-size: 1.15rem; font-weight: 800; letter-spacing: 1.2px; display: block; color: #fff; }
+    .brand-copy small { font-size: 0.58rem; color: #aaa; letter-spacing: 1.2px; display: block; margin-top: 2px; }
+    
+    .desktop-nav { display: flex; gap: 28px; align-items: center; }
+    .desktop-nav a { font-weight: 500; font-size: 0.95rem; color: #dcdcdc; letter-spacing: 0.2px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
     .desktop-nav a:hover { color: var(--copper); }
-    .header-actions { display: flex; align-items: center; gap: 15px; }
-    .lang-switch { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 30px; border: 1px solid var(--border-dark); }
+    
+    .header-actions { display: flex; align-items: center; gap: 14px; }
+    
+    /* ИКОНКА КОРЗИНЫ БЕЗ ТЕКСТА */
+    .cart-icon-btn { position: relative; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; transition: 0.3s; }
+    .cart-icon-btn:hover { background: var(--copper); border-color: var(--copper); }
+    .cart-icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
+    .cart-badge { position: absolute; top: -4px; right: -4px; background: var(--copper); color: #fff; font-size: 0.65rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--ink); }
+
+    .lang-switch { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.35); padding: 7px 14px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px); }
     .lang-btn { background: none; border: none; color: #888; font-family: inherit; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
-    .lang-btn.active { color: var(--copper); }
+    .lang-btn.active { color: #fff; }
+    
     .menu-toggle { display: none; background: none; border: none; width: 30px; height: 20px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 101; }
     .menu-toggle i { display: block; height: 2px; background: #fff; width: 100%; transition: 0.3s; }
     .menu-toggle.active i:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .menu-toggle.active i:nth-child(2) { opacity: 0; }
     .menu-toggle.active i:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
     
-    .mobile-menu { position: fixed; inset: 0; background: var(--ink); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px; transform: translateY(-100%); transition: 0.4s ease; }
+    .mobile-menu { position: fixed; inset: 0; background: var(--ink); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 25px; transform: translateY(-100%); transition: 0.4s ease; }
     .mobile-menu.active { transform: translateY(0); }
-    .mobile-menu a { font-size: 1.5rem; font-weight: 600; }
+    .mobile-menu a { font-size: 1.4rem; font-weight: 600; }
     .mobile-menu .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: #fff; }
 
-    /* HERO */
-    .hero { position: relative; display: flex; flex-direction: column; padding: 130px 0 0; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background: url('img/hero-bg.jpg') center/cover no-repeat; z-index: 1; }
-    .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18,18,18,0.95) 0%, rgba(18,18,18,0.5) 100%), linear-gradient(0deg, rgba(18,18,18,0.8) 0%, transparent 50%); z-index: 2; }
-    .hero-content { position: relative; z-index: 3; max-width: 850px; padding: 0 20px; margin: 0 auto; width: 100%; margin-bottom: 50px; }
-    .eyebrow { display: flex; align-items: center; gap: 15px; color: var(--copper); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
-    .eyebrow i { display: block; height: 1px; width: 80px; background: currentColor; }
-    .hero h1 { font-size: clamp(2.3rem, 4.5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 25px; letter-spacing: -1px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-    .hero-lead { font-size: 1.15rem; color: #ddd; margin-bottom: 35px; max-width: 520px; }
-    .hero-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+    /* HERO ЗОНА */
+    .hero { position: relative; display: flex; flex-direction: column; height: 100vh; min-height: 720px; justify-content: space-between; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: url('img/hero-bg.jpg') center top / cover no-repeat; z-index: 1; }
+    .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,22,21,0.92) 0%, rgba(23,22,21,0.55) 50%, rgba(23,22,21,0.15) 100%), linear-gradient(0deg, rgba(23,22,21,0.75) 0%, transparent 45%); z-index: 2; }
+    
+    .hero-content { position: relative; z-index: 3; max-width: 1320px; width: 100%; margin: auto auto auto 0; padding: 120px 40px 40px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { display: flex; align-items: center; gap: 16px; color: var(--copper); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 20px; }
+    .eyebrow i { display: block; height: 1px; width: 50px; background: currentColor; }
+    
+    .hero h1 { font-size: clamp(2.2rem, 3.8vw, 3.9rem); font-weight: 800; line-height: 1.12; margin-bottom: 22px; letter-spacing: -1px; color: #ffffff; max-width: 780px; text-shadow: 0 4px 25px rgba(0,0,0,0.4); }
+    .hero-lead { font-size: 1.1rem; color: #d2d2d2; margin-bottom: 35px; max-width: 480px; line-height: 1.55; }
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
-    .hero-bottom { position: relative; z-index: 3; background: rgba(18,18,18,0.9); border-top: 1px solid var(--border-dark); display: flex; justify-content: space-around; padding: 25px 5%; backdrop-filter: blur(5px); flex-wrap: wrap; }
-    .feature { display: flex; align-items: center; gap: 15px; font-size: 0.9rem; color: #ddd; margin: 10px 0; }
-    .feature svg { width: 30px; height: 30px; color: var(--copper); flex-shrink: 0; }
+    .hero-badge-quality { position: absolute; right: 50px; bottom: 130px; z-index: 3; width: 125px; height: 125px; background: rgba(23,22,21,0.75); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .hero-badge-quality svg { width: 32px; height: 32px; color: var(--copper); margin-bottom: 4px; }
+    .hero-badge-quality span { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
 
-    /* ЦВЕТОВАЯ ГАММА */
-    .palette { padding: 40px 0; border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); background: rgba(0,0,0,0.2); text-align: center; overflow: hidden; }
-    .palette h2 { font-size: 1.3rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
-    .color-slider-wrapper { position: relative; max-width: 1000px; margin: 0 auto; }
-    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 20px; cursor: grab; -webkit-overflow-scrolling: touch; }
+    .hero-bottom { position: relative; z-index: 3; background: rgba(23,22,21,0.85); border-top: 1px solid rgba(255,255,255,0.12); display: grid; grid-template-columns: 80px 1fr 1fr 1fr 1fr; align-items: center; padding: 22px 40px; backdrop-filter: blur(10px); }
+    .hero-scroll-hint { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #888; font-size: 0.72rem; border-right: 1px solid rgba(255,255,255,0.12); padding-right: 20px; letter-spacing: 1px; text-transform: uppercase; }
+    .hero-scroll-hint svg { width: 16px; height: 16px; stroke: currentColor; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(4px); } 60% { transform: translateY(2px); } }
+    
+    .feature { display: flex; align-items: center; gap: 14px; font-size: 0.88rem; color: #dcdcdc; padding: 0 18px; border-right: 1px solid rgba(255,255,255,0.06); }
+    .feature:last-child { border-right: none; }
+    .feature svg { width: 26px; height: 26px; color: var(--copper); flex-shrink: 0; }
+
+    /* ОСТАЛЬНЫЕ БЛОКИ */
+    .palette { padding: 45px 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); text-align: center; }
+    .palette h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 22px; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
+    .color-slider-wrapper { max-width: 1100px; margin: 0 auto; }
+    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 20px; cursor: grab; }
     .color-slider::-webkit-scrollbar { display: none; }
-    .color-card { flex: 0 0 calc(25% - 12px); scroll-snap-align: center; background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid var(--border-dark); }
-    .color-circle { width: 56px; height: 56px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.2), 0 5px 15px rgba(0,0,0,0.3); }
-    .color-name { font-weight: 500; font-size: 0.85rem; text-align: center; }
+    .color-card { flex: 0 0 calc(25% - 12px); scroll-snap-align: center; background: rgba(255,255,255,0.04); border-radius: 14px; padding: 20px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.12); }
+    .color-circle { width: 52px; height: 52px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.4); }
+    .color-name { font-weight: 500; font-size: 0.85rem; color: #e0e0e0; }
 
-    /* КАТАЛОГ */
-    .section-light { background: var(--cream); color: var(--text-dark); padding: 80px 0; }
-    .section-intro { margin-bottom: 40px; }
-    .section-intro h2 { font-size: 2.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px; }
+    .section-light { background: var(--cream); color: var(--text-dark); padding: 90px 0; }
+    .section-intro { margin-bottom: 45px; }
+    .section-intro h2 { font-size: 2.6rem; font-weight: 800; line-height: 1.12; margin-bottom: 15px; letter-spacing: -1px; }
     .section-intro p { font-size: 1.1rem; color: #666; }
     .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
-    .tab-btn { padding: 12px 24px; border: 1px solid var(--border-light); background: transparent; border-radius: 50px; font-family: inherit; font-size: 0.95rem; font-weight: 600; color: var(--text-dark); cursor: pointer; transition: 0.3s; }
+    .tab-btn { padding: 13px 26px; border: 1px solid var(--border-light); background: transparent; border-radius: 50px; font-family: inherit; font-size: 0.92rem; font-weight: 600; color: var(--text-dark); cursor: pointer; transition: 0.3s; }
     .tab-btn:hover { border-color: var(--copper); color: var(--copper); }
     .tab-btn.active { background: var(--text-dark); color: #fff; border-color: var(--text-dark); }
     .tab-content { display: none; }
@@ -146,104 +151,96 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-    .card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; position: relative; cursor: pointer; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+    .card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.35s ease; position: relative; cursor: pointer; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
     .card-img { width: 100%; aspect-ratio: 4/3; background: var(--cream-dark) center/cover no-repeat; }
-    .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
     .card-body h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
-    .card-specs { font-size: 0.85rem; color: #666; margin-bottom: 15px; flex-grow: 1; }
-    .card-prices { display: flex; flex-direction: column; gap: 6px; background: #f8f6f2; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid rgba(0,0,0,0.05); }
+    .card-specs { font-size: 0.85rem; color: #666; margin-bottom: 16px; flex-grow: 1; }
+    .card-prices { display: flex; flex-direction: column; gap: 6px; background: #f8f6f2; padding: 14px 16px; border-radius: 10px; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.04); }
     .price-row { display: flex; justify-content: space-between; font-size: 0.88rem; color: #555; }
     .price-row b { color: var(--text-dark); font-weight: 700; }
     .card-controls { display: flex; gap: 10px; margin-bottom: 15px; }
-    .card-controls select, .card-controls input { padding: 10px; border: 1px solid var(--border-light); border-radius: 6px; font-family: inherit; font-size: 16px; background: #fff; }
+    .card-controls select, .card-controls input { padding: 10px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit; font-size: 16px; background: #fff; }
     .card-controls select { flex: 1; }
 
-    /* КАЛЬКУЛЯТОР */
-    .calc-section { padding: 80px 0; background: var(--ink); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
-    .calc-card { background: rgba(255,255,255,0.04); border: 1px solid var(--border-dark); border-radius: 16px; padding: 40px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-    .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
-    .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .calc-section { padding: 90px 0; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .calc-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; padding: 50px; backdrop-filter: blur(10px); }
+    .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 45px; align-items: center; }
+    .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
     .calc-group { display: flex; flex-direction: column; gap: 8px; }
     .calc-group.full { grid-column: span 2; }
-    .calc-group label { font-size: 0.85rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; }
-    .calc-group input, .calc-group select { width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-dark); border-radius: 8px; color: #fff; font-family: inherit; font-size: 16px; outline: none; transition: 0.3s; }
+    .calc-group label { font-size: 0.82rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; }
+    .calc-group input, .calc-group select { width: 100%; padding: 14px 16px; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: #fff; font-family: inherit; font-size: 16px; outline: none; transition: 0.3s; }
     .calc-group input:focus, .calc-group select:focus { border-color: var(--copper); }
     
-    .calc-result-box { background: var(--copper); border-radius: 12px; padding: 30px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; box-shadow: 0 10px 30px rgba(199,123,75,0.3); }
-    .calc-res-title { font-size: 0.9rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; opacity: 0.9; }
-    .calc-res-values { display: flex; flex-direction: column; gap: 10px; }
-    .calc-res-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; }
+    .calc-result-box { background: var(--copper); border-radius: 16px; padding: 35px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; box-shadow: 0 15px 35px rgba(199,123,75,0.3); }
+    .calc-res-title { font-size: 0.92rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1.2px; opacity: 0.95; }
+    .calc-res-values { display: flex; flex-direction: column; gap: 12px; }
+    .calc-res-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 10px; }
     .calc-res-row span { font-size: 0.95rem; }
-    .calc-res-row b { font-size: 1.3rem; font-weight: 800; }
+    .calc-res-row b { font-size: 1.35rem; font-weight: 800; }
     .calc-res-row.total b { font-size: 1.7rem; color: #fff; }
 
-    /* УСЛУГИ */
-    .services-section { background: var(--cream); color: var(--text-dark); padding: 80px 0; border-bottom: 1px solid var(--border-light); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .service-card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: 0.3s; position: relative; }
-    .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
-    .service-icon { width: 50px; height: 50px; background: rgba(199,123,75,0.1); color: var(--copper); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-    .service-icon svg { width: 26px; height: 26px; }
-    .service-text h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-    .service-text p { font-size: 0.95rem; color: #666; line-height: 1.5; }
-    .service-price { font-weight: 800; font-size: 1.1rem; color: var(--copper); margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border-light); }
+    .services-section { background: var(--cream); color: var(--text-dark); padding: 90px 0; border-bottom: 1px solid var(--border-light); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+    .service-card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 35px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: 0.35s ease; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .service-icon { width: 56px; height: 56px; background: rgba(199,123,75,0.1); color: var(--copper); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .service-icon svg { width: 28px; height: 28px; }
+    .service-text h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .service-text p { font-size: 1rem; color: #666; line-height: 1.6; }
+    .service-price { font-weight: 800; font-size: 1.15rem; color: var(--copper); margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border-light); }
 
-    /* НАШИ РАБОТЫ */
-    .works { padding: 80px 0; background: var(--ink); }
-    .works h2 { font-size: 2.5rem; margin-bottom: 30px; color: #fff; }
-    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-    .work-card { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; background: #222; border: 1px solid var(--border-dark); }
-    .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+    .works { padding: 90px 0; background: var(--ink); }
+    .works h2 { font-size: 2.6rem; margin-bottom: 35px; color: #fff; }
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
+    .work-card { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; background: #222; border: 1px solid rgba(255,255,255,0.12); }
+    .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
     .work-card:hover img { transform: scale(1.05); }
 
-    /* КОНТАКТЫ */
-    .contacts { padding: 80px 0; background: var(--ink); border-top: 1px solid var(--border-dark); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-    .contact-copy h2 { font-size: 2.5rem; margin-bottom: 20px; }
-    .contact-copy p { color: #ccc; margin-bottom: 30px; }
-    .contact-details { display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px; }
-    .contact-item small { display: block; font-size: 0.75rem; color: var(--copper); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 700; }
-    .contact-item b { font-size: 1.1rem; }
-    .social-links { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
-    .social-links a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-dark); border-radius: 8px; font-weight: 500; font-size: 0.95rem; color: #fff; transition: 0.3s; }
+    .contacts { padding: 90px 0; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.12); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; }
+    .contact-copy h2 { font-size: 2.6rem; margin-bottom: 18px; }
+    .contact-copy p { color: #ccc; margin-bottom: 35px; font-size: 1.05rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 24px; margin-bottom: 35px; }
+    .contact-item small { display: block; font-size: 0.72rem; color: var(--copper); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; font-weight: 700; }
+    .contact-item b { font-size: 1.2rem; }
+    .social-links { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 35px; }
+    .social-links a { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; font-weight: 500; font-size: 0.95rem; color: #fff; transition: 0.3s; }
     .social-links a:hover { background: var(--copper); border-color: var(--copper); }
-    .map-wrapper { width: 100%; height: 300px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-dark); }
+    .map-wrapper { width: 100%; height: 320px; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
     .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.1); }
 
-    .form { background: rgba(255,255,255,0.05); padding: 40px; border-radius: var(--radius); border: 1px solid var(--border-dark); }
-    .form h3 { font-size: 1.5rem; margin-bottom: 10px; }
-    .form p { color: #888; margin-bottom: 20px; font-size: 0.9rem; }
-    .form input, .form textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-dark); border-radius: 8px; color: #fff; font-family: inherit; font-size: 16px; }
+    .form { background: rgba(255,255,255,0.03); padding: 45px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.12); }
+    .form h3 { font-size: 1.6rem; margin-bottom: 10px; }
+    .form p { color: #888; margin-bottom: 25px; font-size: 0.95rem; }
+    .form input, .form textarea { width: 100%; padding: 15px 16px; margin-bottom: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: #fff; font-family: inherit; font-size: 16px; }
     .form input:focus, .form textarea:focus { outline: none; border-color: var(--copper); }
     .form button { width: 100%; }
 
-    /* О НАС */
-    .about-section { background: var(--cream); color: var(--text-dark); padding: 80px 0; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-    .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--text-dark); }
-    .about-text p { font-size: 1.05rem; color: #666; margin-bottom: 20px; }
-    .checks { list-style: none; display: flex; flex-direction: column; gap: 15px; }
-    .checks li { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-dark); }
-    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(199, 123, 75, 0.15); color: var(--copper); border-radius: 50%; font-weight: 800; flex-shrink: 0; }
-    .worktime { background: #fff; padding: 40px; border-radius: var(--radius); border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-    .worktime h3 { margin-bottom: 20px; color: var(--text-dark); font-size: 1.3rem; }
-    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 12px; color: #666; }
+    .about-section { background: var(--cream); color: var(--text-dark); padding: 90px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; align-items: center; }
+    .about-text h2 { font-size: 2.6rem; margin-bottom: 25px; color: var(--text-dark); }
+    .about-text p { font-size: 1.1rem; color: #666; margin-bottom: 22px; line-height: 1.6; }
+    .checks { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .checks li { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--text-dark); font-size: 1.05rem; }
+    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: rgba(199, 123, 75, 0.15); color: var(--copper); border-radius: 50%; font-weight: 800; flex-shrink: 0; }
+    .worktime { background: #fff; padding: 45px; border-radius: 22px; border: 1px solid var(--border-light); box-shadow: 0 15px 35px rgba(0,0,0,0.03); }
+    .worktime h3 { margin-bottom: 24px; color: var(--text-dark); font-size: 1.4rem; }
+    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 15px; color: #666; font-size: 1.05rem; }
     .worktime p:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
     .worktime b { color: var(--text-dark); }
 
-    /* ФУТЕР */
-    footer { padding: 30px 0; background: #0a0a0a; border-top: 1px solid var(--border-dark); color: #888; font-size: 0.9rem; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    footer { padding: 40px 0; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.12); color: #888; font-size: 0.92rem; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1320px; margin: 0 auto; padding: 0 40px; }
 
-    /* МОБИЛЬНАЯ НАВИГАЦИЯ С SAFE AREA */
-    .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1b1a19; border-top: 1px solid var(--border-dark); z-index: 99; height: calc(65px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
+    .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1b1a19; border-top: 1px solid rgba(255,255,255,0.12); z-index: 99; height: calc(65px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
     .mobile-nav__inner { display: flex; justify-content: space-around; align-items: center; height: 65px; }
     .mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #888; font-size: 0.7rem; width: 25%; height: 100%; text-decoration: none; transition: 0.3s; }
     .mobile-nav a.selected, .mobile-nav a:hover { color: var(--copper); }
     .mobile-nav a svg { width: 22px; height: 22px; fill: currentColor; }
 
-    /* ПЛАВАЮЩИЕ КНОПКИ */
     .floating-call { position: fixed; bottom: calc(85px + env(safe-area-inset-bottom)); right: 20px; width: 56px; height: 56px; background: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 98; box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); transition: 0.3s; animation: pulse-ring 2s infinite cubic-bezier(0.45, 0, 0.55, 1); }
     .floating-call:hover { transform: scale(1.1); animation: none; }
     .floating-call svg { width: 26px; height: 26px; fill: #fff; }
@@ -254,64 +251,64 @@
       100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
     }
     
-    .floating-up { position: fixed; bottom: calc(85px + env(safe-area-inset-bottom)); left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid var(--border-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 99; backdrop-filter: blur(10px); }
+    .floating-up { position: fixed; bottom: calc(85px + env(safe-area-inset-bottom)); left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 99; backdrop-filter: blur(10px); }
     .floating-up.show { opacity: 1; pointer-events: auto; }
     .floating-up:hover { background: var(--copper); border-color: var(--copper); }
     .floating-up svg { width: 18px; height: 18px; fill: #fff; }
 
-    /* МОДАЛЬНЫЕ ОКНА */
-    .modal { position: fixed; inset: 0; z-index: 1002; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+    .modal { position: fixed; inset: 0; z-index: 1002; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .modal.show { display: flex; }
-    .modal-content { background: #fff; color: var(--text-dark); border-radius: 16px; max-width: 550px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 35px; position: relative; text-align: left; box-shadow: 0 20px 50px rgba(0,0,0,0.5); -webkit-overflow-scrolling: touch; }
-    .modal-close { position: absolute; top: 18px; right: 20px; font-size: 28px; cursor: pointer; color: #888; line-height: 1; }
-    .modal-content h2 { font-size: 1.5rem; margin-bottom: 15px; color: var(--text-dark); font-weight: 800; }
-    .modal-content p { color: #555; margin-bottom: 12px; font-size: 0.92rem; line-height: 1.6; }
-    .modal-content input { width: 100%; padding: 14px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; font-family: inherit; }
+    .modal-content { background: #fff; color: var(--text-dark); border-radius: 22px; max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; text-align: left; box-shadow: 0 30px 70px rgba(0,0,0,0.5); -webkit-overflow-scrolling: touch; }
+    .modal-close { position: absolute; top: 20px; right: 24px; font-size: 28px; cursor: pointer; color: #888; line-height: 1; }
+    .modal-content h2 { font-size: 1.6rem; margin-bottom: 18px; color: var(--text-dark); font-weight: 800; }
+    .modal-content p { color: #555; margin-bottom: 14px; font-size: 0.95rem; line-height: 1.6; }
+    .modal-content input { width: 100%; padding: 14px 16px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; font-family: inherit; }
 
-    /* СТИЛИ КОРЗИНЫ В МОДАЛКЕ */
-    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; gap: 10px; }
-    .cart-item-info b { display: block; font-size: 0.95rem; color: var(--text-dark); }
-    .cart-item-info small { color: #778; font-size: 0.8rem; }
+    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #eee; gap: 12px; }
+    .cart-item-info b { display: block; font-size: 1rem; color: var(--text-dark); }
+    .cart-item-info small { color: #778; font-size: 0.85rem; }
     .cart-item-controls { display: flex; align-items: center; gap: 8px; }
-    .cart-item-controls button { width: 30px; height: 30px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; }
-    .cart-total-section { margin-top: 20px; padding-top: 15px; border-top: 2px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); }
+    .cart-item-controls button { width: 32px; height: 32px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; }
+    .cart-total-section { margin-top: 25px; padding-top: 18px; border-top: 2px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 800; color: var(--text-dark); }
 
-    /* АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ */
-    @media(max-width: 1024px) {
-      .hero h1 { font-size: 3rem; }
+    @media(max-width: 1100px) {
+      .hero-badge-quality { display: none; }
       .calc-grid { grid-template-columns: 1fr; }
     }
 
     @media(max-width: 900px) {
       .desktop-nav, .desktop-only { display: none; }
       .menu-toggle { display: flex; }
+      .header-inner { height: 80px; padding: 0 20px; }
+      .container { padding: 0 20px; }
       
-      .hero { padding: 110px 0 0; }
+      .hero { height: auto; min-height: 100dvh; padding-top: 80px; padding-bottom: 30px; }
+      .hero-content { padding: 40px 20px; margin: auto 0; }
       .hero h1 { font-size: 2.1rem; }
-      .hero-lead { font-size: 1rem; }
-      .hero-buttons { flex-direction: column; gap: 10px; }
+      .hero-lead { font-size: 0.98rem; }
+      .hero-buttons { flex-direction: column; gap: 12px; }
       .hero-buttons .btn { width: 100%; }
+      .hero-bottom { display: none; }
       
-      .hero-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px 5%; }
-      .feature { flex-direction: column; text-align: center; gap: 8px; margin: 0; font-size: 0.82rem; }
-      .feature svg { width: 26px; height: 26px; }
-      
-      .palette { padding: 30px 0; }
-      .color-card { flex: 0 0 calc(45% - 8px); }
+      .palette { padding: 35px 0; }
+      .color-card { flex: 0 0 calc(45% - 10px); }
 
-      .calc-card { padding: 20px; }
+      .calc-card { padding: 25px; }
       .calc-inputs { grid-template-columns: 1fr; }
       .calc-group.full { grid-column: span 1; }
 
-      .section-intro h2 { font-size: 1.8rem; }
-      .product-grid { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; margin-right: -20px; padding-right: 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+      .section-light, .calc-section, .services-section, .works, .contacts, .about-section { padding: 70px 0; }
+      .section-intro h2, .works h2, .contact-copy h2, .about-text h2 { font-size: 2rem; }
+      
+      .product-grid { display: flex; overflow-x: auto; gap: 16px; padding-bottom: 15px; margin-right: -20px; padding-right: 20px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
       .card { flex: 0 0 85%; scroll-snap-align: start; }
       
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
-      .map-wrapper { height: 250px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 35px; }
+      .map-wrapper { height: 260px; }
       
       .mobile-nav { display: block; }
       footer { padding-bottom: calc(85px + env(safe-area-inset-bottom)); }
+      .footer-inner { padding: 0 20px; flex-direction: column; text-align: center; }
       
       .floating-call { bottom: calc(80px + env(safe-area-inset-bottom)); right: 15px; width: 50px; height: 50px; }
       .floating-up { bottom: calc(80px + env(safe-area-inset-bottom)); left: 15px; width: 36px; height: 36px; }
@@ -331,15 +328,15 @@
     </a>
     <nav class="desktop-nav">
       <a href="#catalog">Каталог</a>
-      <a href="#calculator">Калькулятор</a>
-      <a href="#services">Услуги</a>
+      <a href="#services">Производство</a>
       <a href="#works">Наши работы</a>
-      <a href="#contacts">Контакты</a>
+      <a href="#about">Доставка</a>
       <a href="#about">О компании</a>
+      <a href="#contacts">Контакты</a>
     </nav>
     <div class="header-actions">
-      <button class="cart-btn" onclick="openCartModal()">
-        <span>Корзина</span>
+      <button class="cart-icon-btn" onclick="openCartModal()" aria-label="Корзина">
+        <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
         <span class="cart-badge" id="cartCount">0</span>
       </button>
       <div class="lang-switch">
@@ -347,7 +344,6 @@
         <span>/</span>
         <button class="lang-btn" data-lang="be">BE</button>
       </div>
-      <a href="tel:+375297575265" class="btn btn-primary desktop-only">Позвонить</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Меню"><i></i><i></i><i></i></button>
     </div>
   </div>
@@ -356,11 +352,11 @@
 <div class="mobile-menu" id="mobileMenu">
   <span class="close-btn" id="closeMenuBtn">&times;</span>
   <a href="#catalog" class="nav-link">Каталог</a>
-  <a href="#calculator" class="nav-link">Калькулятор</a>
-  <a href="#services" class="nav-link">Услуги</a>
+  <a href="#services" class="nav-link">Производство</a>
   <a href="#works" class="nav-link">Наши работы</a>
-  <a href="#contacts" class="nav-link">Контакты</a>
+  <a href="#about" class="nav-link">Доставка</a>
   <a href="#about" class="nav-link">О компании</a>
+  <a href="#contacts" class="nav-link">Контакты</a>
 </div>
 
 <section class="hero animate-on-scroll" id="home">
@@ -372,10 +368,20 @@
     <p class="hero-lead" data-i18n="hero-lead">Надёжное покрытие для вашего дома на долгие годы</p>
     <div class="hero-buttons">
       <a class="btn btn-primary" href="#catalog" data-i18n="btn-catalog">Посмотреть каталог <b>→</b></a>
-      <a class="btn btn-outline" href="#contacts" data-i18n="btn-consult">Получить консультацию</a>
+      <a class="btn btn-outline" href="tel:+375297575265" data-i18n="btn-consult">Получить консультацию</a>
     </div>
   </div>
+
+  <div class="hero-badge-quality">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+    <span>Гарантия качества</span>
+  </div>
+
   <div class="hero-bottom">
+    <div class="hero-scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      <span>вниз</span>
+    </div>
     <div class="feature">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
       <span data-i18n="feat-prod">Собственное производство</span>
@@ -442,8 +448,8 @@
       <div class="calc-grid">
         <div class="calc-inputs">
           <div class="calc-group full">
-            <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:5px;" data-i18n="calc-title">Калькулятор расчёта плитки</h3>
-            <p style="color:#aaa; font-size:0.9rem;" data-i18n="calc-subtitle">Укажите параметры площадки для мгновенного расчёта стоимости</p>
+            <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:6px;" data-i18n="calc-title">Калькулятор расчёта плитки</h3>
+            <p style="color:#aaa; font-size:0.95rem;" data-i18n="calc-subtitle">Укажите параметры площадки для мгновенного расчёта стоимости</p>
           </div>
           <div class="calc-group">
             <label data-i18n="calc-width">Ширина (метры)</label>
@@ -605,7 +611,6 @@
   </div>
 </footer>
 
-<!-- НИЖНЯЯ МОБИЛЬНАЯ ПАНЕЛЬ НАВИГАЦИИ -->
 <nav class="mobile-nav">
   <div class="mobile-nav__inner">
     <a class="selected" href="#home">
@@ -635,7 +640,6 @@
   <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
 <div class="modal" id="cartModal" onclick="closeCartModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closeCartModal(event)">&times;</span>
@@ -657,7 +661,6 @@
   </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО УСПЕШНОЙ ОТПРАВКИ -->
 <div class="modal" id="successModal" onclick="closeSuccessModal(event)">
   <div class="modal-content" style="text-align: center; padding: 40px 30px;" onclick="event.stopPropagation()">
     <div style="width: 70px; height: 70px; background: rgba(76, 175, 80, 0.15); color: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
@@ -669,7 +672,6 @@
   </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ДЕТАЛЕЙ ТОВАРА -->
 <div class="modal" id="productModal" onclick="closeProductModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closeProductModal(event)">&times;</span>
@@ -677,7 +679,6 @@
   </div>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ -->
 <div class="modal" id="policyModal" onclick="closePolicy(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closePolicy(event)">&times;</span>
