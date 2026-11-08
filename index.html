@@ -30,6 +30,8 @@
   }
   </script>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
@@ -50,8 +52,8 @@
     .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
 
     @keyframes cineFadeInUp {
-      0% { opacity: 0; transform: translateY(40px); filter: blur(8px); }
-      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes cineBgZoom {
@@ -348,6 +350,39 @@
       .modal-content { padding: 25px; }
     }
 
+    .byn { display: inline-block; width: 0.68em; height: 0.84em; margin-left: 0.18em; vertical-align: -0.06em; flex: none; }
+    .hero-bg { inset: -8% 0; translate: 0 var(--py, 0px); }
+    .hero .eyebrow i { transform-origin: left; animation: lineGrow 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both; }
+    @keyframes lineGrow { from { transform: scaleX(0); } }
+    .animate-on-scroll.visible { will-change: auto; }
+    @keyframes itemIn { from { opacity: 0; transform: translateY(26px) scale(0.96); } to { opacity: 1; transform: none; } }
+    .animate-on-scroll.visible .color-card, .animate-on-scroll.visible .service-card, .animate-on-scroll.visible .work-card, .animate-on-scroll.visible .checks li,
+    .animate-on-scroll.visible .tab-content.active .card { animation: itemIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+    .card-img { display: block; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .card:hover { border-color: rgba(199,123,75,0.55); }
+    .card:hover .card-img { transform: scale(1.07); }
+    .color-card { transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s; }
+    .color-card:hover { transform: translateY(-6px); border-color: rgba(199,123,75,0.6); }
+    .color-circle { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .color-card:hover .color-circle { transform: scale(1.15); }
+    .btn-primary { position: relative; overflow: hidden; }
+    .btn-primary::after { content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent); transform: skewX(-20deg); transition: left 0.7s; pointer-events: none; }
+    .btn-primary:hover::after { left: 140%; }
+    .btn:active { transform: scale(0.97); }
+    .site-header { position: fixed; animation: headerIn 0.8s ease 0.1s forwards; transition: background 0.4s, box-shadow 0.4s; }
+    @keyframes headerIn { to { opacity: 1; } }
+    .header-inner { transition: height 0.35s; }
+    .site-header.scrolled { background: rgba(23,22,21,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 30px rgba(0,0,0,0.35); }
+    .site-header.scrolled .header-inner { height: 68px; }
+    @keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.7); } 100% { transform: scale(1); } }
+    .cart-badge.bump { animation: bump 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes mIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: none; } }
+    @keyframes bgIn { from { opacity: 0; } }
+    .modal.show { animation: bgIn 0.25s ease; }
+    .modal.show .modal-content { animation: mIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .mobile-menu a { opacity: 0; transform: translateY(24px); transition: opacity 0.5s, transform 0.5s; }
+    .mobile-menu.active a { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 70ms + 200ms); }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
       .animate-on-scroll { opacity: 1; transform: none; }
@@ -355,8 +390,9 @@
   </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-byn" viewBox="0 0 336 412"><g fill="none" stroke="currentColor" stroke-width="46"><path d="M82 0V412M60 23H290M0 292H210M82 193H215A98 98 0 0 1 215 389H82"/></g></symbol></svg>
 
-<div class="toast" id="toastMsg" style="position:fixed; bottom:20px; right:20px; background:var(--copper); color:#fff; padding:12px 24px; border-radius:8px; z-index:2000; box-shadow:0 5px 20px rgba(0,0,0,0.3); opacity:0; pointer-events:none; transition:0.3s;"></div>
+<div class="toast" id="toastMsg" style="position:fixed; bottom:20px; right:20px; background:var(--copper); color:#fff; padding:12px 24px; border-radius:8px; z-index:2000; box-shadow:0 5px 20px rgba(0,0,0,0.3); opacity:0; transform:translateY(16px); pointer-events:none; transition:0.35s;"></div>
 
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
@@ -504,10 +540,11 @@
           <div class="calc-group">
             <label data-i18n="calc-type">Исполнение</label>
             <select id="calcPriceType" onchange="recalculate()">
-              <option value="25" selected>Серый бетон (~25 BYN/м²)</option>
-              <option value="31">Цветной бетон (~31 BYN/м²)</option>
-              <option value="32">Под мрамор (~32 BYN/м²)</option>
+              <option value="25" selected>Серый бетон</option>
+              <option value="31">Цветной бетон</option>
+              <option value="32">Под мрамор</option>
             </select>
+            <small id="calcHint" style="color:#aaa"></small>
           </div>
         </div>
         <div class="calc-result-box">
@@ -523,7 +560,7 @@
             </div>
             <div class="calc-res-row total">
               <span data-i18n="calc-total-cost">Ориентировочно:</span>
-              <b id="resCost">1 375 BYN</b>
+              <b id="resCost">1 375<svg class="byn" viewBox="0 0 336 412" role="img" aria-label="BYN"><use href="#i-byn"/></svg></b>
             </div>
           </div>
           <p style="font-size:0.78rem; opacity:0.9; margin-top:-8px;" data-i18n="calc-note">Цена ориентировочная, точную стоимость уточним при заказе.</p>
@@ -551,7 +588,7 @@
           <h3 data-i18n="service-1">Подбор плитки под ландшафт</h3>
           <p data-i18n="service-1-desc">Поможем выбрать форму, цвет и фактуру, которые идеально впишутся в ваш дизайн участка.</p>
         </div>
-        <div class="service-price">10.00 BYN</div>
+        <div class="service-price">10.00<svg class="byn" viewBox="0 0 336 412" role="img" aria-label="BYN"><use href="#i-byn"/></svg></div>
       </div>
       
       <div class="service-card">
@@ -562,7 +599,7 @@
           <h3 data-i18n="service-2">Погрузка / разгрузка плитки</h3>
           <p data-i18n="service-2-desc">Аккуратно и быстро разгрузим материал на объекте, чтобы вы могли сразу приступить к работе.</p>
         </div>
-        <div class="service-price">30.00 BYN</div>
+        <div class="service-price">30.00<svg class="byn" viewBox="0 0 336 412" role="img" aria-label="BYN"><use href="#i-byn"/></svg></div>
       </div>
     </div>
   </div>
@@ -680,7 +717,7 @@
     </div>
     <div class="cart-total-section">
       <span>Итого:</span>
-      <span id="cartTotalPrice">0 BYN</span>
+      <span id="cartTotalPrice">0<svg class="byn" viewBox="0 0 336 412" role="img" aria-label="BYN"><use href="#i-byn"/></svg></span>
     </div>
     <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
       <p style="font-weight:700; margin-bottom: 10px; font-size: 0.95rem;">Оформить заказ:</p>
@@ -754,6 +791,8 @@
   initDynamicHeroBackground();
 
   let cart = [];
+  const BYN_SVG = '<svg class="byn" viewBox="0 0 336 412" role="img" aria-label="BYN"><use href="#i-byn"/></svg>';
+  const money = (str) => String(str).replace(/\s*BYN/g, BYN_SVG);
   // Единицы измерения по разделам каталога (м² — плитка/брусчатка/панели, шт. — бордюры/проступи)
   const UNIT = { bruschatka: "м²", plitka: "м²", bordyury: "шт.", prostupi: "шт.", paneli: "м²" };
 
@@ -831,12 +870,14 @@
   function updateCartUI() {
     const badge = document.getElementById("cartCount");
     const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    const prevCount = badge.textContent;
     badge.textContent = totalCount;
+    if (String(totalCount) !== prevCount) { badge.classList.remove("bump"); void badge.offsetWidth; badge.classList.add("bump"); }
 
     const listContainer = document.getElementById("cartItemsList");
     if (cart.length === 0) {
       listContainer.innerHTML = `<p style="color:#777; text-align:center; padding: 20px 0;">Корзина пуста</p>`;
-      document.getElementById("cartTotalPrice").textContent = `0 BYN`;
+      document.getElementById("cartTotalPrice").innerHTML = `0${BYN_SVG}`;
       return;
     }
 
@@ -848,7 +889,7 @@
         <div class="cart-item-row">
           <div class="cart-item-info">
             <b>${item.name}</b>
-            <small>Цвет: ${item.color} | Цена: ${item.priceStr}/${item.unit}</small>
+            <small>Цвет: ${item.color} | Цена: ${money(item.priceStr)}</small>
           </div>
           <div class="cart-item-controls">
             <button onclick="changeCartQty(${index}, -1)">-</button>
@@ -860,7 +901,7 @@
       `;
     }).join("");
 
-    document.getElementById("cartTotalPrice").textContent = `${totalPrice.toLocaleString('ru-RU')} BYN`;
+    document.getElementById("cartTotalPrice").innerHTML = `${totalPrice.toLocaleString('ru-RU')}${BYN_SVG}`;
   }
 
   function changeCartQty(index, delta) {
@@ -916,7 +957,7 @@
     cart.forEach((item, idx) => {
       const sum = item.priceNum * item.qty;
       totalSum += sum;
-      text += `${idx+1}. ${item.name} (${item.color}) — ${item.qty} ${item.unit} × ${item.priceStr}/${item.unit} = ${+sum.toFixed(2)} BYN\n`;
+      text += `${idx+1}. ${item.name} (${item.color}) — ${item.qty} ${item.unit} × ${item.priceStr} = ${+sum.toFixed(2)} BYN\n`;
     });
     text += `\nИтого к оплате: ${totalSum.toLocaleString('ru-RU')} BYN`;
 
@@ -932,10 +973,10 @@
   function showToast(msg) {
     const t = document.getElementById("toastMsg");
     t.textContent = msg;
-    t.style.opacity = "1";
+    t.style.opacity = "1"; t.style.transform = "translateY(0)";
     t.style.pointerEvents = "auto";
     setTimeout(() => {
-      t.style.opacity = "0";
+      t.style.opacity = "0"; t.style.transform = "translateY(16px)";
       t.style.pointerEvents = "none";
     }, 3000);
   }
@@ -1089,13 +1130,14 @@
 
     document.getElementById("resArea").textContent = `${area.toFixed(1)} м²`;
     document.getElementById("resTotalM").textContent = `${totalM.toFixed(1)} м²`;
-    document.getElementById("resCost").textContent = `${Math.round(totalCost).toLocaleString('ru-RU')} BYN`;
+    document.getElementById("resCost").innerHTML = `${Math.round(totalCost).toLocaleString('ru-RU')}${BYN_SVG}`;
+    document.getElementById("calcHint").innerHTML = `Ориентировочная цена: ~${pricePerM}${BYN_SVG}`;
   }
 
   function orderCalc() {
     const area = document.getElementById("resArea").textContent;
     const totalM = document.getElementById("resTotalM").textContent;
-    const cost = document.getElementById("resCost").textContent;
+    const cost = document.getElementById("resCost").textContent.trim() + " BYN";
     const typeSel = document.getElementById("calcPriceType");
     const typeTxt = typeSel.options[typeSel.selectedIndex].text;
     document.getElementById("userMsg").value =
@@ -1112,13 +1154,13 @@
       const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
       const badge = item.badge ? `<div style="position:absolute; top:12px; left:12px; background:var(--copper); color:#fff; padding:5px 10px; border-radius:6px; font-size:0.7rem; font-weight:700; z-index:10; text-transform:uppercase;">${item.badge}</div>` : '';
       return `
-        <article class="card" onclick="openProductDetail('${key}', ${index}, event)">
+        <article class="card" style="--i:${index}" onclick="openProductDetail('${key}', ${index}, event)">
           ${badge}
-          <div class="card-img" style="background-image:url('img/${item.img}')" onerror="this.style.background='#e0dad0'"></div>
+          <img class="card-img" src="img/${item.img}" alt="${item.name}" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">
           <div class="card-body">
             <h3>${item.name}</h3>
             <div class="card-specs">${item.specs}</div>
-            <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}<small style="font-weight:500;color:#888">/${UNIT[key]}</small></b></div>`).join("")}</div>
+            <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${money(p[1])}</b></div>`).join("")}</div>
             <div class="card-controls" onclick="event.stopPropagation()">
               <select class="color-select" id="color-${key}-${index}" aria-label="Цвет">${colorOptions}</select>
               <input type="number" class="qty-input" id="qty-${key}-${index}" value="1" min="1" style="width: 55px; text-align:center;" aria-label="Количество, ${UNIT[key]}" title="Количество, ${UNIT[key]}">
@@ -1143,8 +1185,8 @@
   function openProductDetail(category, index, e) {
     if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
     const item = data[category][index];
-    const colorOptions = item.prices.map(p => `<option value="${p[0]}" data-price="${p[1]}">${p[0]} — ${p[1]}/${UNIT[category]}</option>`).join("");
-    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:6px;"><span>${p[0]}</span> <b>${p[1]}/${UNIT[category]}</b></div>`).join("");
+    const colorOptions = item.prices.map(p => `<option value="${p[0]}" data-price="${p[1]}">${p[0]}</option>`).join("");
+    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:6px;"><span>${p[0]}</span> <b>${money(p[1])}</b></div>`).join("");
     
     document.getElementById("productModalBody").innerHTML = `
       <div style="display:flex; flex-direction:column; gap:15px;">
@@ -1208,6 +1250,9 @@
   renderGrid("paneli", data.paneli);
   renderWorks();
   recalculate();
+
+  document.querySelectorAll(".animate-on-scroll").forEach(sec => sec.querySelectorAll(".color-card, .service-card, .work-card, .checks li").forEach((el, i) => el.style.setProperty("--i", i)));
+  document.querySelectorAll(".mobile-menu a").forEach((a, i) => a.style.setProperty("--i", i));
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -1281,10 +1326,19 @@
   }
 
   const scrollTopBtn = document.getElementById("scrollTop");
-  window.addEventListener("scroll", () => {
-    if(window.scrollY > 400) scrollTopBtn.classList.add("show");
-    else scrollTopBtn.classList.remove("show");
-  });
+  const siteHeader = document.getElementById("siteHeader");
+  const heroBgEl = document.getElementById("heroBg");
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let ticking = false;
+  function onScroll() {
+    const y = window.scrollY;
+    scrollTopBtn.classList.toggle("show", y > 400);
+    siteHeader.classList.toggle("scrolled", y > 40);
+    if (!reduceMotion && y < window.innerHeight) heroBgEl.style.setProperty("--py", Math.min(y * 0.2, window.innerHeight * 0.07) + "px");
+    ticking = false;
+  }
+  window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
   scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   document.addEventListener("keydown", (e) => {
