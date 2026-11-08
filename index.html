@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#171615">
   
   <title>KOLORITBETON — тротуарная плитка и бетонные изделия в Гродно</title>
@@ -45,7 +45,7 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; scroll-padding-top: 95px; }
-    body { background: var(--ink); color: #fff; font-family: 'Manrope', sans-serif; line-height: 1.6; overflow-x: hidden; padding-bottom: calc(70px + env(safe-area-inset-bottom)); min-height: 100dvh; }
+    body { background: var(--ink); color: #fff; font-family: 'Manrope', sans-serif; line-height: 1.6; overflow-x: hidden; min-height: 100dvh; }
     a { color: inherit; text-decoration: none; transition: 0.3s; }
     .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
 
@@ -153,9 +153,9 @@
     .palette { padding: 45px 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); text-align: center; }
     .palette h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 22px; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
     .color-slider-wrapper { max-width: 1100px; margin: 0 auto; }
-    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 20px; cursor: grab; }
+    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 20px; }
     .color-slider::-webkit-scrollbar { display: none; }
-    .color-card { flex: 0 0 calc(25% - 12px); scroll-snap-align: center; background: rgba(255,255,255,0.04); border-radius: 14px; padding: 20px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.12); }
+    .color-card { flex: 1 1 0; min-width: 100px; scroll-snap-align: center; background: rgba(255,255,255,0.04); border-radius: 14px; padding: 20px 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.12); }
     .color-circle { width: 52px; height: 52px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.4); }
     .color-name { font-weight: 500; font-size: 0.85rem; color: #e0e0e0; }
 
@@ -239,6 +239,8 @@
     .form input, .form textarea { width: 100%; padding: 15px 16px; margin-bottom: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: #fff; font-family: inherit; font-size: 16px; }
     .form input:focus, .form textarea:focus { outline: none; border-color: var(--copper); }
     .form button { width: 100%; }
+    .error-hint { display: none; color: #ff6b6b; font-size: 0.85rem; margin: -8px 0 12px; }
+    input.error { border-color: #ff6b6b !important; }
 
     .about-section { background: var(--cream); color: var(--text-dark); padding: 90px 0; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; align-items: center; }
@@ -272,7 +274,7 @@
       100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
     }
     
-    .floating-up { position: fixed; bottom: calc(85px + env(safe-area-inset-bottom)); left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 99; backdrop-filter: blur(10px); }
+    .floating-up { padding: 0; position: fixed; bottom: calc(85px + env(safe-area-inset-bottom)); left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 99; backdrop-filter: blur(10px); }
     .floating-up.show { opacity: 1; pointer-events: auto; }
     .floating-up:hover { background: var(--copper); border-color: var(--copper); }
     .floating-up svg { width: 18px; height: 18px; fill: #fff; }
@@ -345,6 +347,11 @@
       .floating-up { bottom: calc(80px + env(safe-area-inset-bottom)); left: 15px; width: 36px; height: 36px; }
       .modal-content { padding: 25px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+      .animate-on-scroll { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -361,7 +368,6 @@
       <a href="#catalog">Каталог</a>
       <a href="#services">Производство</a>
       <a href="#works">Наши работы</a>
-      <a href="#about">Доставка</a>
       <a href="#about">О компании</a>
       <a href="#contacts">Контакты</a>
     </nav>
@@ -385,7 +391,6 @@
   <a href="#catalog" class="nav-link">Каталог</a>
   <a href="#services" class="nav-link">Производство</a>
   <a href="#works" class="nav-link">Наши работы</a>
-  <a href="#about" class="nav-link">Доставка</a>
   <a href="#about" class="nav-link">О компании</a>
   <a href="#contacts" class="nav-link">Контакты</a>
 </div>
@@ -521,6 +526,7 @@
               <b id="resCost">1 375 BYN</b>
             </div>
           </div>
+          <p style="font-size:0.78rem; opacity:0.9; margin-top:-8px;" data-i18n="calc-note">Цена ориентировочная, точную стоимость уточним при заказе.</p>
           <button class="btn btn-outline" style="background:#fff; color:var(--text-dark); font-weight:700; width:100%; border:none;" onclick="orderCalc()" data-i18n="calc-btn-order">Заказать с этим расчётом</button>
         </div>
       </div>
@@ -589,7 +595,7 @@
       </div>
 
       <div class="map-wrapper">
-        <iframe src="https://yandex.by/map-widget/v1/?ll=23.826239%2C53.754207&mode=whatshere&whatshere%5Bpoint%5D=23.826202%2C53.753868&whatshere%5Bzoom%5D=17&z=18.41" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
+        <iframe title="Карта: Koloritbeton, Гродно" src="https://yandex.by/map-widget/v1/?ll=23.826239%2C53.754207&mode=whatshere&whatshere%5Bpoint%5D=23.826202%2C53.753868&whatshere%5Bzoom%5D=17&z=18.41" width="100%" height="100%" frameborder="0" loading="lazy"></iframe>
       </div>
     </div>
     <div class="contact-form-wrapper">
@@ -598,7 +604,7 @@
         <p data-i18n="form-text">Мы свяжемся с вами в ближайшее время</p>
         <input type="text" id="userName" placeholder="Ваше имя" data-i18n-placeholder="form-name" required>
         <input type="tel" id="userPhone" placeholder="+375 (__) ___-__-__" data-i18n-placeholder="form-phone" required>
-        <div class="error-hint" id="phoneError" data-i18n="error-phone">Введите корректный номер телефона (минимум 9 цифр)</div>
+        <div class="error-hint" id="phoneError" data-i18n="error-phone">Введите номер полностью: +375 (XX) XXX-XX-XX</div>
         <textarea id="userMsg" rows="3" placeholder="Сообщение" data-i18n-placeholder="form-msg"></textarea>
         <button type="submit" class="btn btn-primary" data-i18n="form-button">Отправить заявку</button>
       </form>
@@ -661,11 +667,11 @@
   <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
 </a>
 
-<div class="floating-up" id="scrollTop" aria-label="Наверх">
+<button type="button" class="floating-up" id="scrollTop" aria-label="Наверх">
   <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>
-</div>
+</button>
 
-<div class="modal" id="cartModal" onclick="closeCartModal(event)">
+<div class="modal" id="cartModal" role="dialog" aria-modal="true" onclick="closeCartModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closeCartModal(event)">&times;</span>
     <h2>Ваша корзина</h2>
@@ -680,13 +686,13 @@
       <p style="font-weight:700; margin-bottom: 10px; font-size: 0.95rem;">Оформить заказ:</p>
       <input type="text" id="cartName" placeholder="Ваше имя" required style="margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px;">
       <input type="tel" id="cartPhone" placeholder="+375 (__) ___-__-__" required style="margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
-      <div class="error-hint" id="cartPhoneError">Введите корректный номер телефона (минимум 9 цифр)</div>
+      <div class="error-hint" id="cartPhoneError">Введите номер полностью: +375 (XX) XXX-XX-XX</div>
       <button class="btn btn-primary" style="width: 100%;" onclick="submitCartOrder()">Отправить заказ</button>
     </div>
   </div>
 </div>
 
-<div class="modal" id="successModal" onclick="closeSuccessModal(event)">
+<div class="modal" id="successModal" role="dialog" aria-modal="true" onclick="closeSuccessModal(event)">
   <div class="modal-content" style="text-align: center; padding: 40px 30px;" onclick="event.stopPropagation()">
     <div style="width: 70px; height: 70px; background: rgba(76, 175, 80, 0.15); color: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
       <svg style="width: 36px; height: 36px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
@@ -697,14 +703,14 @@
   </div>
 </div>
 
-<div class="modal" id="productModal" onclick="closeProductModal(event)">
+<div class="modal" id="productModal" role="dialog" aria-modal="true" onclick="closeProductModal(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closeProductModal(event)">&times;</span>
     <div id="productModalBody"></div>
   </div>
 </div>
 
-<div class="modal" id="policyModal" onclick="closePolicy(event)">
+<div class="modal" id="policyModal" role="dialog" aria-modal="true" onclick="closePolicy(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="modal-close" onclick="closePolicy(event)">&times;</span>
     <h2 data-i18n="modal-policy-title">Политика конфиденциальности</h2>
@@ -747,44 +753,55 @@
   }
   initDynamicHeroBackground();
 
-  const TELEGRAM_BOT_TOKEN = "9283707316:AAEZ8nBhc9k2OU4FIlxDVMK9elbPZNWOukE";
-  const TELEGRAM_CHAT_ID = "748132010";
-
   let cart = [];
+  // Единицы измерения по разделам каталога (м² — плитка/брусчатка/панели, шт. — бордюры/проступи)
+  const UNIT = { bruschatka: "м²", plitka: "м²", bordyury: "шт.", prostupi: "шт.", paneli: "м²" };
 
-  function sendToTelegram(text) {
-    fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: text, parse_mode: "HTML" })
-    })
-    .then(res => {
-      if(!res.ok) {
-        window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
-      }
-    })
-    .catch(() => {
-      window.open(`https://t.me/+375295894068?text=${encodeURIComponent(text)}`, "_blank");
-    });
-    
-    document.getElementById("successModal").classList.add("show");
+  const WORKER_URL = "https://koloritbeton-form.djtimoxa94.workers.dev";
+
+  async function sendToTelegram(text) {
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text })
+      });
+      if (!res.ok) throw new Error("send failed");
+      document.getElementById("successModal").classList.add("show");
+      return true;
+    } catch (e) {
+      alert("Не удалось отправить заявку. Позвоните нам: +375 (29) 757-52-65");
+      return false;
+    }
+  }
+
+  function formatBYPhone(raw) {
+    let d = raw.replace(/\D/g, "");
+    if (d.startsWith("375")) d = d.slice(3);
+    else if (d.startsWith("80")) d = d.slice(2);
+    else if ("375".startsWith(d)) d = "";
+    d = d.slice(0, 9);
+    let out = "+375";
+    if (d.length) out += " (" + d.slice(0, 2);
+    if (d.length >= 2) out += ")";
+    if (d.length > 2) out += " " + d.slice(2, 5);
+    if (d.length > 5) out += "-" + d.slice(5, 7);
+    if (d.length > 7) out += "-" + d.slice(7, 9);
+    return { text: out, empty: d.length === 0 };
   }
 
   function setupPhoneMask(input) {
-    if(!input) return;
+    if (!input) return;
     input.addEventListener("input", function(e) {
-      let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,2})(\d{0,3})(\d{0,2})(\d{0,2})/);
-      if (!x[2]) {
-        e.target.value = x[1] ? '+' + x[1] : '';
-      } else {
-        e.target.value = '+' + x[1] + ' (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
-      }
+      const r = formatBYPhone(e.target.value);
+      const deleting = e.inputType && e.inputType.startsWith("delete");
+      e.target.value = (deleting && r.empty) ? "" : r.text;
     });
     input.addEventListener("focus", function() {
       if (!input.value) input.value = "+375 (";
     });
     input.addEventListener("blur", function() {
-      if (input.value === "+375 (" || input.value === "+") input.value = "";
+      if (formatBYPhone(input.value).empty) input.value = "";
     });
   }
 
@@ -792,18 +809,20 @@
   setupPhoneMask(document.getElementById("cartPhone"));
 
   function validatePhone(phone) {
-    return phone.replace(/\D/g, '').length >= 9;
+    const d = phone.replace(/\D/g, "");
+    return d.length === 12 && d.startsWith("375");
   }
 
-  function addToCart(name, color, priceStr, qty) {
+  function addToCart(name, color, priceStr, qty, unit) {
+    unit = unit || "шт.";
     qty = parseInt(qty) || 1;
     const priceNum = parseFloat(priceStr.replace(/[^\d.]/g, '')) || 0;
     
-    const existing = cart.find(item => item.name === name && item.color === color);
+    const existing = cart.find(item => item.name === name && item.color === color && item.unit === unit);
     if (existing) {
       existing.qty += qty;
     } else {
-      cart.push({ name, color, priceStr, priceNum, qty });
+      cart.push({ name, color, priceStr, priceNum, qty, unit });
     }
     updateCartUI();
     showToast(`Товар «${name}» добавлен в корзину`);
@@ -829,11 +848,11 @@
         <div class="cart-item-row">
           <div class="cart-item-info">
             <b>${item.name}</b>
-            <small>Цвет: ${item.color} | Цена: ${item.priceStr}</small>
+            <small>Цвет: ${item.color} | Цена: ${item.priceStr}/${item.unit}</small>
           </div>
           <div class="cart-item-controls">
             <button onclick="changeCartQty(${index}, -1)">-</button>
-            <span>${item.qty}</span>
+            <span>${item.qty} ${item.unit}</span>
             <button onclick="changeCartQty(${index}, 1)">+</button>
             <button onclick="removeFromCart(${index})" style="background:#ffebee; color:#d32f2f; border-color:#ffcdd2; margin-left:5px;">×</button>
           </div>
@@ -867,7 +886,7 @@
     }
   }
 
-  function submitCartOrder() {
+  async function submitCartOrder() {
     if (cart.length === 0) {
       alert("Корзина пуста!");
       return;
@@ -892,16 +911,17 @@
       phoneError.style.display = "none";
     }
 
-    let text = `<b>Заказ из корзины:</b>\nИмя: ${name}\nТелефон: ${phone}\n\n<b>Состав заказа:</b>\n`;
+    let text = `Заказ из корзины:\nИмя: ${name}\nТелефон: ${phone}\n\nСостав заказа:\n`;
     let totalSum = 0;
     cart.forEach((item, idx) => {
       const sum = item.priceNum * item.qty;
       totalSum += sum;
-      text += `${idx+1}. ${item.name} (${item.color}) — ${item.qty} шт. × ${item.priceStr} = ${sum} BYN\n`;
+      text += `${idx+1}. ${item.name} (${item.color}) — ${item.qty} ${item.unit} × ${item.priceStr}/${item.unit} = ${+sum.toFixed(2)} BYN\n`;
     });
-    text += `\n<b>Итого к оплате: ${totalSum.toLocaleString('ru-RU')} BYN</b>`;
+    text += `\nИтого к оплате: ${totalSum.toLocaleString('ru-RU')} BYN`;
 
-    sendToTelegram(text);
+    const ok = await sendToTelegram(text);
+    if (!ok) return;
     cart = [];
     updateCartUI();
     closeCartModal();
@@ -936,7 +956,7 @@
       "calc-title": "Калькулятор расчёта плитки",
       "calc-subtitle": "Укажите параметры площадки для мгновенного расчёта стоимости",
       "calc-width": "Ширина (метры)", "calc-length": "Длина (метры)", "calc-margin": "Запас на подрезку", "calc-type": "Исполнение",
-      "calc-res-title": "Итоговый расчёт", "calc-area": "Чистая площадь:", "calc-total-m": "С учётом запаса:", "calc-total-cost": "Ориентировочно:", "calc-btn-order": "Заказать с этим расчётом",
+      "calc-res-title": "Итоговый расчёт", "calc-area": "Чистая площадь:", "calc-total-m": "С учётом запаса:", "calc-total-cost": "Ориентировочно:", "calc-btn-order": "Заказать с этим расчётом", "calc-note": "Цена ориентировочная, точную стоимость уточним при заказе.",
       "catalog-subtitle": "КАТАЛОГ ПРОДУКЦИИ",
       "catalog-title": "Широкий выбор<br>бетонных изделий",
       "catalog-lead": "Разнообразие форм, цветов и фактур для любых задач",
@@ -953,9 +973,9 @@
       "worktime-title": "Время работы", "worktime-mon": "Пн–Пт", "worktime-sat": "Суббота", "worktime-sun": "Воскресенье",
       "contact-subtitle": "МЫ НА СВЯЗИ", "contact-title": "Обсудим ваш проект?", "contact-text": "Свяжитесь с нами — поможем подобрать подходящие бетонные изделия.",
       "contact-phone-label": "ТЕЛЕФОН", "contact-address-label": "АДРЕС", "contact-address": "г. Гродно, Гожская ул., 2А",
-      "form-title": "Оставить заявку", "form-text": "Мы свяжемся с вами в ближайшее время", "form-name": "Ваше имя", "form-phone": "Номер телефона", "form-msg": "Сообщение", "form-button": "Отправить заявку",
-      "error-phone": "Введите корректный номер телефона (минимум 9 цифр)",
-      "footer-copy": "© 2022 Koloritbeton. Все права защищены.", "footer-policy": "Политика конфиденциальности",
+      "form-title": "Оставить заявку", "form-text": "Мы свяжемся с вами в ближайшее время", "form-name": "Ваше имя", "form-phone": "+375 (__) ___-__-__", "form-msg": "Сообщение", "form-button": "Отправить заявку",
+      "error-phone": "Введите номер полностью: +375 (XX) XXX-XX-XX",
+      "footer-copy": "© 2022–" + new Date().getFullYear() + " Koloritbeton. Все права защищены.", "footer-policy": "Политика конфиденциальности",
       "nav-home": "Главная", "nav-catalog": "Каталог", "nav-contacts": "Контакты", "nav-call": "Звонок",
       "modal-callback-title": "Заказать звонок", "modal-callback-text": "Оставьте номер — мы перезвоним.", "modal-callback-btn": "Жду звонка",
       "modal-policy-title": "Политика конфиденциальности"
@@ -975,7 +995,7 @@
       "calc-title": "Калькулятар разліку пліткі",
       "calc-subtitle": "Укажыце параметры пляцоўкі для імгненнага разліку кошту",
       "calc-width": "Шырыня (метры)", "calc-length": "Даўжыня (метры)", "calc-margin": "Запас на падрэзку", "calc-type": "Выкананне",
-      "calc-res-title": "Выніковы разлік", "calc-area": "Чыстая плошча:", "calc-total-m": "З улікам запасу:", "calc-total-cost": "Арыентавачна:", "calc-btn-order": "Замовіць з гэтым разлікам",
+      "calc-res-title": "Выніковы разлік", "calc-area": "Чыстая плошча:", "calc-total-m": "З улікам запасу:", "calc-total-cost": "Арыентавачна:", "calc-btn-order": "Замовіць з гэтым разлікам", "calc-note": "Кошт арыентыровачны, дакладную цану ўдакладнім пры замове.",
       "catalog-subtitle": "КАТАЛОГ ПРАДУКЦЫІ",
       "catalog-title": "Шырокі выбар<br>бетонных вырабаў",
       "catalog-lead": "Разнастайнасць формаў, колераў і фактур для любых задач",
@@ -986,15 +1006,15 @@
       "service-2": "Пагрузка / разгрузка пліткі", "service-2-desc": "Акуратна і хутка разгрузім матэрыял на аб'екце, каб вы маглі адразу прыступіць да працы.",
       "about-subtitle": "ПРА КАМПАНІЮ",
       "about-title": "Бетонныя вырабы,<br>якім давяраюць",
-      "about-text1": "Вытворчая кампанія «Koloritbeton» на рынку з 2022 года — малады, але імкліва развіваючы вытворца будаўнічых матэрыялаў.",
+      "about-text1": "Вытворчая кампанія «Koloritbeton» на рынку з 2022 года — малады вытворца будаўнічых матэрыялаў, які імкліва развіваецца.",
       "about-text2": "Мы вырабляем больш за 50 відаў прадукцыі з бетону (кеўларабетон). На нашай вытворчасці працуюць толькі высокакваліфікаваныя спецыялісты.",
       "about-check1": "Высокая якасць прадукцыі", "about-check2": "Даступныя цэны", "about-check3": "Індывідуальны падыход", "about-check4": "Гнуткая сістэма зніжак",
       "worktime-title": "Час працы", "worktime-mon": "Пн–Пт", "worktime-sat": "Субота", "worktime-sun": "Нядзеля",
       "contact-subtitle": "МЫ НА СУВЯЗІ", "contact-title": "Абмяркуем ваш праект?", "contact-text": "Звяжыцеся з намі — дапаможам падабраць адпаведныя бетонныя вырабы.",
       "contact-phone-label": "ТЭЛЕФОН", "contact-address-label": "АДРАС", "contact-address": "г. Гродна, Гожская вул., 2А",
-      "form-title": "Пакінуць заяўку", "form-text": "Мы звяжамся з вамі ў бліжэйшы час", "form-name": "Ваша імя", "form-phone": "Нумар тэлефона", "form-msg": "Паведамленне", "form-button": "Адправіць заяўку",
-      "error-phone": "Увядзіце карэктны нумар тэлефона (мінімум 9 лічбаў)",
-      "footer-copy": "© 2022 Koloritbeton. Усе правы абаронены.", "footer-policy": "Палітыка канфідэнцыйнасці",
+      "form-title": "Пакінуць заяўку", "form-text": "Мы звяжамся з вамі ў бліжэйшы час", "form-name": "Ваша імя", "form-phone": "+375 (__) ___-__-__", "form-msg": "Паведамленне", "form-button": "Адправіць заяўку",
+      "error-phone": "Увядзіце нумар цалкам: +375 (XX) XXX-XX-XX",
+      "footer-copy": "© 2022–" + new Date().getFullYear() + " Koloritbeton. Усе правы абаронены.", "footer-policy": "Палітыка канфідэнцыйнасці",
       "nav-home": "Галоўная", "nav-catalog": "Каталог", "nav-contacts": "Кантакты", "nav-call": "Званок",
       "modal-callback-title": "Замовіць званок", "modal-callback-text": "Пакіньце нумар — мы перазвонім.", "modal-callback-btn": "Чакаю званка",
       "modal-policy-title": "Палітыка канфідэнцыйнасці"
@@ -1025,7 +1045,7 @@
 
   const data = {
     bruschatka: [
-      {name:"Кремль", badge:"Хит продаж", img:"kreml.jpg", specs:"300×150 мм · 50 мм", prices:[["Серый","27 руб."],["Цветной","32 руб."],["Мрамор","33 руб."]], desc:"Идеальное решение для пешеходных зон, дворов и загородных участков. Отличается высокой прочностью и классической формой."},
+      {name:"Кремль", badge:"Хит продаж", img:"kreml.jpg", specs:"300×150 мм · 50 мм", prices:[["Серый","27 BYN"],["Цветной","32 BYN"],["Мрамор","33 BYN"]], desc:"Идеальное решение для пешеходных зон, дворов и загородных участков. Отличается высокой прочностью и классической формой."},
       {name:"Греция", img:"grecia.jpg", specs:"285×285 / 100×100 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","30 BYN"],["Мрамор","30 BYN"]], desc:"Элегантная брусчатка с аутентичным узором, создающая атмосферу античности на вашей территории."},
       {name:"Булыжная мостовая", img:"bulizhnaya.jpg", specs:"150×300 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Имитация старинной европейской мостовой. Прекрасно подходит для ландшафтного дизайна в стиле ретро."},
       {name:"Каменная роза", img:"roza.jpg", specs:"6 камней · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Набор из 6 уникальных камней для создания изящных художественных узоров и мозаики."},
@@ -1033,27 +1053,27 @@
       {name:"Старый Арбат", badge:"Популярно", img:"arbat.jpg", specs:"135×195 / 135×150 мм · 40 мм", prices:[["Серый","25 BYN"],["Цветной","31 BYN"],["Мрамор","32 BYN"]], desc:"Комплект из нескольких элементов разного размера для создания неповторимого стиля."}
     ],
     plitka: [
-      {name:"Флорида дерево", img:"florida.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Тротуарная плитка с текстурой натурального дерева. Не боится влаги и морозов."},
-      {name:"Ялта", img:"yalta.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Классическая фактурная плитка для мощения дорожек и придомовой территории."},
-      {name:"Фазенда", img:"fazenda.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Практичное и долговечное покрытие для дачи и сада."},
-      {name:"Калифорния Кубик", img:"california-kubik.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Объемный геометрический рисунок «кубик» визуально расширяет пространство."},
-      {name:"Паркет", img:"parket.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Имитация паркетной доски для мощения террас и площадок возле дома."},
-      {name:"Калифорния дерево", img:"california-derevo.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Сочетание удобного формата и природной текстуры древесины."},
-      {name:"12 кирпичей", badge:"Новинка", img:"12-kirpichey.jpg", specs:"500×500 мм · 50 мм", prices:[["Серый","28 руб."],["Цветной","33 руб."],["Мрамор","35 руб."]], desc:"Крупноформатная плитка повышенной прочности для интенсивных нагрузок."},
-      {name:"Черепашка", img:"cherepashka.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Оригинальный узор поверхности, предотвращающий скольжение."},
-      {name:"Три доски", img:"tri-doski.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 руб."],["Цветной","26 руб."],["Мрамор","30 руб."]], desc:"Эффектная имитация трех деревянных досок в одной плите."}
+      {name:"Флорида дерево", img:"florida.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Тротуарная плитка с текстурой натурального дерева. Не боится влаги и морозов."},
+      {name:"Ялта", img:"yalta.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Классическая фактурная плитка для мощения дорожек и придомовой территории."},
+      {name:"Фазенда", img:"fazenda.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Практичное и долговечное покрытие для дачи и сада."},
+      {name:"Калифорния Кубик", img:"california-kubik.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Объемный геометрический рисунок «кубик» визуально расширяет пространство."},
+      {name:"Паркет", img:"parket.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Имитация паркетной доски для мощения террас и площадок возле дома."},
+      {name:"Калифорния дерево", img:"california-derevo.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Сочетание удобного формата и природной текстуры древесины."},
+      {name:"12 кирпичей", badge:"Новинка", img:"12-kirpichey.jpg", specs:"500×500 мм · 50 мм", prices:[["Серый","28 BYN"],["Цветной","33 BYN"],["Мрамор","35 BYN"]], desc:"Крупноформатная плитка повышенной прочности для интенсивных нагрузок."},
+      {name:"Черепашка", img:"cherepashka.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Оригинальный узор поверхности, предотвращающий скольжение."},
+      {name:"Три доски", img:"tri-doski.jpg", specs:"300×300 мм · 30 мм", prices:[["Серый","22 BYN"],["Цветной","26 BYN"],["Мрамор","30 BYN"]], desc:"Эффектная имитация трех деревянных досок в одной плите."}
     ],
     bordyury: [
-      {name:"Бордюр 100×22×7,5", img:"bordur-100.jpg", specs:"100×22×7,5", prices:[["Серый","10 руб."],["Цветной","12 руб."],["Мрамор","14 руб."]], desc:"Дорожный бордюр для фиксации краев плиточного покрытия и разделения зон."},
-      {name:"Водосток", img:"vodostok.jpg", specs:"50×16×6", prices:[["Серый","6 руб."],["Цветной","8 руб."],["Мрамор","9 руб."]], desc:"Бетонный водосток для эффективного отвода дождевой воды."},
-      {name:"Бордюр 50×20×3.5", img:"bordur-50.jpg", specs:"50×20×3,5", prices:[["Серый","3.5 руб."],["Цветной","5.5 руб."],["Мрамор","5.5 руб."]], desc:"Садовый бордюр для оформления клумб и пешеходных дорожек."}
+      {name:"Бордюр 100×22×7,5", img:"bordur-100.jpg", specs:"100×22×7,5", prices:[["Серый","10 BYN"],["Цветной","12 BYN"],["Мрамор","14 BYN"]], desc:"Дорожный бордюр для фиксации краев плиточного покрытия и разделения зон."},
+      {name:"Водосток", img:"vodostok.jpg", specs:"50×16×6", prices:[["Серый","6 BYN"],["Цветной","8 BYN"],["Мрамор","9 BYN"]], desc:"Бетонный водосток для эффективного отвода дождевой воды."},
+      {name:"Бордюр 50×20×3.5", img:"bordur-50.jpg", specs:"50×20×3,5", prices:[["Серый","3.5 BYN"],["Цветной","5.5 BYN"],["Мрамор","5.5 BYN"]], desc:"Садовый бордюр для оформления клумб и пешеходных дорожек."}
     ],
     prostupi: [
-      {name:"Три прорези", img:"tri-prorezi.jpg", specs:"1350×340×40 мм", prices:[["Серый","25 руб."],["Цветной","28 руб."],["Мрамор","31 руб."]], desc:"Проступь для лестничных маршей с противоскользящими прорезями."},
-      {name:"Проступь", img:"prostup.jpg", specs:"1250×320×40 мм", prices:[["Серый","24 руб."],["Цветной","27 руб."],["Мрамор","30 руб."]], desc:"Прочная железобетонная ступень для крыльца и уличных лестниц."}
+      {name:"Три прорези", img:"tri-prorezi.jpg", specs:"1350×340×40 мм", prices:[["Серый","25 BYN"],["Цветной","28 BYN"],["Мрамор","31 BYN"]], desc:"Проступь для лестничных маршей с противоскользящими прорезями."},
+      {name:"Проступь", img:"prostup.jpg", specs:"1250×320×40 мм", prices:[["Серый","24 BYN"],["Цветной","27 BYN"],["Мрамор","30 BYN"]], desc:"Прочная железобетонная ступень для крыльца и уличных лестниц."}
     ],
     paneli: [
-      {name:"Ростовский камень", badge:"Хит продаж", img:"rostov.jpg", specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 руб."],["В цвете","29 руб."],["Мрамор","31 руб."]], desc:"Фасадная плитка под дикий камень для облицовки цоколей и стен зданий."}
+      {name:"Ростовский камень", badge:"Хит продаж", img:"rostov.jpg", specs:"190×190 / 380×190 мм · 25 мм", prices:[["Без окраса","26 BYN"],["В цвете","29 BYN"],["Мрамор","31 BYN"]], desc:"Фасадная плитка под дикий камень для облицовки цоколей и стен зданий."}
     ]
   };
 
@@ -1076,8 +1096,13 @@
     const area = document.getElementById("resArea").textContent;
     const totalM = document.getElementById("resTotalM").textContent;
     const cost = document.getElementById("resCost").textContent;
-    const text = `<b>Заказ с калькулятора:</b>\nЧистая площадь: ${area}\nОбъем с запасом: ${totalM}\nСтоимость: ${cost}`;
-    sendToTelegram(text);
+    const typeSel = document.getElementById("calcPriceType");
+    const typeTxt = typeSel.options[typeSel.selectedIndex].text;
+    document.getElementById("userMsg").value =
+      `Расчёт из калькулятора: ${typeTxt}. Чистая площадь ${area}, с запасом ${totalM}, ориентировочно ${cost}.`;
+    document.getElementById("contacts").scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => document.getElementById("userName").focus({ preventScroll: true }), 700);
+    showToast("Укажите имя и телефон и отправьте заявку");
   }
 
   function renderGrid(key, items) {
@@ -1093,10 +1118,11 @@
           <div class="card-body">
             <h3>${item.name}</h3>
             <div class="card-specs">${item.specs}</div>
-            <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("")}</div>
+            <div class="card-prices">${item.prices.map(p => `<div class="price-row"><span>${p[0]}</span> <b>${p[1]}<small style="font-weight:500;color:#888">/${UNIT[key]}</small></b></div>`).join("")}</div>
             <div class="card-controls" onclick="event.stopPropagation()">
-              <select class="color-select" id="color-${key}-${index}">${colorOptions}</select>
-              <input type="number" class="qty-input" id="qty-${key}-${index}" value="1" min="1" style="width: 55px; text-align:center;">
+              <select class="color-select" id="color-${key}-${index}" aria-label="Цвет">${colorOptions}</select>
+              <input type="number" class="qty-input" id="qty-${key}-${index}" value="1" min="1" style="width: 55px; text-align:center;" aria-label="Количество, ${UNIT[key]}" title="Количество, ${UNIT[key]}">
+              <span style="align-self:center; font-size:0.85rem; color:#666;">${UNIT[key]}</span>
             </div>
             <button class="btn btn-primary" style="width:100%; padding:10px;" onclick="event.stopPropagation(); handleAddToCart('${key}', ${index}, this)">В корзину</button>
           </div>
@@ -1111,14 +1137,14 @@
     const color = card.querySelector(".color-select").value;
     const qty = card.querySelector(".qty-input").value;
     const foundPrice = item.prices.find(p => p[0] === color) || item.prices[0];
-    addToCart(item.name, color, foundPrice[1], qty);
+    addToCart(item.name, color, foundPrice[1], qty, UNIT[category]);
   }
 
   function openProductDetail(category, index, e) {
     if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
     const item = data[category][index];
-    const colorOptions = item.prices.map(p => `<option value="${p[0]}" data-price="${p[1]}">${p[0]} — ${p[1]}</option>`).join("");
-    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:6px;"><span>${p[0]}</span> <b>${p[1]}</b></div>`).join("");
+    const colorOptions = item.prices.map(p => `<option value="${p[0]}" data-price="${p[1]}">${p[0]} — ${p[1]}/${UNIT[category]}</option>`).join("");
+    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:6px;"><span>${p[0]}</span> <b>${p[1]}/${UNIT[category]}</b></div>`).join("");
     
     document.getElementById("productModalBody").innerHTML = `
       <div style="display:flex; flex-direction:column; gap:15px;">
@@ -1132,22 +1158,23 @@
         </div>
         <div style="display:flex; gap:10px; margin-top:10px;">
           <select id="modalColor" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:8px; font-family:inherit; font-size:16px;">${colorOptions}</select>
-          <input type="number" id="modalQty" value="1" min="1" style="width:70px; padding:12px; text-align:center; border:1px solid #ddd; border-radius:8px; font-family:inherit; font-size:16px;">
+          <input type="number" id="modalQty" value="1" min="1" aria-label="Количество, ${UNIT[category]}" title="Количество, ${UNIT[category]}" style="width:70px; padding:12px; text-align:center; border:1px solid #ddd; border-radius:8px; font-family:inherit; font-size:16px;">
+          <span style="align-self:center; color:#666;">${UNIT[category]}</span>
         </div>
-        <button class="btn btn-primary" style="width:100%; margin-top:5px;" onclick="addModalItemToCart('${item.name}')">В корзину</button>
+        <button class="btn btn-primary" style="width:100%; margin-top:5px;" onclick="addModalItemToCart('${item.name}', '${category}')">В корзину</button>
       </div>
     `;
     document.getElementById("productModal").classList.add("show");
   }
 
-  function addModalItemToCart(name) {
+  function addModalItemToCart(name, category) {
     const colorSelect = document.getElementById("modalColor");
     const color = colorSelect.value;
     const selectedOption = colorSelect.options[colorSelect.selectedIndex];
-    const priceStr = selectedOption.getAttribute("data-price") || "25 руб.";
+    const priceStr = selectedOption.getAttribute("data-price") || "25 BYN";
     const qty = document.getElementById("modalQty").value;
 
-    addToCart(name, color, priceStr, qty);
+    addToCart(name, color, priceStr, qty, UNIT[category]);
     document.getElementById("productModal").classList.remove("show");
   }
 
@@ -1211,7 +1238,7 @@
   closeMenuBtn.addEventListener("click", () => { mobileMenu.classList.remove("active"); document.body.style.overflow = ""; });
   mobileMenu.querySelectorAll("a").forEach(link => link.addEventListener("click", () => { mobileMenu.classList.remove("active"); document.body.style.overflow = ""; }));
 
-  document.getElementById("tgForm").addEventListener("submit", function(e) {
+  document.getElementById("tgForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     const phoneInput = document.getElementById("userPhone");
     const phoneError = document.getElementById("phoneError");
@@ -1229,10 +1256,10 @@
     const name = document.getElementById("userName").value;
     const phone = phoneInput.value;
     const msg = document.getElementById("userMsg").value;
-    let text = `<b>Новая заявка с сайта:</b>\nИмя: ${name}\nТелефон: ${phone}`;
+    let text = `Новая заявка с сайта:\nИмя: ${name}\nТелефон: ${phone}`;
     if (msg.trim()) text += `\nСообщение: ${msg}`;
-    sendToTelegram(text);
-    this.reset();
+    const ok = await sendToTelegram(text);
+    if (ok) this.reset();
   });
 
   function openLightbox(src) {
@@ -1259,6 +1286,12 @@
     else scrollTopBtn.classList.remove("show");
   });
   scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    document.querySelectorAll(".modal.show").forEach(m => m.id ? m.classList.remove("show") : m.remove());
+    if (mobileMenu.classList.contains("active")) { mobileMenu.classList.remove("active"); document.body.style.overflow = ""; }
+  });
 
   setLanguage("ru");
 </script>
