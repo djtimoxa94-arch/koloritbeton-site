@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Редактор цен — Koloritbeton</title>
+<style>
+  :root { color-scheme: light dark; --bg:#f6f4f0; --card:#fff; --text:#1c1b19; --muted:#6b6760; --line:#ddd8cf; --accent:#c77b4b; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#171615; --card:#222120; --text:#f1eee8; --muted:#a09b92; --line:#3a3835; } }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); padding:24px 16px 120px; }
+  main { max-width:980px; margin:0 auto; }
+  h1 { font-size:1.6rem; margin:0 0 6px; } h2 { font-size:1.2rem; margin:0 0 12px; }
+  .hint { color:var(--muted); margin:0 0 20px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin-bottom:18px; }
+  table { width:100%; border-collapse:collapse; } th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  th { font-size:.8rem; color:var(--muted); font-weight:600; }
+  .wrap { overflow-x:auto; }
+  input[type=text], input[type=number], textarea { width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; background:transparent; color:inherit; font:inherit; }
+  input.price { width:96px; } input.bad { border-color:#e5484d; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:12px; } label { display:block; font-size:.85rem; color:var(--muted); margin-bottom:4px; }
+  button, .btn { border:1px solid var(--line); background:transparent; color:inherit; padding:10px 16px; border-radius:10px; font:inherit; cursor:pointer; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+  .bar { position:fixed; left:0; right:0; bottom:0; background:var(--card); border-top:1px solid var(--line); padding:12px 16px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  #msg { margin:10px 0 0; font-size:.92rem; } .ok { color:#2e9e5b; } .err { color:#e5484d; }
+  details summary { cursor:pointer; font-weight:600; padding:6px 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Редактор цен и настроек</h1>
+  <p class="hint">Правьте значения, затем нажмите «Скачать data.json» и загрузите файл на GitHub вместо старого. Здесь ничего не отправляется на сервер: все изменения остаются в этом окне, пока вы не скачаете файл.</p>
+
+  <section id="loadbox" hidden>
+    <h2>Загрузите data.json</h2>
+    <p class="hint">Не удалось открыть data.json автоматически (так бывает при открытии файла с диска). Выберите файл вручную:</p>
+    <input type="file" id="jsonFile" accept=".json,application/json">
+  </section>
+
+  <div id="app" hidden>
+    <section>
+      <h2>Цены (BYN)</h2>
+      <p class="hint">Можно править здесь или через Excel: скачайте CSV, измените колонку «Цена, BYN» (не меняя остальные), сохраните как CSV и загрузите обратно.</p>
+      <p><button id="btnCsv">Скачать цены для Excel (CSV)</button> <label class="btn" style="display:inline-block; margin:0;">Загрузить CSV из Excel<input type="file" id="csvFile" accept=".csv,text/csv" hidden></label></p>
+      <div id="prices"></div>
+    </section>
+
+    <section>
+      <h2>Доставка и оплата</h2>
+      <div class="wrap"><table><thead><tr><th>Зона / способ (RU)</th><th>Название (BE, по желанию)</th><th>Цена, BYN</th><th></th></tr></thead><tbody id="zones"></tbody></table></div>
+      <p><button id="addZone">+ Добавить зону</button></p>
+      <p class="hint" style="margin-top:-6px;">Пустая цена показывается на сайте как «по запросу», 0 как «бесплатно».</p>
+      <div class="grid">
+        <div><label>Погрузка / разгрузка (например, 30 BYN)</label><input type="text" data-path="settings.delivery.unloading"></div>
+        <div><label>Примечание о доставке (RU)</label><textarea rows="2" data-path="settings.delivery.note"></textarea></div>
+        <div><label>Примечание о доставке (BE)</label><textarea rows="2" data-path="settings.delivery.note_be"></textarea></div>
+        <div><label>Способы оплаты через запятую (RU)</label><input type="text" id="payRu" placeholder="Наличные, Банковская карта"></div>
+        <div><label>Способы оплаты через запятую (BE)</label><input type="text" id="payBe" placeholder="Наяўныя, Банкаўская картка"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Компания и аналитика</h2>
+      <div class="grid">
+        <div><label>Название юрлица / ИП (для подвала)</label><input type="text" data-path="settings.legalName"></div>
+        <div><label>УНП</label><input type="text" data-path="settings.unp"></div>
+        <div><label>Телефон (+375…)</label><input type="text" data-path="settings.phone"></div>
+        <div><label>Telegram username (без @, по желанию)</label><input type="text" data-path="settings.telegram"></div>
+        <div><label>Номер счётчика Яндекс.Метрики</label><input type="text" data-path="settings.metrikaId"></div>
+        <div><label>ID Google Analytics (G-XXXX)</label><input type="text" data-path="settings.gaId"></div>
+        <div><label>м² на одном поддоне (для расчёта поддонов)</label><input type="text" inputmode="decimal" data-path="settings.palletM2" data-num="1"></div>
+      </div>
+    </section>
+    <p id="msg"></p>
+  </div>
+</main>
+
+<div class="bar" id="bar" hidden>
+  <button class="primary" id="btnJson">Скачать data.json</button>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const CAT = { bruschatka: "Брусчатка", plitka: "Тротуарная плитка", bordyury: "Бордюры и водосток", prostupi: "Проступи", paneli: "Фасадные панели" };
+  let state = null;
+  const esc = (x) => String(x == null ? "" : x).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const num = (v) => parseFloat(String(v).replace(",", ".").replace(/[^\d.]/g, ""));
+
+  function getPath(o, p) { return p.split(".").reduce((a, k) => (a == null ? a : a[k]), o); }
+  function setPath(o, p, v) { const ks = p.split("."); let t = o; ks.slice(0, -1).forEach(k => { t[k] = t[k] || {}; t = t[k]; }); t[ks[ks.length - 1]] = v; }
+  function say(text, ok) { const m = $("msg"); m.textContent = text; m.className = ok ? "ok" : "err"; }
+
+  async function init() {
+    try { const r = await fetch("data.json", { cache: "no-cache" }); if (!r.ok) throw 0; start(await r.json()); }
+    catch (e) { $("loadbox").hidden = false; }
+  }
+  $("jsonFile").addEventListener("change", async (e) => {
+    try { start(JSON.parse(await e.target.files[0].text())); $("loadbox").hidden = true; } catch (err) { alert("Файл не похож на data.json"); }
+  });
+
+  function start(json) {
+    state = json; state.settings = state.settings || {}; state.settings.delivery = state.settings.delivery || { zones: [] };
+    state.settings.delivery.zones = state.settings.delivery.zones || []; state.catalog = state.catalog || {};
+    $("app").hidden = false; $("bar").hidden = false; render();
+  }
+
+  function render() {
+    // prices
+    $("prices").innerHTML = Object.keys(CAT).filter(c => state.catalog[c]).map(c => `
+      <details ${c === "bruschatka" ? "open" : ""}><summary>${CAT[c]} (${state.catalog[c].length})</summary>
+      <div class="wrap"><table><thead><tr><th>Позиция</th><th>Размеры</th><th>Варианты и цены</th></tr></thead><tbody>
+      ${state.catalog[c].map((it, i) => `<tr><td>${esc(it.name)}</td><td>${esc(it.specs)}</td><td>${it.prices.map((p, k) =>
+        `<label style="display:inline-block; margin-right:10px;">${esc(p[0])}<br><input class="price" type="text" inputmode="decimal" value="${esc(num(p[1]))}" data-c="${c}" data-i="${i}" data-k="${k}"></label>`).join("")}</td></tr>`).join("")}
+      </tbody></table></div></details>`).join("");
+    document.querySelectorAll("input.price").forEach(el => el.addEventListener("input", () => {
+      const v = num(el.value); const ok = isFinite(v) && v >= 0; el.classList.toggle("bad", !ok);
+      if (ok) state.catalog[el.dataset.c][+el.dataset.i].prices[+el.dataset.k][1] = v + " BYN";
+    }));
+    // zones
+    const z = state.settings.delivery.zones;
+    $("zones").innerHTML = z.map((d, i) => `<tr>
+      <td><input type="text" value="${esc(d.name)}" data-z="${i}" data-f="name"></td>
+      <td><input type="text" value="${esc(d.name_be)}" data-z="${i}" data-f="name_be"></td>
+      <td><input class="price" type="text" inputmode="decimal" value="${d.price == null ? "" : esc(d.price)}" data-z="${i}" data-f="price"></td>
+      <td><button data-del="${i}">Удалить</button></td></tr>`).join("");
+    document.querySelectorAll("[data-z]").forEach(el => el.addEventListener("input", () => {
+      const d = z[+el.dataset.z], f = el.dataset.f;
+      if (f === "price") { const v = el.value.trim(); d.price = v === "" ? null : (isFinite(num(v)) ? num(v) : null); } else d[f] = el.value;
+    }));
+    document.querySelectorAll("[data-del]").forEach(b => b.addEventListener("click", () => { z.splice(+b.dataset.del, 1); render(); }));
+    // generic fields
+    document.querySelectorAll("[data-path]").forEach(el => {
+      const v = getPath(state, el.dataset.path); el.value = v == null ? "" : v;
+      el.oninput = () => setPath(state, el.dataset.path, el.dataset.num ? (el.value.trim() === "" ? null : num(el.value)) : el.value);
+    });
+    $("payRu").value = (state.settings.payment || []).join(", ");
+    $("payBe").value = (state.settings.payment_be || []).join(", ");
+  }
+  const list = (v) => v.split(",").map(x => x.trim()).filter(Boolean);
+  $("payRu").oninput = () => { state.settings.payment = list($("payRu").value); };
+  $("payBe").oninput = () => { state.settings.payment_be = list($("payBe").value); };
+  $("addZone").onclick = () => { state.settings.delivery.zones.push({ name: "", name_be: "", price: null }); render(); };
+
+  function download(name, text, type) {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  }
+  $("btnJson").onclick = () => { download("data.json", JSON.stringify(state, null, 2), "application/json"); say("Файл data.json скачан. Загрузите его на GitHub вместо старого.", true); };
+
+  // ---- CSV for Excel ----
+  function toCSV() {
+    const rows = [["Раздел", "Позиция", "Вариант", "Цена, BYN"]];
+    Object.keys(CAT).forEach(c => (state.catalog[c] || []).forEach(it => it.prices.forEach(p => rows.push([CAT[c], it.name, p[0], String(num(p[1])).replace(".", ",")]))));
+    return "\ufeff" + rows.map(r => r.map(x => '"' + String(x).replace(/"/g, '""') + '"').join(";")).join("\r\n");
+  }
+  function parseCSV(t, d) {
+    t = t.replace(/^\ufeff/, ""); const rows = []; let row = [], f = "", q = false;
+    for (let i = 0; i < t.length; i++) {
+      const ch = t[i];
+      if (q) { if (ch === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === d) { row.push(f); f = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && t[i + 1] === "\n") i++; row.push(f); f = ""; rows.push(row); row = []; }
+      else f += ch;
+    }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    return rows.filter(r => r.some(x => x.trim()));
+  }
+  function importCSV(text) {
+    const first = text.split(/\r?\n/)[0]; const d = first.includes(";") ? ";" : (first.includes("\t") ? "\t" : ",");
+    const rows = parseCSV(text, d).slice(1); const back = {}; Object.keys(CAT).forEach(c => back[CAT[c]] = c);
+    let done = 0; const skipped = [];
+    rows.forEach(r => {
+      const [cat, name, variant, price] = r.map(x => x.trim()); const c = back[cat]; const v = num(price);
+      const it = c && (state.catalog[c] || []).find(x => x.name === name); const p = it && it.prices.find(x => x[0] === variant);
+      if (p && isFinite(v) && v >= 0) { p[1] = v + " BYN"; done++; } else skipped.push(name + " / " + variant);
+    });
+    render();
+    return { done, skipped };
+  }
+  $("btnCsv").onclick = () => download("prices.csv", toCSV(), "text/csv;charset=utf-8");
+  $("csvFile").addEventListener("change", async (e) => {
+    const res = importCSV(await e.target.files[0].text()); e.target.value = "";
+    say(`Обновлено цен: ${res.done}.` + (res.skipped.length ? ` Пропущено строк: ${res.skipped.length} (${res.skipped.slice(0, 3).join("; ")}…). Не меняйте колонки «Раздел», «Позиция», «Вариант».` : " Теперь скачайте data.json."), res.skipped.length === 0);
+  });
+
+  init();
+</script>
+</body>
+</html>

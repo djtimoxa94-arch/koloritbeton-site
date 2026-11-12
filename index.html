@@ -919,14 +919,16 @@
     palletM2: null,
     delivery: {
       zones: [
-        { name: "Самовывоз (ул. Гожская, 2А)", price: 0 },
-        { name: "Гродно", price: null },
-        { name: "Гродненская область", price: null }
+        { name: "Самовывоз (ул. Гожская, 2А)", name_be: "Самавываз (вул. Гожская, 2А)", price: 0 },
+        { name: "Гродно", name_be: "Гродна", price: null },
+        { name: "Гродненская область", name_be: "Гродзенская вобласць", price: null }
       ],
       unloading: "30 BYN",
-      note: "Стоимость доставки зависит от объёма и расстояния — менеджер рассчитает её точно."
+      note: "Стоимость доставки зависит от объёма и расстояния — менеджер рассчитает её точно.",
+      note_be: "Кошт дастаўкі залежыць ад аб’ёму і адлегласці — менеджар разлічыць яго дакладна."
     },
-    payment: []
+    payment: [],
+    payment_be: []
   };
   function mergeInto(t, src) { for (const k in src) { if (src[k] && typeof src[k] === "object" && !Array.isArray(src[k])) { t[k] = t[k] || {}; mergeInto(t[k], src[k]); } else t[k] = src[k]; } }
   const parsePrice = (str) => parseFloat(String(str).replace(/[^\d.]/g, "")) || 0;
@@ -1319,6 +1321,7 @@
       if (translations[currentLang] && translations[currentLang][key]) el.placeholder = translations[currentLang][key];
     });
     document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.lang === currentLang));
+    if ($("deliveryGrid") && $("calcProduct") && SETTINGS.delivery) { renderDelivery(); fillCalc(); }
     applyLang();
   }
 
@@ -1368,7 +1371,7 @@
     sel.innerHTML = Object.keys(CALC_CATS).map(c => `<optgroup label="${CALC_CATS[c]}">${data[c].map((it, i) => `<option value="${c}:${i}">${it.name}</option>`).join("")}</optgroup>`).join("");
     if ([...sel.options].some(o => o.value === prev)) sel.value = prev;
     const z = $("calcZone"); const pz = z.selectedIndex;
-    z.innerHTML = SETTINGS.delivery.zones.map((d, i) => `<option value="${i}">${d.name}</option>`).join("");
+    z.innerHTML = SETTINGS.delivery.zones.map((d, i) => `<option value="${i}">${(currentLang === "be" && d.name_be) ? d.name_be : d.name}</option>`).join("");
     if (pz > 0 && pz < z.options.length) z.selectedIndex = pz;
     fillCalcTypes();
   }
@@ -1419,12 +1422,14 @@
   /* ---------- доставка, подвал, мессенджеры ---------- */
   function renderDelivery() {
     const d = SETTINGS.delivery;
+    const L = (o, k) => (currentLang === "be" && o[k + "_be"]) ? o[k + "_be"] : o[k];
+    const pay = (currentLang === "be" && SETTINGS.payment_be && SETTINGS.payment_be.length) ? SETTINGS.payment_be : SETTINGS.payment;
     const priceTxt = (p) => p === 0 ? "бесплатно" : (typeof p === "number" ? money(p + " BYN") : "по запросу");
-    const cards = d.zones.map(z => `<div class="dcard"><h3>${z.name}</h3><div class="dprice">${priceTxt(z.price)}</div></div>`);
+    const cards = d.zones.map(z => `<div class="dcard"><h3>${L(z, "name")}</h3><div class="dprice">${priceTxt(z.price)}</div></div>`);
     cards.push(`<div class="dcard"><h3>Погрузка / разгрузка</h3><div class="dprice">${money(d.unloading)}</div></div>`);
-    cards.push(`<div class="dcard"><h3>Способы оплаты</h3><p>${SETTINGS.payment.length ? SETTINGS.payment.join(", ") : "Уточняйте у менеджера по телефону."}</p></div>`);
+    cards.push(`<div class="dcard"><h3>Способы оплаты</h3><p>${pay.length ? pay.join(", ") : "Уточняйте у менеджера по телефону."}</p></div>`);
     $("deliveryGrid").innerHTML = cards.join("");
-    $("deliveryNote").textContent = d.note || "";
+    $("deliveryNote").textContent = L(d, "note") || "";
   }
   function renderFooter() {
     $("footerLegal").textContent = [SETTINGS.legalName, "УНП " + SETTINGS.unp, "г. Гродно, ул. Гожская, 2А"].filter(Boolean).join(" · ");
