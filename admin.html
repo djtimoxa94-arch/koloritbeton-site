@@ -41,7 +41,7 @@
   <div id="app" hidden>
     <section>
       <h2>Цены (BYN)</h2>
-      <p class="hint">Можно править здесь или через Excel: скачайте CSV, измените колонку «Цена, BYN» (не меняя остальные), сохраните как CSV и загрузите обратно.</p>
+      <p class="hint"><b>Если подключена Google Таблица (поле ниже), цены и ассортимент берутся из неё, а не отсюда.</b> Иначе можно править здесь или через Excel: скачайте CSV, измените колонку «Цена, BYN» (не меняя остальные), сохраните как CSV и загрузите обратно.</p>
       <p><button id="btnCsv">Скачать цены для Excel (CSV)</button> <label class="btn" style="display:inline-block; margin:0;">Загрузить CSV из Excel<input type="file" id="csvFile" accept=".csv,text/csv" hidden></label></p>
       <div id="prices"></div>
     </section>
@@ -67,6 +67,7 @@
         <div><label>УНП</label><input type="text" data-path="settings.unp"></div>
         <div><label>Телефон (+375…)</label><input type="text" data-path="settings.phone"></div>
         <div><label>Telegram username (без @, по желанию)</label><input type="text" data-path="settings.telegram"></div>
+        <div><label>Ссылка на Google Таблицу (CSV) — если указана, цены и товары берутся из неё</label><input type="text" data-path="settings.sheetUrl"></div>
         <div><label>Номер счётчика Яндекс.Метрики</label><input type="text" data-path="settings.metrikaId"></div>
         <div><label>ID Google Analytics (G-XXXX)</label><input type="text" data-path="settings.gaId"></div>
         <div><label>м² на одном поддоне (для расчёта поддонов)</label><input type="text" inputmode="decimal" data-path="settings.palletM2" data-num="1"></div>

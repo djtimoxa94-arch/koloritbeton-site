@@ -501,6 +501,10 @@
     }
     @media (max-width: 340px) { .brand-copy { display: none; } }
 
+    [hidden] { display: none !important; }
+    @media (min-width: 901px) { .hero-content { margin-left: auto; margin-right: auto; } }
+    .calc-res-row b { white-space: nowrap; }
+    .calc-grid > *, .calc-inputs > *, .calc-res-row > span { min-width: 0; }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
       .animate-on-scroll { opacity: 1; transform: none; }
@@ -941,6 +945,7 @@
     siteUrl: "https://djtimoxa94-arch.github.io/koloritbeton-site/",
     metrikaId: "",
     gaId: "",
+    sheetUrl: "",
     concreteDensity: 2300,
     palletM2: null,
     delivery: {
@@ -1535,6 +1540,58 @@
     document.querySelectorAll(".stat-num[data-count]").forEach(n => { n.textContent = "0" + (n.dataset.suffix || ""); io.observe(n); });
   })();
 
+  /* ---------- каталог из Google Таблицы (File → Share → Publish to web → CSV) ---------- */
+  const SHEET_CATS = { "Брусчатка": "bruschatka", "Тротуарная плитка": "plitka", "Бордюры и водосток": "bordyury", "Проступи": "prostupi", "Фасадные панели": "paneli" };
+  function parseCSVText(t, d) {
+    t = t.replace(/^\ufeff/, ""); const rows = []; let row = [], f = "", q = false;
+    for (let i = 0; i < t.length; i++) {
+      const ch = t[i];
+      if (q) { if (ch === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === d) { row.push(f); f = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && t[i + 1] === "\n") i++; row.push(f); f = ""; rows.push(row); row = []; }
+      else f += ch;
+    }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    return rows.filter(r => r.some(x => x.trim()));
+  }
+  function parseSheetCSV(text) {
+    const first = text.split(/\r?\n/)[0];
+    const rows = parseCSVText(text, (first.includes(";") && !first.includes(",")) ? ";" : ",");
+    if (rows.length < 2) return {};
+    const head = rows[0].map(h => h.trim().toLowerCase());
+    const cell = (r, n) => { const i = head.indexOf(n.toLowerCase()); return i < 0 ? "" : String(r[i] || "").trim(); };
+    const out = {};
+    rows.slice(1).forEach(r => {
+      const key = SHEET_CATS[cell(r, "Раздел")], name = cell(r, "Название");
+      if (!key || !name) return;
+      if (/^(нет|no|0|false|скрыть)$/i.test(cell(r, "Показывать"))) return;
+      const prices = [];
+      for (let k = 1; k <= 4; k++) {
+        const v = cell(r, "Вариант " + k), pr = parseFloat(cell(r, "Цена " + k).replace(",", ".").replace(/[^\d.]/g, ""));
+        if (v && isFinite(pr)) prices.push([v, pr + " BYN"]);
+      }
+      if (!prices.length) return;
+      const it = { name, img: cell(r, "Фото"), specs: cell(r, "Размеры"), prices, desc: cell(r, "Описание") };
+      const badge = cell(r, "Бейдж"); if (badge) it.badge = badge;
+      const nb = cell(r, "Название (BE)"), db = cell(r, "Описание (BE)");
+      if (nb) BE[name] = nb; if (db && it.desc) BE[it.desc] = db;
+      (out[key] = out[key] || []).push(it);
+    });
+    return out;
+  }
+  async function loadSheet() {
+    if (!SETTINGS.sheetUrl) return;
+    try {
+      const r = await fetch(SETTINGS.sheetUrl, { cache: "no-cache" });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const cat = parseSheetCSV(await r.text()), keys = Object.keys(cat);
+      if (!keys.length) throw new Error("в таблице нет подходящих строк");
+      keys.forEach(k => { data[k] = cat[k]; });
+      renderAll();
+    } catch (e) { console.warn("Google Таблица недоступна, используется data.json:", e.message); }
+  }
+
   function renderAll() {
     ["bruschatka", "plitka", "bordyury", "prostupi", "paneli"].forEach(k => renderGrid(k, data[k]));
     const total = Object.values(data).reduce((a, l) => a + l.length, 0), si = $("statItems");
@@ -1644,7 +1701,7 @@
   updateCartUI();
   fetch("data.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null).then(j => {
     if (j) { if (j.catalog) Object.keys(j.catalog).forEach(k => { data[k] = j.catalog[k]; }); if (j.settings) mergeInto(SETTINGS, j.settings); renderAll(); }
-  }).catch(() => {}).finally(initAnalytics);
+  }).catch(() => {}).then(loadSheet).finally(initAnalytics);
 
   document.querySelectorAll(".animate-on-scroll").forEach(sec => sec.querySelectorAll(".color-card, .service-card, .work-card, .checks li, .dcard, .stat").forEach((el, i) => el.style.setProperty("--i", i)));
   document.querySelectorAll(".mobile-menu a").forEach((a, i) => a.style.setProperty("--i", i));
