@@ -95,7 +95,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -106,13 +106,13 @@
       --cream-dark: #e8e2d9;
       --text-dark: #1A1A1A;
       --border-light: rgba(0,0,0,0.08);
-      --radius: 14px;
+      --radius: 16px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html { scroll-behavior: smooth; scroll-padding-top: 95px; }
     body { background: var(--ink); color: #fff; font-family: 'Manrope', sans-serif; line-height: 1.6; overflow-x: hidden; min-height: 100dvh; }
     a { color: inherit; text-decoration: none; transition: 0.3s; }
-    .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
 
     @keyframes cineFadeInUp {
       0% { opacity: 0; transform: translateY(40px); }
@@ -151,33 +151,33 @@
     .hero-badge-quality { animation: cineFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards; opacity: 0; }
     .hero-bottom { animation: cineFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards; opacity: 0; }
 
-    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 30px; border-radius: 50px; border: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: 'Manrope', sans-serif; touch-action: manipulation; letter-spacing: 0.3px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; border-radius: var(--r-pill); border: none; font-weight: 600; font-size: var(--fs-base); cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); font-family: 'Manrope', sans-serif; touch-action: manipulation; letter-spacing: 0.3px; }
     .btn:hover { transform: translateY(-3px); }
-    .btn-primary { background: var(--copper); color: #fff; box-shadow: 0 6px 20px rgba(199, 123, 75, 0.35); }
-    .btn-primary:hover { background: var(--copper-hover); box-shadow: 0 12px 35px rgba(199, 123, 75, 0.5); }
+    .btn-primary { background: var(--accent-strong); color: #fff; box-shadow: 0 6px 20px rgba(199, 123, 75, 0.35); }
+    .btn-primary:hover { background: var(--accent-strong-hover); box-shadow: 0 12px 35px rgba(199, 123, 75, 0.5); }
     .btn-outline { border: 1px solid rgba(255,255,255,0.35); color: #fff; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); }
     .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
     .site-header { position: absolute; top: 0; left: 0; width: 100%; z-index: 100; background: transparent; border-bottom: none; animation: cineFadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 95px; max-width: 1320px; margin: 0 auto; padding: 0 40px; }
-    .brand { display: flex; align-items: center; gap: 14px; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 95px; max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+    .brand { display: flex; align-items: center; gap: 16px; }
     .brand-logo { height: 44px; width: 44px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255,255,255,0.2); }
-    .brand-copy b { font-size: 1.15rem; font-weight: 800; letter-spacing: 1.2px; display: block; color: #fff; }
-    .brand-copy small { font-size: 0.58rem; color: #aaa; letter-spacing: 1.2px; display: block; margin-top: 2px; }
+    .brand-copy b { font-size: var(--fs-md); font-weight: 700; letter-spacing: 1.2px; display: block; color: #fff; }
+    .brand-copy small { font-size: var(--fs-xs); color: #aaa; letter-spacing: 1.2px; display: block; margin-top: 2px; }
     
-    .desktop-nav { display: flex; gap: 28px; align-items: center; }
-    .desktop-nav a { font-weight: 500; font-size: 0.95rem; color: #dcdcdc; letter-spacing: 0.2px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); transition: color 0.3s ease; }
+    .desktop-nav { display: flex; gap: 32px; align-items: center; }
+    .desktop-nav a { font-weight: 500; font-size: var(--fs-base); color: #dcdcdc; letter-spacing: 0.2px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); transition: color 0.3s ease; }
     .desktop-nav a:hover { color: var(--copper); }
     
-    .header-actions { display: flex; align-items: center; gap: 14px; }
+    .header-actions { display: flex; align-items: center; gap: 16px; }
     
     .cart-icon-btn { position: relative; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; transition: 0.3s; }
-    .cart-icon-btn:hover { background: var(--copper); border-color: var(--copper); }
+    .cart-icon-btn:hover { background: var(--accent-strong); border-color: var(--copper); }
     .cart-icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
-    .cart-badge { position: absolute; top: -4px; right: -4px; background: var(--copper); color: #fff; font-size: 0.65rem; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--ink); }
+    .cart-badge { position: absolute; top: -4px; right: -4px; background: var(--accent-strong); color: #fff; font-size: var(--fs-xs); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--ink); }
 
-    .lang-switch { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.35); padding: 7px 14px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px); }
-    .lang-btn { background: none; border: none; color: #888; font-family: inherit; font-weight: 700; cursor: pointer; font-size: 0.85rem; transition: color 0.3s; }
+    .lang-switch { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.35); padding: 8px 16px; border-radius: var(--r-xl); border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(8px); }
+    .lang-btn { background: none; border: none; color: #888; font-family: inherit; font-weight: 700; cursor: pointer; font-size: var(--fs-sm); transition: color 0.3s; }
     .lang-btn.active { color: #fff; }
     
     .menu-toggle { display: none; background: none; border: none; width: 30px; height: 20px; flex-direction: column; justify-content: space-between; cursor: pointer; z-index: 101; }
@@ -186,146 +186,146 @@
     .menu-toggle.active i:nth-child(2) { opacity: 0; }
     .menu-toggle.active i:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
     
-    .mobile-menu { position: fixed; inset: 0; background: var(--ink); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 25px; transform: translateY(-100%); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .mobile-menu { position: fixed; inset: 0; background: var(--ink); z-index: 100; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 24px; transform: translateY(-100%); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .mobile-menu.active { transform: translateY(0); }
-    .mobile-menu a { font-size: 1.4rem; font-weight: 600; }
-    .mobile-menu .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; color: #fff; }
+    .mobile-menu a { font-size: var(--fs-xl); font-weight: 600; }
+    .mobile-menu .close-btn { position: absolute; top: 20px; right: 20px; font-size: var(--fs-2xl); cursor: pointer; color: #fff; }
 
     .hero { position: relative; display: flex; flex-direction: column; height: 100vh; min-height: 720px; justify-content: space-between; overflow: hidden; }
     .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,22,21,0.92) 0%, rgba(23,22,21,0.55) 50%, rgba(23,22,21,0.15) 100%), linear-gradient(0deg, rgba(23,22,21,0.75) 0%, transparent 45%); z-index: 2; }
     
-    .hero-content { position: relative; z-index: 3; max-width: 1320px; width: 100%; margin: auto auto auto 0; padding: 120px 40px 40px; display: flex; flex-direction: column; justify-content: center; }
-    .eyebrow { display: flex; align-items: center; gap: 16px; color: var(--copper); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 20px; }
+    .hero-content { position: relative; z-index: 3; max-width: 1320px; width: 100%; margin: auto auto auto 0; padding: 128px 48px 48px; display: flex; flex-direction: column; justify-content: center; }
+    .eyebrow { display: flex; align-items: center; gap: 16px; color: var(--copper); font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 24px; }
     .eyebrow i { display: block; height: 1px; width: 50px; background: currentColor; }
     
-    .hero h1 { font-size: clamp(2.2rem, 3.8vw, 3.9rem); font-weight: 800; line-height: 1.12; margin-bottom: 22px; letter-spacing: -1px; color: #ffffff; max-width: 780px; text-shadow: 0 4px 25px rgba(0,0,0,0.4); }
-    .hero-lead { font-size: 1.1rem; color: #d2d2d2; margin-bottom: 35px; max-width: 480px; line-height: 1.55; }
+    .hero h1 { font-size: clamp(2.2rem, 3.8vw, 3.9rem); font-weight: 700; line-height: 1.12; margin-bottom: 24px; letter-spacing: -1px; color: #ffffff; max-width: 780px; text-shadow: 0 4px 25px rgba(0,0,0,0.4); }
+    .hero-lead { font-size: var(--fs-md); color: #d2d2d2; margin-bottom: 32px; max-width: 480px; line-height: 1.55; }
     .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
 
     .hero-badge-quality { position: absolute; right: 50px; bottom: 130px; z-index: 3; width: 125px; height: 125px; background: rgba(23,22,21,0.75); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     .hero-badge-quality svg { width: 32px; height: 32px; color: var(--copper); margin-bottom: 4px; }
-    .hero-badge-quality span { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
+    .hero-badge-quality span { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
 
-    .hero-bottom { position: relative; z-index: 3; background: rgba(23,22,21,0.85); border-top: 1px solid rgba(255,255,255,0.12); display: grid; grid-template-columns: 80px 1fr 1fr 1fr 1fr; align-items: center; padding: 22px 40px; backdrop-filter: blur(10px); }
-    .hero-scroll-hint { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #888; font-size: 0.72rem; border-right: 1px solid rgba(255,255,255,0.12); padding-right: 20px; letter-spacing: 1px; text-transform: uppercase; }
+    .hero-bottom { position: relative; z-index: 3; background: rgba(23,22,21,0.85); border-top: 1px solid rgba(255,255,255,0.12); display: grid; grid-template-columns: 80px 1fr 1fr 1fr 1fr; align-items: center; padding: 24px 48px; backdrop-filter: blur(10px); }
+    .hero-scroll-hint { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #888; font-size: var(--fs-xs); border-right: 1px solid rgba(255,255,255,0.12); padding-right: 24px; letter-spacing: 1px; text-transform: uppercase; }
     .hero-scroll-hint svg { width: 16px; height: 16px; stroke: currentColor; animation: bounce 2s infinite; }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(4px); } 60% { transform: translateY(2px); } }
     
-    .feature { display: flex; align-items: center; gap: 14px; font-size: 0.88rem; color: #dcdcdc; padding: 0 18px; border-right: 1px solid rgba(255,255,255,0.06); }
+    .feature { display: flex; align-items: center; gap: 16px; font-size: var(--fs-sm); color: #dcdcdc; padding: 0 16px; border-right: 1px solid rgba(255,255,255,0.06); }
     .feature:last-child { border-right: none; }
     .feature svg { width: 26px; height: 26px; color: var(--copper); flex-shrink: 0; }
 
-    .palette { padding: 45px 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); text-align: center; }
-    .palette h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 22px; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
+    .palette { padding: 48px 0; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(0,0,0,0.25); text-align: center; }
+    .palette h2 { font-size: var(--fs-md); font-weight: 600; margin-bottom: 24px; text-transform: uppercase; color: #fff; letter-spacing: 2px; }
     .color-slider-wrapper { max-width: 1100px; margin: 0 auto; }
-    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 10px 20px; }
+    .color-slider { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 12px 24px; }
     .color-slider::-webkit-scrollbar { display: none; }
-    .color-card { flex: 1 1 0; min-width: 100px; scroll-snap-align: center; background: rgba(255,255,255,0.04); border-radius: 14px; padding: 20px 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1px solid rgba(255,255,255,0.12); }
+    .color-card { flex: 1 1 0; min-width: 100px; scroll-snap-align: center; background: rgba(255,255,255,0.04); border-radius: var(--r-lg); padding: 24px 8px; display: flex; flex-direction: column; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.12); }
     .color-circle { width: 52px; height: 52px; border-radius: 50%; box-shadow: inset 0 4px 10px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.4); }
-    .color-name { font-weight: 500; font-size: 0.85rem; color: #e0e0e0; }
+    .color-name { font-weight: 500; font-size: var(--fs-sm); color: #e0e0e0; }
 
-    .section-light { background: var(--cream); color: var(--text-dark); padding: 90px 0; }
-    .section-intro { margin-bottom: 45px; }
-    .section-intro h2 { font-size: 2.6rem; font-weight: 800; line-height: 1.12; margin-bottom: 15px; letter-spacing: -1px; }
-    .section-intro p { font-size: 1.1rem; color: #666; }
-    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
-    .tab-btn { padding: 13px 26px; border: 1px solid var(--border-light); background: transparent; border-radius: 50px; font-family: inherit; font-size: 0.92rem; font-weight: 600; color: var(--text-dark); cursor: pointer; transition: 0.3s; }
+    .section-light { background: var(--cream); color: var(--text-dark); padding: 96px 0; }
+    .section-intro { margin-bottom: 48px; }
+    .section-intro h2 { font-size: var(--fs-3xl); font-weight: 700; line-height: 1.12; margin-bottom: 16px; letter-spacing: -1px; }
+    .section-intro p { font-size: var(--fs-md); color: #666; }
+    .tabs { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+    .tab-btn { padding: 12px 24px; border: 1px solid var(--border-light); background: transparent; border-radius: var(--r-pill); font-family: inherit; font-size: var(--fs-sm); font-weight: 600; color: var(--text-dark); cursor: pointer; transition: 0.3s; }
     .tab-btn:hover { border-color: var(--copper); color: var(--copper); }
     .tab-btn.active { background: var(--text-dark); color: #fff; border-color: var(--text-dark); }
     .tab-content { display: none; }
     .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 30px; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 32px; }
     .card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: 0.35s ease; position: relative; cursor: pointer; }
     .card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
     .card-img { width: 100%; aspect-ratio: 4/3; background: var(--cream-dark) center/cover no-repeat; }
     .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
-    .card-body h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
-    .card-specs { font-size: 0.85rem; color: #666; margin-bottom: 16px; flex-grow: 1; }
-    .card-prices { display: flex; flex-direction: column; gap: 6px; background: #f8f6f2; padding: 14px 16px; border-radius: 10px; margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.04); }
-    .price-row { display: flex; justify-content: space-between; font-size: 0.88rem; color: #555; }
+    .card-body h3 { font-size: var(--fs-lg); font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+    .card-specs { font-size: var(--fs-sm); color: #666; margin-bottom: 16px; flex-grow: 1; }
+    .card-prices { display: flex; flex-direction: column; gap: 8px; background: #f8f6f2; padding: 16px 16px; border-radius: var(--r-md); margin-bottom: 16px; border: 1px solid rgba(0,0,0,0.04); }
+    .price-row { display: flex; justify-content: space-between; font-size: var(--fs-sm); color: #555; }
     .price-row b { color: var(--text-dark); font-weight: 700; }
-    .card-controls { display: flex; gap: 10px; margin-bottom: 15px; }
-    .card-controls select, .card-controls input { padding: 10px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit; font-size: 16px; background: #fff; }
+    .card-controls { display: flex; gap: 12px; margin-bottom: 16px; }
+    .card-controls select, .card-controls input { padding: 12px; border: 1px solid var(--border-light); border-radius: var(--r-sm); font-family: inherit; font-size: var(--fs-base); background: #fff; }
     .card-controls select { flex: 1; }
 
-    .calc-section { padding: 90px 0; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); }
-    .calc-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; padding: 50px; backdrop-filter: blur(10px); }
-    .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 45px; align-items: center; }
-    .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .calc-section { padding: 96px 0; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.12); border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .calc-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-xl); padding: 48px; backdrop-filter: blur(10px); }
+    .calc-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+    .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .calc-group { display: flex; flex-direction: column; gap: 8px; }
     .calc-group.full { grid-column: span 2; }
-    .calc-group label { font-size: 0.82rem; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; }
-    .calc-group input, .calc-group select { width: 100%; padding: 14px 16px; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: #fff; font-family: inherit; font-size: 16px; outline: none; transition: 0.3s; }
+    .calc-group label { font-size: var(--fs-sm); font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; }
+    .calc-group input, .calc-group select { width: 100%; padding: 16px 16px; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--r-md); color: #fff; font-family: inherit; font-size: var(--fs-base); outline: none; transition: 0.3s; }
     .calc-group input:focus, .calc-group select:focus { border-color: var(--copper); }
     
-    .calc-result-box { background: var(--copper); border-radius: 16px; padding: 35px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; box-shadow: 0 15px 35px rgba(199,123,75,0.3); }
-    .calc-res-title { font-size: 0.92rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1.2px; opacity: 0.95; }
+    .calc-result-box { background: var(--accent-strong); border-radius: var(--r-lg); padding: 32px; color: #fff; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; box-shadow: 0 15px 35px rgba(199,123,75,0.3); }
+    .calc-res-title { font-size: var(--fs-sm); text-transform: uppercase; font-weight: 700; letter-spacing: 1.2px; opacity: 0.95; }
     .calc-res-values { display: flex; flex-direction: column; gap: 12px; }
-    .calc-res-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 10px; }
-    .calc-res-row span { font-size: 0.95rem; }
-    .calc-res-row b { font-size: 1.35rem; font-weight: 800; }
-    .calc-res-row.total b { font-size: 1.7rem; color: #fff; }
+    .calc-res-row { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 12px; }
+    .calc-res-row span { font-size: var(--fs-base); }
+    .calc-res-row b { font-size: var(--fs-lg); font-weight: 700; }
+    .calc-res-row.total b { font-size: var(--fs-xl); color: #fff; }
 
-    .services-section { background: var(--cream); color: var(--text-dark); padding: 90px 0; border-bottom: 1px solid var(--border-light); }
+    .services-section { background: var(--cream); color: var(--text-dark); padding: 96px 0; border-bottom: 1px solid var(--border-light); }
     .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px; }
-    .service-card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 35px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: 0.35s ease; }
+    .service-card { background: #fff; border: 1px solid var(--border-light); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: 0.35s ease; }
     .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
-    .service-icon { width: 56px; height: 56px; background: rgba(199,123,75,0.1); color: var(--copper); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .service-icon { width: 56px; height: 56px; background: rgba(199,123,75,0.1); color: var(--copper); border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center; }
     .service-icon svg { width: 28px; height: 28px; }
-    .service-text h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-    .service-text p { font-size: 1rem; color: #666; line-height: 1.6; }
-    .service-price { font-weight: 800; font-size: 1.15rem; color: var(--copper); margin-top: auto; padding-top: 15px; border-top: 1px solid var(--border-light); }
+    .service-text h3 { font-size: var(--fs-lg); font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .service-text p { font-size: var(--fs-base); color: #666; line-height: 1.6; }
+    .service-price { font-weight: 700; font-size: var(--fs-md); color: var(--copper); margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-light); }
 
-    .works { padding: 90px 0; background: var(--ink); }
-    .works h2 { font-size: 2.6rem; margin-bottom: 35px; color: #fff; }
-    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 30px; }
+    .works { padding: 96px 0; background: var(--ink); }
+    .works h2 { font-size: var(--fs-3xl); margin-bottom: 32px; color: #fff; }
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 32px; }
     .work-card { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; cursor: pointer; background: #222; border: 1px solid rgba(255,255,255,0.12); }
     .work-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
     .work-card:hover img { transform: scale(1.05); }
 
-    .contacts { padding: 90px 0; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.12); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; }
-    .contact-copy h2 { font-size: 2.6rem; margin-bottom: 18px; }
-    .contact-copy p { color: #ccc; margin-bottom: 35px; font-size: 1.05rem; }
-    .contact-details { display: flex; flex-direction: column; gap: 24px; margin-bottom: 35px; }
-    .contact-item small { display: block; font-size: 0.72rem; color: var(--copper); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; font-weight: 700; }
-    .contact-item b { font-size: 1.2rem; }
-    .social-links { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 35px; }
-    .social-links a { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; font-weight: 500; font-size: 0.95rem; color: #fff; transition: 0.3s; }
-    .social-links a:hover { background: var(--copper); border-color: var(--copper); }
+    .contacts { padding: 96px 0; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.12); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .contact-copy h2 { font-size: var(--fs-3xl); margin-bottom: 16px; }
+    .contact-copy p { color: #ccc; margin-bottom: 32px; font-size: var(--fs-base); }
+    .contact-details { display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px; }
+    .contact-item small { display: block; font-size: var(--fs-xs); color: var(--copper); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; font-weight: 700; }
+    .contact-item b { font-size: var(--fs-lg); }
+    .social-links { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+    .social-links a { display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); font-weight: 500; font-size: var(--fs-base); color: #fff; transition: 0.3s; }
+    .social-links a:hover { background: var(--accent-strong); border-color: var(--copper); }
     .map-wrapper { width: 100%; height: 320px; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(255,255,255,0.12); }
     .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) contrast(1.1); }
 
-    .form { background: rgba(255,255,255,0.03); padding: 45px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.12); }
-    .form h3 { font-size: 1.6rem; margin-bottom: 10px; }
-    .form p { color: #888; margin-bottom: 25px; font-size: 0.95rem; }
-    .form input, .form textarea { width: 100%; padding: 15px 16px; margin-bottom: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; color: #fff; font-family: inherit; font-size: 16px; }
+    .form { background: rgba(255,255,255,0.03); padding: 48px; border-radius: var(--r-xl); border: 1px solid rgba(255,255,255,0.12); }
+    .form h3 { font-size: var(--fs-xl); margin-bottom: 12px; }
+    .form p { color: #888; margin-bottom: 24px; font-size: var(--fs-base); }
+    .form input, .form textarea { width: 100%; padding: 16px 16px; margin-bottom: 16px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--r-md); color: #fff; font-family: inherit; font-size: var(--fs-base); }
     .form input:focus, .form textarea:focus { outline: none; border-color: var(--copper); }
     .form button { width: 100%; }
-    .error-hint { display: none; color: #ff6b6b; font-size: 0.85rem; margin: -8px 0 12px; }
+    .error-hint { display: none; color: #ff6b6b; font-size: var(--fs-sm); margin: -8px 0 12px; }
     input.error { border-color: #ff6b6b !important; }
 
-    .about-section { background: var(--cream); color: var(--text-dark); padding: 90px 0; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; align-items: center; }
-    .about-text h2 { font-size: 2.6rem; margin-bottom: 25px; color: var(--text-dark); }
-    .about-text p { font-size: 1.1rem; color: #666; margin-bottom: 22px; line-height: 1.6; }
+    .about-section { background: var(--cream); color: var(--text-dark); padding: 96px 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .about-text h2 { font-size: var(--fs-3xl); margin-bottom: 24px; color: var(--text-dark); }
+    .about-text p { font-size: var(--fs-md); color: #666; margin-bottom: 24px; line-height: 1.6; }
     .checks { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-    .checks li { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--text-dark); font-size: 1.05rem; }
-    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: rgba(199, 123, 75, 0.15); color: var(--copper); border-radius: 50%; font-weight: 800; flex-shrink: 0; }
-    .worktime { background: #fff; padding: 45px; border-radius: 22px; border: 1px solid var(--border-light); box-shadow: 0 15px 35px rgba(0,0,0,0.03); }
-    .worktime h3 { margin-bottom: 24px; color: var(--text-dark); font-size: 1.4rem; }
-    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin-bottom: 15px; color: #666; font-size: 1.05rem; }
+    .checks li { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--text-dark); font-size: var(--fs-base); }
+    .checks li::before { content: "✓"; display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: rgba(199, 123, 75, 0.15); color: var(--copper); border-radius: 50%; font-weight: 700; flex-shrink: 0; }
+    .worktime { background: #fff; padding: 48px; border-radius: var(--r-xl); border: 1px solid var(--border-light); box-shadow: 0 15px 35px rgba(0,0,0,0.03); }
+    .worktime h3 { margin-bottom: 24px; color: var(--text-dark); font-size: var(--fs-xl); }
+    .worktime p { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-light); padding-bottom: 16px; margin-bottom: 16px; color: #666; font-size: var(--fs-base); }
     .worktime p:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
     .worktime b { color: var(--text-dark); }
 
-    footer { padding: 40px 0; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.12); color: #888; font-size: 0.92rem; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+    footer { padding: 48px 0; background: #0a0a0a; border-top: 1px solid rgba(255,255,255,0.12); color: #888; font-size: var(--fs-sm); }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; max-width: 1320px; margin: 0 auto; padding: 0 48px; }
 
     .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #1b1a19; border-top: 1px solid rgba(255,255,255,0.12); z-index: 99; height: calc(65px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
     .mobile-nav__inner { display: flex; justify-content: space-around; align-items: center; height: 65px; }
-    .mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #888; font-size: 0.7rem; width: 25%; height: 100%; text-decoration: none; transition: 0.3s; }
+    .mobile-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: #888; font-size: var(--fs-xs); width: 25%; height: 100%; text-decoration: none; transition: 0.3s; }
     .mobile-nav a.selected, .mobile-nav a:hover { color: var(--copper); }
     .mobile-nav a svg { width: 22px; height: 22px; fill: currentColor; }
 
@@ -341,23 +341,23 @@
     
     .floating-up { padding: 0; position: fixed; bottom: calc(85px + env(safe-area-inset-bottom)); left: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 99; backdrop-filter: blur(10px); }
     .floating-up.show { opacity: 1; pointer-events: auto; }
-    .floating-up:hover { background: var(--copper); border-color: var(--copper); }
+    .floating-up:hover { background: var(--accent-strong); border-color: var(--copper); }
     .floating-up svg { width: 18px; height: 18px; fill: #fff; }
 
-    .modal { position: fixed; inset: 0; z-index: 1002; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .modal { position: fixed; inset: 0; z-index: 1002; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .modal.show { display: flex; }
-    .modal-content { background: #fff; color: var(--text-dark); border-radius: 22px; max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 40px; position: relative; text-align: left; box-shadow: 0 30px 70px rgba(0,0,0,0.5); -webkit-overflow-scrolling: touch; }
-    .modal-close { position: absolute; top: 20px; right: 24px; font-size: 28px; cursor: pointer; color: #888; line-height: 1; }
-    .modal-content h2 { font-size: 1.6rem; margin-bottom: 18px; color: var(--text-dark); font-weight: 800; }
-    .modal-content p { color: #555; margin-bottom: 14px; font-size: 0.95rem; line-height: 1.6; }
-    .modal-content input { width: 100%; padding: 14px 16px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; font-family: inherit; }
+    .modal-content { background: #fff; color: var(--text-dark); border-radius: var(--r-xl); max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 48px; position: relative; text-align: left; box-shadow: 0 30px 70px rgba(0,0,0,0.5); -webkit-overflow-scrolling: touch; }
+    .modal-close { position: absolute; top: 20px; right: 24px; font-size: var(--fs-2xl); cursor: pointer; color: #888; line-height: 1; }
+    .modal-content h2 { font-size: var(--fs-xl); margin-bottom: 16px; color: var(--text-dark); font-weight: 700; }
+    .modal-content p { color: #555; margin-bottom: 16px; font-size: var(--fs-base); line-height: 1.6; }
+    .modal-content input { width: 100%; padding: 16px 16px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: var(--r-md); font-size: var(--fs-base); font-family: inherit; }
 
-    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #eee; gap: 12px; }
-    .cart-item-info b { display: block; font-size: 1rem; color: var(--text-dark); }
-    .cart-item-info small { color: #778; font-size: 0.85rem; }
+    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #eee; gap: 12px; }
+    .cart-item-info b { display: block; font-size: var(--fs-base); color: var(--text-dark); }
+    .cart-item-info small { color: #778; font-size: var(--fs-sm); }
     .cart-item-controls { display: flex; align-items: center; gap: 8px; }
-    .cart-item-controls button { width: 32px; height: 32px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1rem; }
-    .cart-total-section { margin-top: 25px; padding-top: 18px; border-top: 2px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 800; color: var(--text-dark); }
+    .cart-item-controls button { width: 32px; height: 32px; border: 1px solid #ddd; background: #f9f9f9; border-radius: var(--r-sm); cursor: pointer; font-weight: bold; font-size: var(--fs-base); }
+    .cart-total-section { margin-top: 24px; padding-top: 16px; border-top: 2px solid #eee; display: flex; justify-content: space-between; align-items: center; font-size: var(--fs-lg); font-weight: 700; color: var(--text-dark); }
 
     @media(max-width: 1100px) {
       .hero-badge-quality { display: none; }
@@ -367,32 +367,32 @@
     @media(max-width: 900px) {
       .desktop-nav, .desktop-only { display: none; }
       .menu-toggle { display: flex; }
-      .header-inner { height: 80px; padding: 0 20px; }
-      .container { padding: 0 20px; }
+      .header-inner { height: 80px; padding: 0 24px; }
+      .container { padding: 0 24px; }
       
-      .hero { height: auto; min-height: 100dvh; padding-top: 80px; padding-bottom: 30px; }
-      .hero-content { padding: 40px 20px; margin: auto 0; }
-      .hero h1 { font-size: 2.1rem; }
-      .hero-lead { font-size: 0.98rem; }
+      .hero { height: auto; min-height: 100dvh; padding-top: 96px; padding-bottom: 32px; }
+      .hero-content { padding: 48px 24px; margin: auto 0; }
+      .hero h1 { font-size: var(--fs-2xl); }
+      .hero-lead { font-size: var(--fs-base); }
       .hero-buttons { flex-direction: column; gap: 12px; }
       .hero-buttons .btn { width: 100%; }
       .hero-bottom { display: none; }
       
-      .palette { padding: 35px 0; }
+      .palette { padding: 32px 0; }
       .color-card { flex: 0 0 calc(45% - 10px); }
 
-      .calc-card { padding: 25px; }
+      .calc-card { padding: 24px; }
       .calc-inputs { grid-template-columns: 1fr; }
       .calc-group.full { grid-column: span 1; }
 
-      .section-light, .calc-section, .services-section, .works, .contacts, .about-section { padding: 70px 0; }
-      .section-intro h2, .works h2, .contact-copy h2, .about-text h2 { font-size: 2rem; }
+      .section-light, .calc-section, .services-section, .works, .contacts, .about-section { padding: 64px 0; }
+      .section-intro h2, .works h2, .contact-copy h2, .about-text h2 { font-size: var(--fs-2xl); }
       
       .product-grid { 
         display: flex; 
         overflow-x: auto; 
         gap: 16px; 
-        padding: 0 20px 15px 20px; 
+        padding: 0 24px 16px 24px; 
         margin: 0; 
         width: 100%;
         scroll-snap-type: x mandatory; 
@@ -401,16 +401,16 @@
       }
       .card { flex: 0 0 82%; scroll-snap-align: start; }
       
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 35px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
       .map-wrapper { height: 260px; }
       
       .mobile-nav { display: block; }
       footer { padding-bottom: calc(85px + env(safe-area-inset-bottom)); }
-      .footer-inner { padding: 0 20px; flex-direction: column; text-align: center; }
+      .footer-inner { padding: 0 24px; flex-direction: column; text-align: center; }
       
       .floating-call { bottom: calc(80px + env(safe-area-inset-bottom)); right: 15px; width: 50px; height: 50px; }
       .floating-up { bottom: calc(80px + env(safe-area-inset-bottom)); left: 15px; width: 36px; height: 36px; }
-      .modal-content { padding: 25px; }
+      .modal-content { padding: 24px; }
     }
 
     .byn { display: inline-block; width: 0.68em; height: 0.84em; margin-left: 0.18em; vertical-align: -0.06em; flex: none; }
@@ -446,37 +446,37 @@
     .mobile-menu a { opacity: 0; transform: translateY(24px); transition: opacity 0.5s, transform 0.5s; }
     .mobile-menu.active a { opacity: 1; transform: none; transition-delay: calc(var(--i, 0) * 70ms + 200ms); }
 
-    .stats { background: var(--ink); padding: 38px 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-    .stat { padding: 10px; }
-    .stat-num { font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 800; color: var(--copper); line-height: 1.15; }
-    .stat-num.stat-text { font-size: clamp(1.2rem, 2vw, 1.7rem); padding: 0.35rem 0; }
-    .stat-label { color: #bbb; font-size: 0.9rem; margin-top: 6px; }
+    .stats { background: var(--ink); padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+    .stat { padding: 12px; }
+    .stat-num { font-size: clamp(1.8rem, 3.2vw, 2.8rem); font-weight: 700; color: var(--copper); line-height: 1.15; }
+    .stat-num.stat-text { font-size: clamp(1.2rem, 2vw, 1.7rem); padding: 4px 0; }
+    .stat-label { color: #bbb; font-size: var(--fs-sm); margin-top: 8px; }
     .color-card { cursor: pointer; }
     .color-card.active { border-color: var(--copper); box-shadow: 0 0 0 1px var(--copper), 0 12px 30px rgba(199,123,75,0.25); }
-    .palette-note { margin-top: 18px; color: #ddd; font-size: 0.95rem; }
-    .palette-note a, .palette-note button { color: var(--copper); background: none; border: none; font: inherit; cursor: pointer; text-decoration: underline; margin-left: 14px; }
+    .palette-note { margin-top: 16px; color: #ddd; font-size: var(--fs-base); }
+    .palette-note a, .palette-note button { color: var(--copper); background: none; border: none; font: inherit; cursor: pointer; text-decoration: underline; margin-left: 16px; }
     .card.tinted::before { content: ""; position: absolute; left: 0; right: 0; top: 0; aspect-ratio: 4/3; background: var(--tint); mix-blend-mode: color; opacity: 0.6; pointer-events: none; z-index: 1; }
     .dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 24px; }
-    .dcard { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 28px; }
-    .dcard h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
-    .dcard p { color: #bbb; font-size: 0.92rem; }
-    .dprice { font-size: 1.6rem; font-weight: 800; color: var(--copper); margin-top: 10px; }
-    .dnote { color: #aaa; margin-top: 24px; font-size: 0.95rem; }
-    .msgr { display: inline-flex; align-items: center; padding: 14px 22px; border-radius: 10px; font-weight: 600; color: #fff; }
+    .dcard { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 32px; }
+    .dcard h3 { font-size: var(--fs-md); font-weight: 700; margin-bottom: 8px; }
+    .dcard p { color: #bbb; font-size: var(--fs-sm); }
+    .dprice { font-size: var(--fs-xl); font-weight: 700; color: var(--copper); margin-top: 12px; }
+    .dnote { color: #aaa; margin-top: 24px; font-size: var(--fs-base); }
+    .msgr { display: inline-flex; align-items: center; padding: 16px 24px; border-radius: var(--r-md); font-weight: 600; color: #fff; }
     .msgr.viber { background: #7360f2; } .msgr.tg { background: #229ed9; } .msgr.wa { background: #25d366; color: #04210f; }
     .msgr:hover { transform: translateY(-3px); }
-    .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: #aaa; margin-bottom: 16px; }
+    .consent { display: flex; gap: 12px; align-items: flex-start; font-size: var(--fs-sm); color: #aaa; margin-bottom: 16px; }
     .consent input { width: 18px; height: 18px; padding: 0; margin: 2px 0 0; flex: none; }
     .consent a { color: var(--copper); text-decoration: underline; }
-    .cart-qty { width: 64px; height: 32px; border: 1px solid #ddd; border-radius: 8px; text-align: center; font: inherit; font-size: 16px; }
+    .cart-qty { width: 64px; height: 32px; border: 1px solid #ddd; border-radius: var(--r-sm); text-align: center; font: inherit; font-size: var(--fs-base); }
     .animate-on-scroll.visible .dcard, .animate-on-scroll.visible .stat { animation: itemIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
     @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
 
     .modal-close, .mobile-menu .close-btn { background: none; border: none; padding: 0; font-family: inherit; }
     .modal-close:focus-visible, .close-btn:focus-visible { outline: 2px solid var(--copper); outline-offset: 4px; }
     html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-    @media (max-width: 900px) { input:not([type="checkbox"]):not([type="radio"]), select, textarea { font-size: 16px; } }
+    @media (max-width: 900px) { input:not([type="checkbox"]):not([type="radio"]), select, textarea { font-size: var(--fs-base); } }
 
     html { overflow-x: hidden; overflow-x: clip; }
     .brand { min-width: 0; flex: 0 1 auto; }
@@ -484,19 +484,19 @@
     .brand-copy b, .brand-copy small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .header-actions { flex: none; }
     @media (max-width: 600px) {
-      .header-inner { padding: 0 14px; gap: 8px; }
+      .header-inner { padding: 0 16px; gap: 8px; }
       .brand { gap: 8px; }
       .brand-logo { width: 36px; height: 36px; }
-      .brand-copy b { font-size: 1rem; letter-spacing: 0.3px; }
+      .brand-copy b { font-size: var(--fs-base); letter-spacing: 0.3px; }
       .brand-copy small { display: none; }
       .header-actions { gap: 8px; }
       .cart-icon-btn { width: 38px; height: 38px; }
-      .lang-switch { padding: 5px 10px; gap: 4px; }
+      .lang-switch { padding: 4px 12px; gap: 4px; }
     }
     @media (max-width: 400px) {
-      .header-inner { padding: 0 12px; gap: 6px; }
-      .brand-copy b { font-size: 0.9rem; letter-spacing: 0; }
-      .header-actions { gap: 6px; }
+      .header-inner { padding: 0 12px; gap: 8px; }
+      .brand-copy b { font-size: var(--fs-sm); letter-spacing: 0; }
+      .header-actions { gap: 8px; }
       .lang-switch { padding: 4px 8px; }
     }
     @media (max-width: 340px) { .brand-copy { display: none; } }
@@ -505,6 +505,106 @@
     @media (min-width: 901px) { .hero-content { margin-left: auto; margin-right: auto; } }
     .calc-res-row b { white-space: nowrap; }
     .calc-grid > *, .calc-inputs > *, .calc-res-row > span { min-width: 0; }
+    /* ======== Design tokens (2026) ======== */
+    :root {
+      /* spacing: 4-pt grid */
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px;
+      --gutter: clamp(16px, 4vw, 40px);
+      --section-y: clamp(64px, 5vw + 40px, 112px);
+      /* radius scale */
+      --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-pill: 999px;
+      /* type scale */
+      --fs-xs: 0.75rem; --fs-sm: 0.875rem; --fs-base: 1rem; --fs-md: 1.125rem; --fs-lg: 1.25rem; --fs-xl: 1.5rem; --fs-2xl: 2rem; --fs-3xl: 2.5rem; --fs-4xl: 3rem; --fs-5xl: 3.5rem; --fs-6xl: 4rem;
+      --fs-h2: clamp(1.75rem, 1.1rem + 2.4vw, 3rem);
+      --fs-h1: clamp(2.25rem, 1.2rem + 4.2vw, 4.5rem);
+      /* colour roles (WCAG AA verified) */
+      --accent: #c77b4b;               /* icons / text on dark: 5.5:1 on ink */
+      --accent-strong: #a35630;        /* fills with white text: 5.3:1 */
+      --accent-strong-hover: #8f4a25;
+      --accent-text: #8f4a25;          /* accent text on light surfaces: 5.8:1 on cream */
+      --line-dark: rgba(255,255,255,0.12);
+      --line-light: rgba(23,22,21,0.12);
+      /* elevation */
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.10);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.14), 0 12px 32px rgba(0,0,0,0.14);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.18), 0 24px 64px rgba(0,0,0,0.22);
+      /* motion */
+      --ease: cubic-bezier(0.16, 1, 0.3, 1); --dur-1: 150ms; --dur-2: 250ms; --dur-3: 400ms;
+    }
+    body { font-size: var(--fs-base); line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    h1, h2, h3, .section-intro h2 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    .hero h1 { font-size: var(--fs-h1); line-height: 1.08; letter-spacing: -0.02em; }
+    .section-intro h2, .palette h2, section h2 { font-size: var(--fs-h2); line-height: 1.15; letter-spacing: -0.015em; }
+    .container, .header-inner { padding-inline: var(--gutter); }
+    .section-light, .calc-section, .works, .contacts, .about-section, .services-section { padding-block: var(--section-y); }
+    .section-intro { margin-bottom: var(--space-7); }
+    .eyebrow { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.16em; }
+    .section-light .eyebrow, .services-section .eyebrow, .about-section .eyebrow { color: var(--accent-text); }
+    .service-price { color: var(--accent-text); }
+
+    /* buttons: one height, one radius, accessible colours */
+    .btn { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); border-radius: var(--r-pill); padding-inline: var(--space-6); font-size: var(--fs-base); font-weight: 600; letter-spacing: 0.01em; transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease), background-color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease); }
+    .btn-primary { background: var(--accent-strong); color: #fff; box-shadow: var(--shadow-sm); }
+    .btn-primary:hover { background: var(--accent-strong-hover); box-shadow: var(--shadow-md); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.45); }
+
+    /* form controls: 48px, r-md, visible focus */
+    input:not([type="checkbox"]):not([type="radio"]), select { min-height: 48px; border-radius: var(--r-md); }
+    textarea { border-radius: var(--r-md); }
+    input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(199,123,75,0.30); }
+    a:focus-visible, button:focus-visible, [role="button"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* touch targets >= 44px */
+    .cart-icon-btn, .menu-toggle, .modal-close, .close-btn, .floating-up { min-width: 44px; min-height: 44px; }
+    .lang-switch { min-height: 44px; display: inline-flex; align-items: center; }
+    .cart-icon-btn { width: 44px; height: 44px; }
+    .qty-input, .color-select, .cart-qty { min-height: 44px; }
+
+    /* surfaces */
+    .card, .dcard, .service-card, .work-card, .calc-card, .color-card, .stat { border-radius: var(--r-lg); }
+    .card, .service-card, .work-card { box-shadow: var(--shadow-sm); transition: transform var(--dur-3) var(--ease), box-shadow var(--dur-3) var(--ease), border-color var(--dur-3) var(--ease); }
+    .card:hover, .service-card:hover, .work-card:hover { box-shadow: var(--shadow-md); }
+    .modal-content { border-radius: var(--r-xl); box-shadow: var(--shadow-lg); }
+    .calc-result-box { background: var(--accent-strong); border-radius: var(--r-xl); }
+    .msgr { min-height: 48px; border-radius: var(--r-pill); font-weight: 600; }
+    .msgr.viber { background: #6451e6; } .msgr.tg { background: #17789f; } .msgr.wa { background: #25d366; color: #052e16; }
+
+    b, strong { font-weight: 700; }
+    .btn { padding-block: 0; }
+    .hero .btn, .btn-lg { min-height: 56px; }
+    .tab-btn { min-height: 44px; padding-inline: var(--space-5); }
+    input:not([type="checkbox"]):not([type="radio"]):not(.qty-input):not(.cart-qty), select:not(.color-select) { height: 48px; padding-block: 0; }
+    input.qty-input, select.color-select, input.cart-qty { height: 44px; padding-block: 0; }
+    .lang-switch { padding-block: 0; }
+    .lang-btn { min-height: 44px; padding-inline: 6px; }
+
+    .menu-toggle { width: 44px; height: 44px; padding: 0 10px; justify-content: center; align-items: stretch; gap: 7px; }
+    @media (max-width: 600px) {
+      .tabs { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); padding-bottom: var(--space-1); }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tabs { scroll-padding-inline: var(--gutter); }
+      .tab-btn { flex: none; scroll-snap-align: start; }
+    }
+
+    @media (max-width: 600px) {
+      .header-actions { gap: 4px; }
+      .lang-switch { padding-inline: 4px; gap: 0; }
+      .lang-btn { padding-inline: 6px; font-size: var(--fs-sm); }
+      .brand { gap: 6px; }
+    }
+    @media (max-width: 374px) { .brand-copy { display: none; } }
+
+    /* ---- responsive header & hero (real-font tested, laptop heights) ---- */
+    .desktop-nav a { white-space: nowrap; }
+    @media (max-width: 1279px) { .brand-copy small { display: none; } .desktop-nav { gap: var(--space-5); } }
+    @media (max-width: 1180px) { .desktop-nav { display: none; } .menu-toggle { display: flex; } }
+    @media (min-width: 901px) {
+      .hero { height: auto; min-height: max(100svh, 640px); }
+      .hero-content { padding-top: clamp(96px, 16vh, 128px); padding-bottom: var(--space-6); }
+      .hero h1 { font-size: clamp(2.25rem, min(1.2rem + 4.2vw, 9vh), 4.5rem); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
       .animate-on-scroll { opacity: 1; transform: none; }
@@ -515,7 +615,7 @@
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-byn" viewBox="0 0 336 412"><g fill="none" stroke="currentColor" stroke-width="46"><path d="M82 0V412M60 23H290M0 292H210M82 193H215A98 98 0 0 1 215 389H82"/></g></symbol></svg>
 
-<div class="toast" id="toastMsg" style="position:fixed; bottom:20px; right:20px; background:var(--copper); color:#fff; padding:12px 24px; border-radius:8px; z-index:2000; box-shadow:0 5px 20px rgba(0,0,0,0.3); opacity:0; transform:translateY(16px); pointer-events:none; transition:0.35s;"></div>
+<div class="toast" id="toastMsg" style="position:fixed; bottom:20px; right:20px; background:var(--accent-strong); color:#fff; padding:12px 24px; border-radius:var(--r-sm); z-index:2000; box-shadow:0 5px 20px rgba(0,0,0,0.3); opacity:0; transform:translateY(16px); pointer-events:none; transition:0.35s;"></div>
 
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
@@ -632,18 +732,8 @@
       <h2 data-i18n="catalog-title">Широкий выбор<br>бетонных изделий</h2>
       <p data-i18n="catalog-lead">Разнообразие форм, цветов и фактур для любых задач</p>
     </div>
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="bruschatka" data-i18n="tab-bruschatka">Брусчатка</button>
-      <button class="tab-btn" data-tab="plitka" data-i18n="tab-plitka">Тротуарная плитка</button>
-      <button class="tab-btn" data-tab="bordyury" data-i18n="tab-bordyury">Бордюры</button>
-      <button class="tab-btn" data-tab="prostupi" data-i18n="tab-prostupi">Проступи</button>
-      <button class="tab-btn" data-tab="paneli" data-i18n="tab-paneli">Фасадные панели</button>
-    </div>
-    <div id="tab-bruschatka" class="tab-content active"><div class="product-grid" id="grid-bruschatka"></div></div>
-    <div id="tab-plitka" class="tab-content"><div class="product-grid" id="grid-plitka"></div></div>
-    <div id="tab-bordyury" class="tab-content"><div class="product-grid" id="grid-bordyury"></div></div>
-    <div id="tab-prostupi" class="tab-content"><div class="product-grid" id="grid-prostupi"></div></div>
-    <div id="tab-paneli" class="tab-content"><div class="product-grid" id="grid-paneli"></div></div>
+    <div class="tabs" role="tablist"></div>
+    <div id="tabContents"></div>
   </div>
 </section>
 
@@ -653,8 +743,8 @@
       <div class="calc-grid">
         <div class="calc-inputs">
           <div class="calc-group full">
-            <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:6px;" data-i18n="calc-title">Калькулятор расчёта плитки</h3>
-            <p style="color:#aaa; font-size:0.95rem;">Выберите плитку и размеры площадки — посчитаем площадь, вес и стоимость</p>
+            <h3 style="font-size:var(--fs-xl); font-weight:700; margin-bottom:8px;" data-i18n="calc-title">Калькулятор расчёта плитки</h3>
+            <p style="color:#aaa; font-size:var(--fs-base);">Выберите плитку и размеры площадки — посчитаем площадь, вес и стоимость</p>
           </div>
           <div class="calc-group full"><label for="calcProduct">Плитка / брусчатка</label><select id="calcProduct" onchange="fillCalcTypes()"></select></div>
           <div class="calc-group"><label for="calcType" data-i18n="calc-type">Исполнение</label><select id="calcType" onchange="recalculate()"></select></div>
@@ -679,7 +769,7 @@
             <div class="calc-res-row"><span>Доставка:</span><b id="resDelivery"></b></div>
             <div class="calc-res-row total"><span data-i18n="calc-total-cost">Ориентировочно:</span><b id="resCost"></b></div>
           </div>
-          <p style="font-size:0.78rem; opacity:0.9; margin-top:-8px;" data-i18n="calc-note">Цена ориентировочная, точную стоимость уточним при заказе.</p>
+          <p style="font-size:var(--fs-xs); opacity:0.9; margin-top:-8px;" data-i18n="calc-note">Цена ориентировочная, точную стоимость уточним при заказе.</p>
           <button class="btn btn-outline" style="background:#fff; color:var(--text-dark); font-weight:700; width:100%; border:none;" onclick="calcToCart()">Добавить в корзину</button>
           <button class="btn btn-outline" style="width:100%; color:#fff; border-color:rgba(255,255,255,0.7);" onclick="orderCalc()" data-i18n="calc-btn-order">Заказать с этим расчётом</button>
         </div>
@@ -755,7 +845,7 @@
         <li data-i18n="about-check3">Индивидуальный подход</li>
         <li data-i18n="about-check4">Гибкая система скидок</li>
       </ul>
-      <p style="margin-top:22px; font-size:0.98rem;" data-i18n="seo-text">Koloritbeton — производитель тротуарной плитки, брусчатки, бордюров, проступей и фасадных панелей в Гродно. В <a href="#catalog" style="color:var(--copper); text-decoration:underline;">каталоге</a>: брусчатка (Кремль, Греция, Булыжная мостовая, Каменная роза, Домино, Старый Арбат), тротуарная плитка (Флорида дерево, Ялта, Фазенда, Паркет и другие), бордюры, водосток, проступи и фасадные панели «Ростовский камень». Доставляем по Гродно и области, стоимость можно рассчитать в <a href="#calculator" style="color:var(--copper); text-decoration:underline;">калькуляторе</a>.</p>
+      <p style="margin-top:24px; font-size:var(--fs-base);" data-i18n="seo-text">Koloritbeton — производитель тротуарной плитки, брусчатки, бордюров, проступей и фасадных панелей в Гродно. В <a href="#catalog" style="color:var(--accent-text); text-decoration:underline;">каталоге</a>: брусчатка (Кремль, Греция, Булыжная мостовая, Каменная роза, Домино, Старый Арбат), тротуарная плитка (Флорида дерево, Ялта, Фазенда, Паркет и другие), бордюры, водосток, проступи и фасадные панели «Ростовский камень». Доставляем по Гродно и области, стоимость можно рассчитать в <a href="#calculator" style="color:var(--accent-text); text-decoration:underline;">калькуляторе</a>.</p>
     </div>
     <div class="worktime">
       <h3 data-i18n="worktime-title">Время работы</h3>
@@ -809,7 +899,7 @@
   <div class="container footer-inner">
     <p data-i18n="footer-copy">© 2022 Koloritbeton. Все права защищены.</p>
     <a href="#" onclick="openPolicy(event)" data-i18n="footer-policy">Политика конфиденциальности</a>
-    <p id="footerLegal" style="flex-basis:100%; font-size:0.8rem; opacity:0.8;"></p>
+    <p id="footerLegal" style="flex-basis:100%; font-size:var(--fs-xs); opacity:0.8;"></p>
   </div>
 </footer>
 
@@ -846,31 +936,31 @@
   <div class="modal-content" onclick="event.stopPropagation()">
     <button type="button" class="modal-close" aria-label="Закрыть" onclick="closeCartModal(event)">&times;</button>
     <h2>Ваша корзина</h2>
-    <div id="cartItemsList" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
-      <p style="color:#777; text-align:center; padding: 20px 0;">Корзина пуста</p>
+    <div id="cartItemsList" style="max-height: 300px; overflow-y: auto; margin-bottom: 24px;">
+      <p style="color:#777; text-align:center; padding: 24px 0;">Корзина пуста</p>
     </div>
     <div class="cart-total-section">
       <span>Итого:</span>
       <span id="cartTotalPrice">0<svg class="byn" viewBox="0 0 336 412" role="img" aria-label="BYN"><use href="#i-byn"/></svg></span>
     </div>
-    <div style="margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
-      <p style="font-weight:700; margin-bottom: 10px; font-size: 0.95rem;">Оформить заказ:</p>
-      <input type="text" id="cartName" autocomplete="name" placeholder="Ваше имя" required style="margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px;">
-      <input type="tel" id="cartPhone" inputmode="tel" autocomplete="tel" placeholder="+375 (__) ___-__-__" required style="margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
+    <div style="margin-top: 24px; border-top: 1px solid #eee; padding-top: 24px;">
+      <p style="font-weight:700; margin-bottom: 12px; font-size: var(--fs-base);">Оформить заказ:</p>
+      <input type="text" id="cartName" autocomplete="name" placeholder="Ваше имя" required style="margin-bottom: 12px; border: 1px solid #ddd; border-radius: var(--r-sm);">
+      <input type="tel" id="cartPhone" inputmode="tel" autocomplete="tel" placeholder="+375 (__) ___-__-__" required style="margin-bottom: 16px; border: 1px solid #ddd; border-radius: var(--r-sm);">
       <div class="error-hint" id="cartPhoneError">Введите номер полностью: +375 (XX) XXX-XX-XX</div>
-      <p style="font-size:0.78rem; color:#777; margin-bottom:10px;">Отправляя заказ, вы соглашаетесь с <a href="#" onclick="openPolicy(event)" style="text-decoration:underline;">политикой конфиденциальности</a>.</p>
+      <p style="font-size:var(--fs-xs); color:#777; margin-bottom:12px;">Отправляя заказ, вы соглашаетесь с <a href="#" onclick="openPolicy(event)" style="text-decoration:underline;">политикой конфиденциальности</a>.</p>
       <button class="btn btn-primary" style="width: 100%;" onclick="submitCartOrder()">Отправить заказ</button>
     </div>
   </div>
 </div>
 
 <div class="modal" id="successModal" role="dialog" aria-modal="true" onclick="closeSuccessModal(event)">
-  <div class="modal-content" style="text-align: center; padding: 40px 30px;" onclick="event.stopPropagation()">
-    <div style="width: 70px; height: 70px; background: rgba(76, 175, 80, 0.15); color: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+  <div class="modal-content" style="text-align: center; padding: 48px 32px;" onclick="event.stopPropagation()">
+    <div style="width: 70px; height: 70px; background: rgba(76, 175, 80, 0.15); color: #4CAF50; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
       <svg style="width: 36px; height: 36px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
     </div>
-    <h2 style="margin-bottom: 10px;">Заявка успешно отправлена!</h2>
-    <p style="margin-bottom: 25px; color: #666;">Спасибо за доверие. Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.</p>
+    <h2 style="margin-bottom: 12px;">Заявка успешно отправлена!</h2>
+    <p style="margin-bottom: 24px; color: #666;">Спасибо за доверие. Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.</p>
     <button class="btn btn-primary" style="width: 100%;" onclick="closeSuccessModal(event)">Отлично</button>
   </div>
 </div>
@@ -886,7 +976,7 @@
   <div class="modal-content" onclick="event.stopPropagation()">
     <button type="button" class="modal-close" aria-label="Закрыть" onclick="closePolicy(event)">&times;</button>
     <h2 data-i18n="modal-policy-title">Политика конфиденциальности</h2>
-    <p style="font-size:0.8rem; color:#888; margin-bottom:15px;">В соответствии с Законом Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных»</p>
+    <p style="font-size:var(--fs-xs); color:#888; margin-bottom:16px;">В соответствии с Законом Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных»</p>
     <p><b>1. Общие положения</b><br>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта «Koloritbeton».</p>
     <p><b>2. Цели обработки данных</b><br>Обработка персональных данных (имя, номер телефона) осуществляется исключительно с целью обратной связи и оформления заказов.</p>
     <p><b>3. Контакты Оператора:</b><br>г. Гродно, Гожская ул., 2А<br>Телефон: +375 (29) 757-52-65<br>УНП: 591299505</p>
@@ -988,6 +1078,11 @@
   });
   // Единицы измерения по разделам каталога (м² — плитка/брусчатка/панели, шт. — бордюры/проступи)
   const UNIT = { bruschatka: "м²", plitka: "м²", bordyury: "шт.", prostupi: "шт.", paneli: "м²" };
+  const CATS = {
+    bruschatka: { label: "Брусчатка", unit: "м²" }, plitka: { label: "Тротуарная плитка", unit: "м²" },
+    bordyury: { label: "Бордюры", unit: "шт." }, prostupi: { label: "Проступи", unit: "шт." }, paneli: { label: "Фасадные панели", unit: "м²" }
+  };
+  let catOrder = Object.keys(CATS);
 
   const WORKER_URL = "https://koloritbeton-form.djtimoxa94.workers.dev";
 
@@ -1079,7 +1174,7 @@
 
     const listContainer = document.getElementById("cartItemsList");
     if (cart.length === 0) {
-      listContainer.innerHTML = `<p style="color:#777; text-align:center; padding: 20px 0;">Корзина пуста</p>`;
+      listContainer.innerHTML = `<p style="color:#777; text-align:center; padding: 24px 0;">Корзина пуста</p>`;
       document.getElementById("cartTotalPrice").innerHTML = `0${BYN_SVG}`;
       return;
     }
@@ -1098,7 +1193,7 @@
             <button onclick="changeCartQty(${index}, -1)">-</button>
             <input type="number" class="cart-qty" value="${item.qty}" min="0.1" step="${item.unit === "м²" ? "0.1" : "1"}" onchange="setCartQty(${index}, this.value)" aria-label="Количество"><small>${item.unit}</small>
             <button onclick="changeCartQty(${index}, 1)">+</button>
-            <button onclick="removeFromCart(${index})" style="background:#ffebee; color:#d32f2f; border-color:#ffcdd2; margin-left:5px;">×</button>
+            <button onclick="removeFromCart(${index})" style="background:#ffebee; color:#d32f2f; border-color:#ffcdd2; margin-left:4px;">×</button>
           </div>
         </div>
       `;
@@ -1194,7 +1289,7 @@
 
   const translations = {
     "ru": {
-      "seo-text": "Koloritbeton — производитель тротуарной плитки, брусчатки, бордюров, проступей и фасадных панелей в Гродно. В <a href=\"#catalog\" style=\"color:var(--copper); text-decoration:underline;\">каталоге</a>: брусчатка (Кремль, Греция, Булыжная мостовая, Каменная роза, Домино, Старый Арбат), тротуарная плитка (Флорида дерево, Ялта, Фазенда, Паркет и другие), бордюры, водосток, проступи и фасадные панели «Ростовский камень». Доставляем по Гродно и области, стоимость можно рассчитать в <a href=\"#calculator\" style=\"color:var(--copper); text-decoration:underline;\">калькуляторе</a>.",
+      "seo-text": "Koloritbeton — производитель тротуарной плитки, брусчатки, бордюров, проступей и фасадных панелей в Гродно. В <a href=\"#catalog\" style=\"color:var(--accent-text); text-decoration:underline;\">каталоге</a>: брусчатка (Кремль, Греция, Булыжная мостовая, Каменная роза, Домино, Старый Арбат), тротуарная плитка (Флорида дерево, Ялта, Фазенда, Паркет и другие), бордюры, водосток, проступи и фасадные панели «Ростовский камень». Доставляем по Гродно и области, стоимость можно рассчитать в <a href=\"#calculator\" style=\"color:var(--accent-text); text-decoration:underline;\">калькуляторе</a>.",
       "hero-subtitle": "ПРЕМИАЛЬНОЕ КАЧЕСТВО",
       "hero-title": "Тротуарная плитка<br>собственного производства<br>в Гродно",
       "hero-lead": "Надёжное покрытие для вашего дома на долгие годы",
@@ -1234,7 +1329,7 @@
       "modal-policy-title": "Политика конфиденциальности"
     },
     "be": {
-      "seo-text": "Koloritbeton — вытворца тратуарнай пліткі, брукаванкі, бардзюраў, прыступак і фасадных панэляў у Гродна. У <a href=\"#catalog\" style=\"color:var(--copper); text-decoration:underline;\">каталогу</a>: брукаванка (Крэмль, Грэцыя, Булыжны брук, Каменная ружа, Даміно, Стары Арбат), тратуарная пліта (Флорыда дрэва, Ялта, Фазенда, Паркет і іншыя), бардзюры, водасцёк, прыступкі і фасадныя панэлі «Растоўскі камень». Дастаўляем па Гродна і вобласці, кошт можна разлічыць у <a href=\"#calculator\" style=\"color:var(--copper); text-decoration:underline;\">калькулятары</a>.",
+      "seo-text": "Koloritbeton — вытворца тратуарнай пліткі, брукаванкі, бардзюраў, прыступак і фасадных панэляў у Гродна. У <a href=\"#catalog\" style=\"color:var(--accent-text); text-decoration:underline;\">каталогу</a>: брукаванка (Крэмль, Грэцыя, Булыжны брук, Каменная ружа, Даміно, Стары Арбат), тратуарная пліта (Флорыда дрэва, Ялта, Фазенда, Паркет і іншыя), бардзюры, водасцёк, прыступкі і фасадныя панэлі «Растоўскі камень». Дастаўляем па Гродна і вобласці, кошт можна разлічыць у <a href=\"#calculator\" style=\"color:var(--accent-text); text-decoration:underline;\">калькулятары</a>.",
       "hero-subtitle": "ПРЭМІЯЛЬНАЯ ЯКАСЦЬ",
       "hero-title": "Тратуарная плітка<br>уласнай вытворчасці<br>ў Гродне",
       "hero-lead": "Надзейнае пакрыццё для вашага дома на доўгія гады",
@@ -1277,7 +1372,7 @@
 
   /* ---------- белорусская версия: словарь + автоперевод DOM ---------- */
   let currentLang = "ru";
-  const BE = {"Размеры / Характеристики:":"Памеры / Характарыстыкі:","Цены по исполнению:":"Цэны па выкананні:","Каталог": "Каталог", "Производство": "Вытворчасць", "Доставка": "Дастаўка", "Наши работы": "Нашы работы", "О компании": "Пра кампанію", "Контакты": "Кантакты", "ПРОИЗВОДСТВО БЕТОННЫХ ИЗДЕЛИЙ": "ВЫТВОРЧАСЦЬ БЕТОННЫХ ВЫРАБАЎ", "вниз": "уніз", "Гарантия качества": "Гарантыя якасці", "Выходной": "Выхадны", "Количество": "Колькасць", "Корзина": "Кошык", "Меню": "Меню", "Наверх": "Уверх", "О компании в цифрах": "Пра кампанію ў лічбах", "Позвонить": "Патэлефанаваць", "Цвет": "Колер", "Закрыть": "Закрыць", "Карта: Koloritbeton, Гродно": "Карта: Koloritbeton, Гродна", "10% (стандарт)": "10% (стандарт)", "15% (сложная геометрия)": "15% (складаная геаметрыя)", "5% (простая форма)": "5% (простая форма)", "Плитка / брусчатка": "Пліта / брукаванка", "Вес (ориентировочно):": "Вага (прыкладна):", "Выберите плитку и размеры площадки — посчитаем площадь, вес и стоимость": "Абярыце пліту і памеры пляцоўкі — падлічым плошчу, вагу і кошт", "Стоимость плитки:": "Кошт пліткі:", "Доставка:": "Дастаўка:", "Поддонов:": "Паддонаў:", "Добавить в корзину": "Дадаць у кошык", "бесплатно": "бясплатна", "по запросу": "па запыце", "Самовывоз (ул. Гожская, 2А)": "Самавываз (вул. Гожская, 2А)", "Гродно": "Гродна", "Гродненская область": "Гродзенская вобласць", "Гродно и область": "Гродна і вобласць", "доставка": "дастаўка", "Брусчатка": "Брукаванка", "Тротуарная плитка": "Тратуарная пліта", "Фасадные панели": "Фасадныя панэлі", "позиций в каталоге": "пазіцый у каталогу", "цветов бетона": "колераў бетону", "год на рынке · с 2022": "год на рынку · з 2022", "года на рынке · с 2022": "гады на рынку · з 2022", "лет на рынке · с 2022": "гадоў на рынку · з 2022", "ДОСТАВКА И ОПЛАТА": "ДАСТАЎКА І АПЛАТА", "Доставка по Гродно и области": "Дастаўка па Гродна і вобласці", "Погрузка / разгрузка": "Пагрузка / разгрузка", "Способы оплаты": "Спосабы аплаты", "Уточняйте у менеджера по телефону.": "Удакладняйце ў менеджара па тэлефоне.", "Стоимость доставки зависит от объёма и расстояния — менеджер рассчитает её точно.": "Кошт дастаўкі залежыць ад аб’ёму і адлегласці — менеджар разлічыць яго дакладна.", "Выбран цвет:": "Абраны колер:", "Смотреть в каталоге": "Глядзець у каталогу", "Сбросить": "Скінуць", "Ваша корзина": "Ваш кошык", "Корзина пуста": "Кошык пусты", "Итого:": "Разам:", "Оформить заказ:": "Аформіць заказ:", "Отправить заказ": "Адправіць заказ", "Отправляя заказ, вы соглашаетесь с": "Адпраўляючы заказ, вы згаджаецеся з", "политикой конфиденциальности": "палітыкай канфідэнцыяльнасці", "Согласен на обработку персональных данных в соответствии с": "Згодны на апрацоўку персанальных даных у адпаведнасці з", "В корзину": "У кошык", "Заявка успешно отправлена!": "Заяўка паспяхова адпраўлена!", "Спасибо за доверие. Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.": "Дзякуй за давер. Наш менеджар звяжацца з вамі ў бліжэйшы час для ўдакладнення дэталяў.", "Отлично": "Выдатна", "Укажите имя и телефон и отправьте заявку": "Пазначце імя і тэлефон і адпраўце заяўку", "Отправляем…": "Адпраўляем…", "Введите номер полностью: +375 (XX) XXX-XX-XX": "Увядзіце нумар цалкам: +375 (XX) XXX-XX-XX", "Введите ваше имя!": "Увядзіце ваша імя!", "Корзина пуста!": "Кошык пусты!", "Не удалось отправить заявку. Позвоните нам: +375 (29) 757-52-65": "Не атрымалася адправіць заяўку. Пазваніце нам: +375 (29) 757-52-65", "Телефон: +375 (29) 757-52-65": "Тэлефон: +375 (29) 757-52-65", "г. Гродно, Гожская ул., 2А": "г. Гродна, вул. Гожская, 2А", "1. Общие положения": "1. Агульныя палажэнні", "2. Цели обработки данных": "2. Мэты апрацоўкі даных", "3. Контакты Оператора:": "3. Кантакты Аператара:", "4. Срок хранения": "4. Тэрмін захоўвання", "5. Права субъекта данных": "5. Правы суб’екта даных", "6. Отзыв согласия": "6. Адклік згоды", "В соответствии с Законом Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных»": "У адпаведнасці з Законам Рэспублікі Беларусь ад 07.05.2021 № 99-З «Аб абароне персанальных даных»", "Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта «Koloritbeton».": "Гэтая Палітыка вызначае парадак апрацоўкі і абароны персанальных даных карыстальнікаў сайта «Koloritbeton».", "Обработка персональных данных (имя, номер телефона) осуществляется исключительно с целью обратной связи и оформления заказов.": "Апрацоўка персанальных даных (імя, нумар тэлефона) ажыццяўляецца выключна з мэтай зваротнай сувязі і афармлення заказаў.", "Персональные данные хранятся не дольше, чем это необходимо для обработки обращения и исполнения заказа, и удаляются или обезличиваются по достижении этих целей.": "Персанальныя даныя захоўваюцца не даўжэй, чым гэта неабходна для апрацоўкі звароту і выканання заказу, і выдаляюцца або абязасабліваюцца пасля дасягнення гэтых мэт.", "Вы вправе получить информацию об обработке своих данных, требовать их изменения или удаления, а также отозвать согласие на обработку.": "Вы маеце права атрымаць інфармацыю пра апрацоўку сваіх даных, патрабаваць іх змены або выдалення, а таксама адклікаць згоду на апрацоўку.", "Для отзыва согласия или обращения по вопросам обработки данных свяжитесь с нами по телефону +375 (29) 757-52-65. Мы рассмотрим обращение в срок, установленный законодательством.": "Для адкліку згоды або звароту па пытаннях апрацоўкі даных звяжыцеся з намі па тэлефоне +375 (29) 757-52-65. Мы разгледзім зварот у тэрмін, вызначаны заканадаўствам.", "Высококачественное бетонное изделие собственного производства.": "Высокаякасны бетонны выраб уласнай вытворчасці.", "Серый": "Шэры", "Цветной": "Каляровы", "Мрамор": "Мармур", "Без окраса": "Без афарбоўкі", "В цвете": "У колеры", "Хит продаж": "Хіт продажаў", "Популярно": "Папулярна", "Новинка": "Навінка", "Кремль": "Крэмль", "Греция": "Грэцыя", "Булыжная мостовая": "Булыжны брук", "Каменная роза": "Каменная ружа", "Домино": "Даміно", "Старый Арбат": "Стары Арбат", "Флорида дерево": "Флорыда дрэва", "Ялта": "Ялта", "Фазенда": "Фазенда", "Калифорния Кубик": "Каліфорнія Кубік", "Паркет": "Паркет", "Калифорния дерево": "Каліфорнія дрэва", "12 кирпичей": "12 цаглін", "Черепашка": "Чарапашка", "Три доски": "Тры дошкі", "Водосток": "Водасцёк", "Три прорези": "Тры прарэзы", "Проступь": "Прыступка", "Ростовский камень": "Растоўскі камень", "Идеальное решение для пешеходных зон, дворов и загородных участков. Отличается высокой прочностью и классической формой.": "Ідэальнае рашэнне для пешаходных зон, двароў і загарадных участкаў. Вызначаецца высокай трываласцю і класічнай формай.", "Элегантная брусчатка с аутентичным узором, создающая атмосферу античности на вашей территории.": "Элегантная брукаванка з аўтэнтычным узорам, якая стварае атмасферу антычнасці на вашай тэрыторыі.", "Имитация старинной европейской мостовой. Прекрасно подходит для ландшафтного дизайна в стиле ретро.": "Імітацыя старадаўняга еўрапейскага брука. Выдатна падыходзіць для ландшафтнага дызайну ў стылі рэтра.", "Набор из 6 уникальных камней для создания изящных художественных узоров и мозаики.": "Набор з 6 унікальных камянёў для стварэння вытанчаных мастацкіх узораў і мазаікі.", "Строгая прямоугольная форма, удобная в укладке и долговечная в эксплуатации.": "Строгая прамавугольная форма, зручная ва ўкладцы і трывалая ў эксплуатацыі.", "Комплект из нескольких элементов разного размера для создания неповторимого стиля.": "Камплект з некалькіх элементаў розных памераў для стварэння непаўторнага стылю.", "Тротуарная плитка с текстурой натурального дерева. Не боится влаги и морозов.": "Тратуарная пліта з тэкстурай натуральнага дрэва. Не баіцца вільгаці і маразоў.", "Классическая фактурная плитка для мощения дорожек и придомовой территории.": "Класічная фактурная пліта для брукавання дарожак і прыдомавай тэрыторыі.", "Практичное и долговечное покрытие для дачи и сада.": "Практычнае і трывалае пакрыццё для дачы і саду.", "Объемный геометрический рисунок «кубик» визуально расширяет пространство.": "Аб’ёмны геаметрычны малюнак «кубік» візуальна пашырае прастору.", "Имитация паркетной доски для мощения террас и площадок возле дома.": "Імітацыя паркетнай дошкі для брукавання тэрас і пляцовак каля дома.", "Сочетание удобного формата и природной текстуры древесины.": "Спалучэнне зручнага фармату і прыроднай тэкстуры драўніны.", "Крупноформатная плитка повышенной прочности для интенсивных нагрузок.": "Буйнафарматная пліта павышанай трываласці для інтэнсіўных нагрузак.", "Оригинальный узор поверхности, предотвращающий скольжение.": "Арыгінальны ўзор паверхні, які прадухіляе слізганне.", "Эффектная имитация трех деревянных досок в одной плите.": "Эфектная імітацыя трох драўляных дошак у адной пліце.", "Дорожный бордюр для фиксации краев плиточного покрытия и разделения зон.": "Дарожны бардзюр для замацавання краёў плітачнага пакрыцця і падзелу зон.", "Бетонный водосток для эффективного отвода дождевой воды.": "Бетонны водасцёк для эфектыўнага адводу дажджавой вады.", "Садовый бордюр для оформления клумб и пешеходных дорожек.": "Садовы бардзюр для афармлення клумбаў і пешаходных дарожак.", "Проступь для лестничных маршей с противоскользящими прорезями.": "Прыступка для лесвічных маршаў з супрацьслізкімі прарэзамі.", "Прочная железобетонная ступень для крыльца и уличных лестниц.": "Трывалая жалезабетонная прыступка для ганка і вулічных лесвіц.", "Фасадная плитка под дикий камень для облицовки цоколей и стен зданий.": "Фасадная пліта пад дзікі камень для аблічоўкі цокалёў і сцен будынкаў."};
+  const BE = {"Бордюры":"Бардзюры","Бордюры и водосток":"Бардзюры і водасцёк","Проступи":"Прыступкі","Размеры / Характеристики:":"Памеры / Характарыстыкі:","Цены по исполнению:":"Цэны па выкананні:","Каталог": "Каталог", "Производство": "Вытворчасць", "Доставка": "Дастаўка", "Наши работы": "Нашы работы", "О компании": "Пра кампанію", "Контакты": "Кантакты", "ПРОИЗВОДСТВО БЕТОННЫХ ИЗДЕЛИЙ": "ВЫТВОРЧАСЦЬ БЕТОННЫХ ВЫРАБАЎ", "вниз": "уніз", "Гарантия качества": "Гарантыя якасці", "Выходной": "Выхадны", "Количество": "Колькасць", "Корзина": "Кошык", "Меню": "Меню", "Наверх": "Уверх", "О компании в цифрах": "Пра кампанію ў лічбах", "Позвонить": "Патэлефанаваць", "Цвет": "Колер", "Закрыть": "Закрыць", "Карта: Koloritbeton, Гродно": "Карта: Koloritbeton, Гродна", "10% (стандарт)": "10% (стандарт)", "15% (сложная геометрия)": "15% (складаная геаметрыя)", "5% (простая форма)": "5% (простая форма)", "Плитка / брусчатка": "Пліта / брукаванка", "Вес (ориентировочно):": "Вага (прыкладна):", "Выберите плитку и размеры площадки — посчитаем площадь, вес и стоимость": "Абярыце пліту і памеры пляцоўкі — падлічым плошчу, вагу і кошт", "Стоимость плитки:": "Кошт пліткі:", "Доставка:": "Дастаўка:", "Поддонов:": "Паддонаў:", "Добавить в корзину": "Дадаць у кошык", "бесплатно": "бясплатна", "по запросу": "па запыце", "Самовывоз (ул. Гожская, 2А)": "Самавываз (вул. Гожская, 2А)", "Гродно": "Гродна", "Гродненская область": "Гродзенская вобласць", "Гродно и область": "Гродна і вобласць", "доставка": "дастаўка", "Брусчатка": "Брукаванка", "Тротуарная плитка": "Тратуарная пліта", "Фасадные панели": "Фасадныя панэлі", "позиций в каталоге": "пазіцый у каталогу", "цветов бетона": "колераў бетону", "год на рынке · с 2022": "год на рынку · з 2022", "года на рынке · с 2022": "гады на рынку · з 2022", "лет на рынке · с 2022": "гадоў на рынку · з 2022", "ДОСТАВКА И ОПЛАТА": "ДАСТАЎКА І АПЛАТА", "Доставка по Гродно и области": "Дастаўка па Гродна і вобласці", "Погрузка / разгрузка": "Пагрузка / разгрузка", "Способы оплаты": "Спосабы аплаты", "Уточняйте у менеджера по телефону.": "Удакладняйце ў менеджара па тэлефоне.", "Стоимость доставки зависит от объёма и расстояния — менеджер рассчитает её точно.": "Кошт дастаўкі залежыць ад аб’ёму і адлегласці — менеджар разлічыць яго дакладна.", "Выбран цвет:": "Абраны колер:", "Смотреть в каталоге": "Глядзець у каталогу", "Сбросить": "Скінуць", "Ваша корзина": "Ваш кошык", "Корзина пуста": "Кошык пусты", "Итого:": "Разам:", "Оформить заказ:": "Аформіць заказ:", "Отправить заказ": "Адправіць заказ", "Отправляя заказ, вы соглашаетесь с": "Адпраўляючы заказ, вы згаджаецеся з", "политикой конфиденциальности": "палітыкай канфідэнцыяльнасці", "Согласен на обработку персональных данных в соответствии с": "Згодны на апрацоўку персанальных даных у адпаведнасці з", "В корзину": "У кошык", "Заявка успешно отправлена!": "Заяўка паспяхова адпраўлена!", "Спасибо за доверие. Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.": "Дзякуй за давер. Наш менеджар звяжацца з вамі ў бліжэйшы час для ўдакладнення дэталяў.", "Отлично": "Выдатна", "Укажите имя и телефон и отправьте заявку": "Пазначце імя і тэлефон і адпраўце заяўку", "Отправляем…": "Адпраўляем…", "Введите номер полностью: +375 (XX) XXX-XX-XX": "Увядзіце нумар цалкам: +375 (XX) XXX-XX-XX", "Введите ваше имя!": "Увядзіце ваша імя!", "Корзина пуста!": "Кошык пусты!", "Не удалось отправить заявку. Позвоните нам: +375 (29) 757-52-65": "Не атрымалася адправіць заяўку. Пазваніце нам: +375 (29) 757-52-65", "Телефон: +375 (29) 757-52-65": "Тэлефон: +375 (29) 757-52-65", "г. Гродно, Гожская ул., 2А": "г. Гродна, вул. Гожская, 2А", "1. Общие положения": "1. Агульныя палажэнні", "2. Цели обработки данных": "2. Мэты апрацоўкі даных", "3. Контакты Оператора:": "3. Кантакты Аператара:", "4. Срок хранения": "4. Тэрмін захоўвання", "5. Права субъекта данных": "5. Правы суб’екта даных", "6. Отзыв согласия": "6. Адклік згоды", "В соответствии с Законом Республики Беларусь от 07.05.2021 № 99-З «О защите персональных данных»": "У адпаведнасці з Законам Рэспублікі Беларусь ад 07.05.2021 № 99-З «Аб абароне персанальных даных»", "Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта «Koloritbeton».": "Гэтая Палітыка вызначае парадак апрацоўкі і абароны персанальных даных карыстальнікаў сайта «Koloritbeton».", "Обработка персональных данных (имя, номер телефона) осуществляется исключительно с целью обратной связи и оформления заказов.": "Апрацоўка персанальных даных (імя, нумар тэлефона) ажыццяўляецца выключна з мэтай зваротнай сувязі і афармлення заказаў.", "Персональные данные хранятся не дольше, чем это необходимо для обработки обращения и исполнения заказа, и удаляются или обезличиваются по достижении этих целей.": "Персанальныя даныя захоўваюцца не даўжэй, чым гэта неабходна для апрацоўкі звароту і выканання заказу, і выдаляюцца або абязасабліваюцца пасля дасягнення гэтых мэт.", "Вы вправе получить информацию об обработке своих данных, требовать их изменения или удаления, а также отозвать согласие на обработку.": "Вы маеце права атрымаць інфармацыю пра апрацоўку сваіх даных, патрабаваць іх змены або выдалення, а таксама адклікаць згоду на апрацоўку.", "Для отзыва согласия или обращения по вопросам обработки данных свяжитесь с нами по телефону +375 (29) 757-52-65. Мы рассмотрим обращение в срок, установленный законодательством.": "Для адкліку згоды або звароту па пытаннях апрацоўкі даных звяжыцеся з намі па тэлефоне +375 (29) 757-52-65. Мы разгледзім зварот у тэрмін, вызначаны заканадаўствам.", "Высококачественное бетонное изделие собственного производства.": "Высокаякасны бетонны выраб уласнай вытворчасці.", "Серый": "Шэры", "Цветной": "Каляровы", "Мрамор": "Мармур", "Без окраса": "Без афарбоўкі", "В цвете": "У колеры", "Хит продаж": "Хіт продажаў", "Популярно": "Папулярна", "Новинка": "Навінка", "Кремль": "Крэмль", "Греция": "Грэцыя", "Булыжная мостовая": "Булыжны брук", "Каменная роза": "Каменная ружа", "Домино": "Даміно", "Старый Арбат": "Стары Арбат", "Флорида дерево": "Флорыда дрэва", "Ялта": "Ялта", "Фазенда": "Фазенда", "Калифорния Кубик": "Каліфорнія Кубік", "Паркет": "Паркет", "Калифорния дерево": "Каліфорнія дрэва", "12 кирпичей": "12 цаглін", "Черепашка": "Чарапашка", "Три доски": "Тры дошкі", "Водосток": "Водасцёк", "Три прорези": "Тры прарэзы", "Проступь": "Прыступка", "Ростовский камень": "Растоўскі камень", "Идеальное решение для пешеходных зон, дворов и загородных участков. Отличается высокой прочностью и классической формой.": "Ідэальнае рашэнне для пешаходных зон, двароў і загарадных участкаў. Вызначаецца высокай трываласцю і класічнай формай.", "Элегантная брусчатка с аутентичным узором, создающая атмосферу античности на вашей территории.": "Элегантная брукаванка з аўтэнтычным узорам, якая стварае атмасферу антычнасці на вашай тэрыторыі.", "Имитация старинной европейской мостовой. Прекрасно подходит для ландшафтного дизайна в стиле ретро.": "Імітацыя старадаўняга еўрапейскага брука. Выдатна падыходзіць для ландшафтнага дызайну ў стылі рэтра.", "Набор из 6 уникальных камней для создания изящных художественных узоров и мозаики.": "Набор з 6 унікальных камянёў для стварэння вытанчаных мастацкіх узораў і мазаікі.", "Строгая прямоугольная форма, удобная в укладке и долговечная в эксплуатации.": "Строгая прамавугольная форма, зручная ва ўкладцы і трывалая ў эксплуатацыі.", "Комплект из нескольких элементов разного размера для создания неповторимого стиля.": "Камплект з некалькіх элементаў розных памераў для стварэння непаўторнага стылю.", "Тротуарная плитка с текстурой натурального дерева. Не боится влаги и морозов.": "Тратуарная пліта з тэкстурай натуральнага дрэва. Не баіцца вільгаці і маразоў.", "Классическая фактурная плитка для мощения дорожек и придомовой территории.": "Класічная фактурная пліта для брукавання дарожак і прыдомавай тэрыторыі.", "Практичное и долговечное покрытие для дачи и сада.": "Практычнае і трывалае пакрыццё для дачы і саду.", "Объемный геометрический рисунок «кубик» визуально расширяет пространство.": "Аб’ёмны геаметрычны малюнак «кубік» візуальна пашырае прастору.", "Имитация паркетной доски для мощения террас и площадок возле дома.": "Імітацыя паркетнай дошкі для брукавання тэрас і пляцовак каля дома.", "Сочетание удобного формата и природной текстуры древесины.": "Спалучэнне зручнага фармату і прыроднай тэкстуры драўніны.", "Крупноформатная плитка повышенной прочности для интенсивных нагрузок.": "Буйнафарматная пліта павышанай трываласці для інтэнсіўных нагрузак.", "Оригинальный узор поверхности, предотвращающий скольжение.": "Арыгінальны ўзор паверхні, які прадухіляе слізганне.", "Эффектная имитация трех деревянных досок в одной плите.": "Эфектная імітацыя трох драўляных дошак у адной пліце.", "Дорожный бордюр для фиксации краев плиточного покрытия и разделения зон.": "Дарожны бардзюр для замацавання краёў плітачнага пакрыцця і падзелу зон.", "Бетонный водосток для эффективного отвода дождевой воды.": "Бетонны водасцёк для эфектыўнага адводу дажджавой вады.", "Садовый бордюр для оформления клумб и пешеходных дорожек.": "Садовы бардзюр для афармлення клумбаў і пешаходных дарожак.", "Проступь для лестничных маршей с противоскользящими прорезями.": "Прыступка для лесвічных маршаў з супрацьслізкімі прарэзамі.", "Прочная железобетонная ступень для крыльца и уличных лестниц.": "Трывалая жалезабетонная прыступка для ганка і вулічных лесвіц.", "Фасадная плитка под дикий камень для облицовки цоколей и стен зданий.": "Фасадная пліта пад дзікі камень для аблічоўкі цокалёў і сцен будынкаў."};
   const T = (x) => trText(x);
   const BE_RULES = [
     [/^Товар «(.+)» добавлен в корзину$/, (a) => `Тавар «${T(a)}» дададзены ў кошык`],
@@ -1394,12 +1489,13 @@
     ]
   };
 
-  const CALC_CATS = { bruschatka: "Брусчатка", plitka: "Тротуарная плитка", paneli: "Фасадные панели" };
+  const calcCats = () => Object.fromEntries(catOrder.filter(k => data[k] && data[k].length && UNIT[k] === "м²").map(k => [k, CATS[k].label]));
   const thicknessMm = (it) => { const m = String(it.specs).match(/(\d+)\s*мм\s*$/); return m ? +m[1] : null; };
 
   function fillCalc() {
     const sel = $("calcProduct"); const prev = sel.value;
-    sel.innerHTML = Object.keys(CALC_CATS).map(c => `<optgroup label="${CALC_CATS[c]}">${data[c].map((it, i) => `<option value="${c}:${i}">${it.name}</option>`).join("")}</optgroup>`).join("");
+    const CC = calcCats();
+    sel.innerHTML = Object.keys(CC).map(c => `<optgroup label="${CC[c]}">${data[c].map((it, i) => `<option value="${c}:${i}">${it.name}</option>`).join("")}</optgroup>`).join("");
     if ([...sel.options].some(o => o.value === prev)) sel.value = prev;
     const z = $("calcZone"); const pz = z.selectedIndex;
     z.innerHTML = SETTINGS.delivery.zones.map((d, i) => `<option value="${i}">${(currentLang === "be" && d.name_be) ? d.name_be : d.name}</option>`).join("");
@@ -1541,7 +1637,8 @@
   })();
 
   /* ---------- каталог из Google Таблицы (File → Share → Publish to web → CSV) ---------- */
-  const SHEET_CATS = { "Брусчатка": "bruschatka", "Тротуарная плитка": "plitka", "Бордюры и водосток": "bordyury", "Проступи": "prostupi", "Фасадные панели": "paneli" };
+  const BUILTIN_LABELS = { "Брусчатка": "bruschatka", "Тротуарная плитка": "plitka", "Бордюры": "bordyury", "Бордюры и водосток": "bordyury", "Проступи": "prostupi", "Фасадные панели": "paneli" };
+  const catKey = (label) => { if (BUILTIN_LABELS[label]) return BUILTIN_LABELS[label]; let h = 5381; for (const ch of label) h = ((h << 5) + h + ch.charCodeAt(0)) >>> 0; return "c" + h.toString(36); };
   function parseCSVText(t, d) {
     t = t.replace(/^\ufeff/, ""); const rows = []; let row = [], f = "", q = false;
     for (let i = 0; i < t.length; i++) {
@@ -1558,13 +1655,13 @@
   function parseSheetCSV(text) {
     const first = text.split(/\r?\n/)[0];
     const rows = parseCSVText(text, (first.includes(";") && !first.includes(",")) ? ";" : ",");
-    if (rows.length < 2) return {};
+    const res = { cats: {}, meta: {}, order: [] };
+    if (rows.length < 2) return res;
     const head = rows[0].map(h => h.trim().toLowerCase());
     const cell = (r, n) => { const i = head.indexOf(n.toLowerCase()); return i < 0 ? "" : String(r[i] || "").trim(); };
-    const out = {};
     rows.slice(1).forEach(r => {
-      const key = SHEET_CATS[cell(r, "Раздел")], name = cell(r, "Название");
-      if (!key || !name) return;
+      const label = cell(r, "Раздел"), name = cell(r, "Название");
+      if (!label || !name) return;
       if (/^(нет|no|0|false|скрыть)$/i.test(cell(r, "Показывать"))) return;
       const prices = [];
       for (let k = 1; k <= 4; k++) {
@@ -1572,28 +1669,45 @@
         if (v && isFinite(pr)) prices.push([v, pr + " BYN"]);
       }
       if (!prices.length) return;
+      const key = catKey(label);
+      if (!res.meta[key]) {
+        const def = CATS[key];
+        res.meta[key] = { label, unit: cell(r, "Единица") || (def ? def.unit : "шт.") };
+        res.order.push(key); res.cats[key] = [];
+        const lb = cell(r, "Раздел (BE)"); if (lb) BE[label] = lb;
+      }
       const it = { name, img: cell(r, "Фото"), specs: cell(r, "Размеры"), prices, desc: cell(r, "Описание") };
       const badge = cell(r, "Бейдж"); if (badge) it.badge = badge;
       const nb = cell(r, "Название (BE)"), db = cell(r, "Описание (BE)");
       if (nb) BE[name] = nb; if (db && it.desc) BE[it.desc] = db;
-      (out[key] = out[key] || []).push(it);
+      res.cats[key].push(it);
     });
-    return out;
+    return res;
   }
   async function loadSheet() {
     if (!SETTINGS.sheetUrl) return;
     try {
       const r = await fetch(SETTINGS.sheetUrl, { cache: "no-cache" });
       if (!r.ok) throw new Error("HTTP " + r.status);
-      const cat = parseSheetCSV(await r.text()), keys = Object.keys(cat);
-      if (!keys.length) throw new Error("в таблице нет подходящих строк");
-      keys.forEach(k => { data[k] = cat[k]; });
-      renderAll();
+      const res = parseSheetCSV(await r.text());
+      if (!res.order.length) throw new Error("в таблице нет подходящих строк");
+      Object.keys(data).forEach(k => { delete data[k]; });             // таблица — единственный источник каталога
+      res.order.forEach(k => { data[k] = res.cats[k]; CATS[k] = res.meta[k]; UNIT[k] = res.meta[k].unit; });
+      catOrder = res.order; renderAll();
     } catch (e) { console.warn("Google Таблица недоступна, используется data.json:", e.message); }
   }
 
+  function renderTabs() {
+    Object.keys(data).forEach(k => { if (!CATS[k]) CATS[k] = { label: k, unit: "шт." }; if (!UNIT[k]) UNIT[k] = CATS[k].unit; if (!catOrder.includes(k)) catOrder.push(k); });
+    const keys = catOrder.filter(k => data[k] && data[k].length);
+    const prev = document.querySelector(".tab-btn.active"), cur = prev && keys.includes(prev.dataset.tab) ? prev.dataset.tab : keys[0];
+    document.querySelector(".tabs").innerHTML = keys.map(k => `<button class="tab-btn${k === cur ? " active" : ""}" data-tab="${k}" role="tab">${CATS[k].label}</button>`).join("");
+    $("tabContents").innerHTML = keys.map(k => `<div id="tab-${k}" class="tab-content${k === cur ? " active" : ""}"><div class="product-grid" id="grid-${k}"></div></div>`).join("");
+    return keys;
+  }
+
   function renderAll() {
-    ["bruschatka", "plitka", "bordyury", "prostupi", "paneli"].forEach(k => renderGrid(k, data[k]));
+    renderTabs().forEach(k => renderGrid(k, data[k]));
     const total = Object.values(data).reduce((a, l) => a + l.length, 0), si = $("statItems");
     si.dataset.count = total; if (si.dataset.done) si.textContent = total;
     renderWorks(); fillCalc(); renderDelivery(); renderFooter(); renderMessengers(); updateProductSchema(); applyColor();
@@ -1604,7 +1718,7 @@
     if(!grid) return;
     grid.innerHTML = items.map((item, index) => {
       const colorOptions = item.prices.map(p => `<option value="${p[0]}">${p[0]}</option>`).join("");
-      const badge = item.badge ? `<div style="position:absolute; top:12px; left:12px; background:var(--copper); color:#fff; padding:5px 10px; border-radius:6px; font-size:0.7rem; font-weight:700; z-index:10; text-transform:uppercase;">${item.badge}</div>` : '';
+      const badge = item.badge ? `<div style="position:absolute; top:12px; left:12px; background:var(--accent-strong); color:#fff; padding:4px 12px; border-radius:var(--r-sm); font-size:var(--fs-xs); font-weight:700; z-index:10; text-transform:uppercase;">${item.badge}</div>` : '';
       return `
         <article class="card" style="--i:${index}" onclick="openProductDetail('${key}', ${index}, event)">
           ${badge}
@@ -1616,9 +1730,9 @@
             <div class="card-controls" onclick="event.stopPropagation()">
               <select class="color-select" id="color-${key}-${index}" aria-label="Цвет">${colorOptions}</select>
               <input type="number" class="qty-input" id="qty-${key}-${index}" value="1" min="${UNIT[key] === "м²" ? "0.5" : "1"}" step="${UNIT[key] === "м²" ? "0.5" : "1"}" style="width: 55px; text-align:center;" aria-label="Количество, ${UNIT[key]}" title="Количество, ${UNIT[key]}">
-              <span style="align-self:center; font-size:0.85rem; color:#666;">${UNIT[key]}</span>
+              <span style="align-self:center; font-size:var(--fs-sm); color:#666;">${UNIT[key]}</span>
             </div>
-            <button class="btn btn-primary" style="width:100%; padding:10px;" onclick="event.stopPropagation(); handleAddToCart('${key}', ${index}, this)">В корзину</button>
+            <button class="btn btn-primary" style="width:100%; padding:12px;" onclick="event.stopPropagation(); handleAddToCart('${key}', ${index}, this)">В корзину</button>
           </div>
         </article>
       `;
@@ -1639,24 +1753,24 @@
     if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
     const item = data[category][index];
     const colorOptions = item.prices.map(p => `<option value="${p[0]}" data-price="${p[1]}">${p[0]}</option>`).join("");
-    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:6px;"><span>${p[0]}</span> <b>${money(p[1])}</b></div>`).join("");
+    const pricesHtml = item.prices.map(p => `<div class="price-row" style="margin-bottom:8px;"><span>${p[0]}</span> <b>${money(p[1])}</b></div>`).join("");
     
     document.getElementById("productModalBody").innerHTML = `
-      <div style="display:flex; flex-direction:column; gap:15px;">
-        <div style="width:100%; aspect-ratio:16/9; background:#e0dad0 center/cover no-repeat; border-radius:12px; background-image:url('img/${item.img}')"></div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="width:100%; aspect-ratio:16/9; background:#e0dad0 center/cover no-repeat; border-radius:var(--r-md); background-image:url('img/${item.img}')"></div>
         <h2>${item.name}</h2>
         <p><b>Размеры / Характеристики:</b> ${item.specs}</p>
         <p>${item.desc || 'Высококачественное бетонное изделие собственного производства.'}</p>
-        <div style="background:#f8f6f2; padding:15px; border-radius:8px;">
+        <div style="background:#f8f6f2; padding:16px; border-radius:var(--r-sm);">
           <b style="display:block; margin-bottom:8px; color:var(--text-dark);">Цены по исполнению:</b>
           ${pricesHtml}
         </div>
-        <div style="display:flex; gap:10px; margin-top:10px;">
-          <select id="modalColor" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:8px; font-family:inherit; font-size:16px;">${colorOptions}</select>
-          <input type="number" id="modalQty" value="1" min="${UNIT[category] === "м²" ? "0.5" : "1"}" step="${UNIT[category] === "м²" ? "0.5" : "1"}" aria-label="Количество, ${UNIT[category]}" title="Количество, ${UNIT[category]}" style="width:70px; padding:12px; text-align:center; border:1px solid #ddd; border-radius:8px; font-family:inherit; font-size:16px;">
+        <div style="display:flex; gap:12px; margin-top:12px;">
+          <select id="modalColor" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:var(--r-sm); font-family:inherit; font-size:var(--fs-base);">${colorOptions}</select>
+          <input type="number" id="modalQty" value="1" min="${UNIT[category] === "м²" ? "0.5" : "1"}" step="${UNIT[category] === "м²" ? "0.5" : "1"}" aria-label="Количество, ${UNIT[category]}" title="Количество, ${UNIT[category]}" style="width:70px; padding:12px; text-align:center; border:1px solid #ddd; border-radius:var(--r-sm); font-family:inherit; font-size:var(--fs-base);">
           <span style="align-self:center; color:#666;">${UNIT[category]}</span>
         </div>
-        <button class="btn btn-primary" style="width:100%; margin-top:5px;" onclick="addModalItemToCart('${item.name}', '${category}')">В корзину</button>
+        <button class="btn btn-primary" style="width:100%; margin-top:4px;" onclick="addModalItemToCart('${item.name}', '${category}')">В корзину</button>
       </div>
     `;
     document.getElementById("productModal").classList.add("show");
@@ -1719,13 +1833,12 @@
     observer.observe(section);
   });
 
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-      btn.classList.add("active");
-      document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
-    });
+  document.querySelector(".tabs").addEventListener("click", (e) => {
+    const btn = e.target.closest(".tab-btn"); if (!btn) return;
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
   });
 
   const menuBtn = document.getElementById("menuToggle");
@@ -1763,7 +1876,7 @@
   function openLightbox(src) {
     const lb = document.createElement("div");
     lb.className = "modal show";
-    lb.innerHTML = `<div class="modal-content" style="padding:0;background:transparent;border:none;max-width:90%;"><img src="${src}" style="width:100%;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.5);" loading="lazy"></div>`;
+    lb.innerHTML = `<div class="modal-content" style="padding:0;background:transparent;border:none;max-width:90%;"><img src="${src}" style="width:100%;border-radius:var(--r-md);box-shadow:0 10px 40px rgba(0,0,0,0.5);" loading="lazy"></div>`;
     lb.onclick = () => lb.remove();
     document.body.appendChild(lb);
   }
