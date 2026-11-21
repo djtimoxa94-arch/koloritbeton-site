@@ -19,6 +19,8 @@
   .wrap { overflow-x:auto; }
   input[type=text], input[type=number], textarea { width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; background:transparent; color:inherit; font:inherit; }
   input.price { width:96px; } input.bad { border-color:#e5484d; }
+  #sheetCheck table td, #sheetCheck table th { font-size: .9rem; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:999px; background:rgba(199,123,75,.15); margin:2px 4px 2px 0; font-size:.85rem; }
   .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:12px; } label { display:block; font-size:.85rem; color:var(--muted); margin-bottom:4px; }
   button, .btn { border:1px solid var(--line); background:transparent; color:inherit; padding:10px 16px; border-radius:10px; font:inherit; cursor:pointer; }
   button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
@@ -70,8 +72,22 @@
         <div><label>Ссылка на Google Таблицу (CSV) — если указана, цены и товары берутся из неё</label><input type="text" data-path="settings.sheetUrl"></div>
         <div><label>Номер счётчика Яндекс.Метрики</label><input type="text" data-path="settings.metrikaId"></div>
         <div><label>ID Google Analytics (G-XXXX)</label><input type="text" data-path="settings.gaId"></div>
-        <div><label>м² на одном поддоне (для расчёта поддонов)</label><input type="text" inputmode="decimal" data-path="settings.palletM2" data-num="1"></div>
+        <div><label>м² на одном поддоне (если не указано в таблице)</label><input type="text" inputmode="decimal" data-path="settings.palletM2" data-num="1"></div>
+        <div><label>Вместимость одной машины, кг (для расчёта числа машин)</label><input type="text" inputmode="decimal" data-path="settings.truckKg" data-num="1" placeholder="например, 20000"></div>
       </div>
+    </section>
+
+    <section>
+      <h2>Часы работы</h2>
+      <p class="hint">Для статуса «Сейчас открыто» на сайте (по времени Гродно). Пустые поля = выходной.</p>
+      <div class="wrap"><table><thead><tr><th>День</th><th>Открытие</th><th>Закрытие</th></tr></thead><tbody id="hoursRows"></tbody></table></div>
+    </section>
+
+    <section>
+      <h2>Проверка Google Таблицы</h2>
+      <p class="hint">Нажмите, чтобы загрузить таблицу по ссылке выше и увидеть, какие товары сайт «увидит», а какие строки пропускает и почему.</p>
+      <p><button id="btnCheck" class="primary">Проверить таблицу</button></p>
+      <div id="sheetCheck"></div>
     </section>
     <p id="msg"></p>
   </div>
@@ -106,6 +122,105 @@
     $("app").hidden = false; $("bar").hidden = false; render();
   }
 
+  /* --- копия разборщика таблицы с сайта (одинаковая логика) --- */
+  const BE = {};
+  const CATS = { bruschatka: { label: "Брусчатка", unit: "м²" }, plitka: { label: "Тротуарная плитка", unit: "м²" }, bordyury: { label: "Бордюры", unit: "шт." }, prostupi: { label: "Проступи", unit: "шт." }, paneli: { label: "Фасадные панели", unit: "м²" } };
+
+/* SHEET-PARSER:BEGIN */
+  const BUILTIN_LABELS = { "Брусчатка": "bruschatka", "Тротуарная плитка": "plitka", "Бордюры": "bordyury", "Бордюры и водосток": "bordyury", "Проступи": "prostupi", "Фасадные панели": "paneli" };
+  const catKey = (label) => { if (BUILTIN_LABELS[label]) return BUILTIN_LABELS[label]; let h = 5381; for (const ch of label) h = ((h << 5) + h + ch.charCodeAt(0)) >>> 0; return "c" + h.toString(36); };
+  function parseCSVText(t, d) {
+    t = t.replace(/^\ufeff/, ""); const rows = []; let row = [], f = "", q = false;
+    for (let i = 0; i < t.length; i++) {
+      const ch = t[i];
+      if (q) { if (ch === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === d) { row.push(f); f = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && t[i + 1] === "\n") i++; row.push(f); f = ""; rows.push(row); row = []; }
+      else f += ch;
+    }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    return rows.filter(r => r.some(x => x.trim()));
+  }
+  function parseSheetCSV(text) {
+    const first = text.split(/\r?\n/)[0];
+    const rows = parseCSVText(text, (first.includes(";") && !first.includes(",")) ? ";" : ",");
+    const res = { cats: {}, meta: {}, order: [], skipped: [], total: 0, headers: [], missing: [] };
+    if (rows.length < 2) { res.missing = ["заголовки и строки"]; return res; }
+    const norm = (h) => h.trim().toLowerCase().replace(/\s+/g, " ");
+    const head = rows[0].map(norm); res.headers = rows[0].map(h => h.trim());
+    ["раздел", "название", "вариант 1", "цена 1"].forEach(h => { if (!head.includes(h)) res.missing.push(h); });
+    const cell = (r, n) => { const i = head.indexOf(norm(n)); return i < 0 ? "" : String(r[i] || "").trim(); };
+    const numOf = (v) => parseFloat(String(v).replace(/\s/g, "").replace(",", ".").replace(/[^\d.]/g, ""));
+    rows.slice(1).forEach((r, idx) => {
+      const line = idx + 2, label = cell(r, "Раздел"), name = cell(r, "Название");
+      if (!label && !name) return;
+      res.total++;
+      if (!label) { res.skipped.push({ line, name, reason: "не указан «Раздел»" }); return; }
+      if (!name) { res.skipped.push({ line, name: "", reason: "не указано «Название»" }); return; }
+      if (/^(нет|no|0|false|скрыть)$/i.test(cell(r, "Показывать"))) { res.skipped.push({ line, name, reason: "«Показывать» = нет" }); return; }
+      const prices = [];
+      for (let k = 1; k <= 4; k++) {
+        const v = cell(r, "Вариант " + k), pr = numOf(cell(r, "Цена " + k));
+        if (v && isFinite(pr)) prices.push([v, pr + " BYN"]);
+      }
+      if (!prices.length) { res.skipped.push({ line, name, reason: "нет ни одной пары «Вариант» + «Цена» (цена должна быть числом)" }); return; }
+      const key = catKey(label);
+      if (!res.meta[key]) {
+        const def = CATS[key];
+        res.meta[key] = { label, unit: cell(r, "Единица") || (def ? def.unit : "шт.") };
+        res.order.push(key); res.cats[key] = [];
+        const lb = cell(r, "Раздел (BE)"); if (lb) BE[label] = lb;
+      }
+      const it = { name, img: cell(r, "Фото"), specs: cell(r, "Размеры"), prices, desc: cell(r, "Описание") };
+      const badge = cell(r, "Бейдж"); if (badge) it.badge = badge;
+      const tags = cell(r, "Теги").split(/[,;]/).map(x => x.trim()).filter(Boolean); if (tags.length) it.tags = tags;
+      const pp = numOf(cell(r, "На поддоне")); if (pp > 0) it.perPallet = pp;
+      const tiers = [];
+      for (let k = 1; k <= 3; k++) { const f = numOf(cell(r, "Опт от " + k)), pc = numOf(cell(r, "Опт % " + k)); if (f > 0 && pc > 0 && pc < 100) tiers.push({ from: f, pct: pc }); }
+      if (tiers.length) it.tiers = tiers.sort((x, y) => x.from - y.from);
+      const nb = cell(r, "Название (BE)"), db = cell(r, "Описание (BE)");
+      if (nb) BE[name] = nb; if (db && it.desc) BE[it.desc] = db;
+      res.cats[key].push(it);
+    });
+    return res;
+  }
+  /* SHEET-PARSER:END */
+
+  const DEFAULT_HOURS = { "0": null, "1": ["08:00", "19:00"], "2": ["08:00", "19:00"], "3": ["08:00", "19:00"], "4": ["08:00", "19:00"], "5": ["08:00", "19:00"], "6": ["09:00", "17:00"] };
+  const DAYS = [["1", "Понедельник"], ["2", "Вторник"], ["3", "Среда"], ["4", "Четверг"], ["5", "Пятница"], ["6", "Суббота"], ["0", "Воскресенье"]];
+  function renderHours() {
+    const h = state.settings.hours = state.settings.hours || JSON.parse(JSON.stringify(DEFAULT_HOURS));
+    $("hoursRows").innerHTML = DAYS.map(([k, n]) => `<tr><td>${n}</td><td><input type="time" data-h="${k}" data-i="0" value="${esc((h[k] || ["", ""])[0])}"></td><td><input type="time" data-h="${k}" data-i="1" value="${esc((h[k] || ["", ""])[1])}"></td></tr>`).join("");
+    const vals = {}; DAYS.forEach(([k]) => { vals[k] = (h[k] || ["", ""]).slice(); });
+    document.querySelectorAll("[data-h]").forEach(el => el.addEventListener("input", () => {
+      const k = el.dataset.h; vals[k][+el.dataset.i] = el.value;
+      h[k] = (vals[k][0] && vals[k][1]) ? [vals[k][0], vals[k][1]] : null;
+    }));
+  }
+  async function checkSheet() {
+    const out = $("sheetCheck"), url = String((state.settings && state.settings.sheetUrl) || "").trim();
+    if (!url) { out.innerHTML = '<p class="err">Ссылка на таблицу не указана. Вставьте её в поле «Ссылка на Google Таблицу (CSV)» выше.</p>'; return; }
+    out.innerHTML = "<p>Проверяю…</p>";
+    let text;
+    try { const r = await fetch(url, { cache: "no-cache" }); if (!r.ok) throw new Error("HTTP " + r.status); text = await r.text(); }
+    catch (e) { out.innerHTML = `<p class="err">Не удалось загрузить таблицу (${esc(e.message)}). Проверьте, что она опубликована: Файл → Поделиться → Опубликовать в интернете → выберите нужный ЛИСТ и формат CSV → Опубликовать, и что ссылка скопирована целиком.</p>`; return; }
+    if (/^\s*(<!doctype html|<html)/i.test(text)) { out.innerHTML = '<p class="err">Google вернул веб-страницу, а не CSV. При публикации выберите не «Веб-страница», а «Значения, разделённые запятыми (.csv)» и конкретный лист (не «Весь документ»).</p>'; return; }
+    const res = parseSheetCSV(text), recommended = ["Раздел (BE)", "Единица", "Название (BE)", "Размеры", "Описание", "Фото", "Показывать", "Теги", "На поддоне", "Опт от 1", "Опт % 1"];
+    const have = res.headers.map(x => x.trim().toLowerCase());
+    let html = "";
+    if (res.missing.length) html += `<p class="err"><b>Не найдены обязательные колонки:</b> ${res.missing.map(esc).join(", ")}. Названия в первой строке должны совпадать с шаблоном.</p>`;
+    const items = Object.values(res.cats).reduce((s, l) => s + l.length, 0);
+    html += `<p class="${items ? "ok" : "err"}"><b>Сайт увидит товаров: ${items}</b> (строк с данными: ${res.total}, пропущено: ${res.skipped.length})</p>`;
+    html += "<p>" + res.order.map(k => `<span class="tag">${esc(res.meta[k].label)}: ${res.cats[k].length} · ${esc(res.meta[k].unit)}</span>`).join("") + "</p>";
+    if (res.skipped.length) html += `<p class="err"><b>Эти строки сайт пропускает:</b></p><div class="wrap"><table><thead><tr><th>Строка</th><th>Название</th><th>Причина</th></tr></thead><tbody>${res.skipped.map(x => `<tr><td>${x.line}</td><td>${esc(x.name || "—")}</td><td>${esc(x.reason)}</td></tr>`).join("")}</tbody></table></div>`;
+    const noImg = Object.values(res.cats).flat().filter(x => !x.img).map(x => x.name);
+    if (noImg.length) html += `<p class="hint">Без фото (колонка «Фото» пуста): ${noImg.slice(0, 8).map(esc).join(", ")}${noImg.length > 8 ? "…" : ""}</p>`;
+    const absent = recommended.filter(c => !have.includes(c.toLowerCase())); if (absent.length) html += `<p class="hint">Необязательных колонок нет в таблице: ${absent.map(esc).join(", ")}.</p>`;
+    out.innerHTML = html;
+  }
+  $("btnCheck").addEventListener("click", checkSheet);
+
   function render() {
     // prices
     $("prices").innerHTML = Object.keys(CAT).filter(c => state.catalog[c]).map(c => `
@@ -137,6 +252,7 @@
     });
     $("payRu").value = (state.settings.payment || []).join(", ");
     $("payBe").value = (state.settings.payment_be || []).join(", ");
+    renderHours();
   }
   const list = (v) => v.split(",").map(x => x.trim()).filter(Boolean);
   $("payRu").oninput = () => { state.settings.payment = list($("payRu").value); };
